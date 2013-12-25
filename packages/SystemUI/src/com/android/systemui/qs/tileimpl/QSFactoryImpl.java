@@ -133,8 +133,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<LiveDisplayTile> liveDisplayTileProvider,
             Provider<ReadingModeTile> readingModeTileProvider,
             Provider<PowerShareTile> powerShareTileProvider,
-            Provider<AODTile> aodTileProvider) {
-            Provider<AdbOverNetworkTile> adbOverNetworkProvider,
+            Provider<AODTile> aodTileProvider,
             Provider<SoundSearchTile> soundSearchTIleProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
