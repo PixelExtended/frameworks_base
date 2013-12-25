@@ -125,7 +125,12 @@ public class QSFactoryImpl implements QSFactory {
             Provider<VolumeTile> volumeTileProvider,
             Provider<VpnTile> vpnTileProvider,
             Provider<LiveDisplayTile> liveDisplayTileProvider,
+<<<<<<< HEAD
             Provider<ReadingModeTile> readingModeTileProvider) {
+=======
+            Provider<ReadingModeTile> readingModeTileProvider,
+            Provider<AdbOverNetworkTile> adbOverNetworkProvider) {
+>>>>>>> 745b96470f2... Forward Port: Smoother Upload and Download Animation
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
