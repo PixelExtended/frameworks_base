@@ -5233,6 +5233,12 @@ public final class Settings {
          */
         public static final String APP_LOCK_LOCK_AFTER = "applock_lock_after";
 
+	/**
+         * Whether to use the custom quick unlock screen control
+         * @hide
+         */
+        public static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
+
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
