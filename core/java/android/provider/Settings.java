@@ -5507,6 +5507,12 @@ public final class Settings {
         };
 
         /**
+         * Three Finger Gesture from Oppo
+         * @hide
+         */
+        public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
+
+        /**
          * These are all public system settings
          *
          * @hide
