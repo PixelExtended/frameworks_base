@@ -4780,6 +4780,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SHOW_LOCKSCREEN_MEDIA_ART),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4793,6 +4796,9 @@ public class StatusBar extends SystemUI implements DemoMode,
              } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN))) {
                 setStatusBarWindowViewOptions();
+             }  else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.SHOW_LOCKSCREEN_MEDIA_ART))) {
+                setLockScreenMediaArt();
             }
         }
 
@@ -4800,6 +4806,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setDoubleTapToSleepGesture();
             setStatusBarWindowViewOptions();
             setScreenBrightnessMode();
+	    setLockScreenMediaArt();
         }
     }
 
@@ -4825,6 +4832,12 @@ public class StatusBar extends SystemUI implements DemoMode,
         mBrightnessControl = Settings.System.getIntForUser(
             mContext.getContentResolver(), Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0,
             UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void setLockScreenMediaArt() {
+        if (mMediaManager != null) {
+            mMediaManager.setLockScreenMediaArt();
+        }
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
