@@ -5481,6 +5481,12 @@ public final class Settings {
          */
         public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
 
+	/**
+         * media artwork wallpaper blur level on lockscreen
+         * @hide
+         */
+        public static final String SHOW_LOCKSCREEN_MEDIA_ART = "show_lockscreen_media_art";
+
         /**
          * These are all public system settings
          *
