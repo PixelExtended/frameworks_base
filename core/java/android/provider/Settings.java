@@ -5547,6 +5547,15 @@ public final class Settings {
          */
         public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_ACTION = "right_vertical_back_swipe_app_action";
 
+       /**
+         * Should we listen for fingerprints when the screen is off?  Devices
+         * with a rear-mounted sensor want this, but certain devices have
+         * the sensor embedded in the power key and listening all the time
+         * causes a poor experience.
+         * @hide
+         */
+        public static final String FP_WAKE_UNLOCK = "fp_wake_unlock";
+
         /**
          * Display friendly name of custom application launched when
          * using the long right back swipe app action
@@ -5797,6 +5806,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
             PRIVATE_SETTINGS.add(LOCKSCREEN_BATTERY_INFO);
             PRIVATE_SETTINGS.add(OMNI_CUSTOM_FP_ICON);
+            PRIVATE_SETTINGS.add(FP_WAKE_UNLOCK);
         }
 
         /**

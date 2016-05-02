@@ -85,5 +85,6 @@ public class SystemSettings {
         Settings.System.ALARM_ALERT,
         Settings.System.NOTIFICATION_LIGHT_PULSE,
         Settings.System.OMNI_CUSTOM_FP_ICON,
+        Settings.System.FP_WAKE_UNLOCK
     };
 }

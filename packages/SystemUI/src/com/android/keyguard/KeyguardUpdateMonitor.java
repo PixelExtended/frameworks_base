@@ -92,9 +92,11 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.fuelgauge.BatteryStatus;
+import com.android.systemui.Dependency;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
+import com.android.systemui.omni.OmniSettingsService;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.dagger.qualifiers.Background;
 import com.android.systemui.dagger.qualifiers.Main;
@@ -139,7 +141,8 @@ import com.android.internal.util.custom.fod.FodUtils;
  * to be updated.
  */
 @Singleton
-public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpable {
+public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpable,
+        OmniSettingsService.OmniSettingsObserver {
 
     private static final String TAG = "KeyguardUpdateMonitor";
     private static final boolean DEBUG = KeyguardConstants.DEBUG;
@@ -307,6 +310,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
 
     // Face unlock
     private static final boolean mCustomFaceUnlockSupported = FaceUnlockUtils.isFaceUnlockSupported();
+
+    private boolean mFingerprintWakeAndUnlock;
 
     /**
      * Short delay before restarting fingerprint authentication after a successful try. This should
@@ -1630,6 +1635,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 com.android.systemui.R.bool.config_fingerprintWakeAndUnlock);
         mFaceAuthOnlyOnSecurityView = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_faceAuthOnlyOnSecurityView);
+        mFingerprintWakeAndUnlock = Settings.System.getIntForUser(
+                mContext.getContentResolver(), Settings.System.FP_WAKE_UNLOCK, 0,
+                UserHandle.USER_CURRENT) == 0;
         mBackgroundExecutor = backgroundExecutor;
         mBroadcastDispatcher = broadcastDispatcher;
         mRingerModeTracker = ringerModeTracker;
@@ -1889,6 +1897,12 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         }
         mSettingsObserver = new SettingsObserver(mHandler);
         mSettingsObserver.observe();
+        Dependency.get(SyberiaSettingsService.class).addIntObserver(this, Settings.System.FP_WAKE_UNLOCK);
+    }
+
+    @Override
+    public void onIntSettingChanged(String key, Integer newValue) {
+        mFingerprintWakeAndUnlock = (newValue == 0);
     }
 
     private final UserSwitchObserver mUserSwitchObserver = new UserSwitchObserver() {
