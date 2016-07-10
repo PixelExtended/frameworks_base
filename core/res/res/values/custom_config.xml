@@ -243,4 +243,8 @@
 
     <!-- Mock Oplus LinearmotorVibratorService -->
     <bool name="config_mockOplusLinearmotorVibratorService">false</bool>
+
+    <!-- Whether device has dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
+
 </resources>
