@@ -189,4 +189,7 @@
          Use with extreme caution. -->
     <string-array name="config_appLockAllowedSystemApps" translatable="false" />
 
+    <!-- Whether device has dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
+
 </resources>
