@@ -2214,6 +2214,9 @@ private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObser
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SWITCH_STYLE),
                     false, this, UserHandle.USER_ALL);
+	    resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_MEDIA_BLUR),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -2229,12 +2232,16 @@ private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObser
                     Settings.System.SWITCH_STYLE))) {
                 stockSwitchStyle();
                 updateSwitchStyle();
+	   }else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_MEDIA_BLUR))) {
+                setLockScreenMediaBlurLevel();
             }
         }
 
         public void update() {
             setFpToDismissNotifications();
             setQsBatteryPercentMode();
+	    setLockScreenMediaBlurLevel();
         }
     }
 
@@ -2248,6 +2255,12 @@ private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObser
         mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 1,
                 UserHandle.USER_CURRENT) == 1;
+    }
+
+ private void setLockScreenMediaBlurLevel() {
+        if (mMediaManager != null) {
+            mMediaManager.setLockScreenMediaBlurLevel();
+        }
     }
 
     /**

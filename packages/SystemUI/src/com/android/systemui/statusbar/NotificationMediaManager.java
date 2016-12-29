@@ -134,6 +134,7 @@ public class NotificationMediaManager implements Dumpable, TunerService.Tunable 
     private final MediaArtworkProcessor mMediaArtworkProcessor;
     private final Set<AsyncTask<?, ?, ?>> mProcessArtworkTasks = new ArraySet<>();
     private final WallpaperManager mWallpaperManager;
+    private float mLockscreenMediaBlur;
 
     protected NotificationPresenter mPresenter;
     private MediaController mMediaController;
@@ -774,7 +775,13 @@ public class NotificationMediaManager implements Dumpable, TunerService.Tunable 
     };
 
     private Bitmap processArtwork(Bitmap artwork) {
-        return mMediaArtworkProcessor.processArtwork(mContext, artwork);
+        return mMediaArtworkProcessor.processArtwork(mContext, artwork, mLockscreenMediaBlur);
+    }
+
+    public void setLockScreenMediaBlurLevel() {
+        mLockscreenMediaBlur = (float) Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_MEDIA_BLUR, 25,
+                UserHandle.USER_CURRENT);
     }
 
     @MainThread
