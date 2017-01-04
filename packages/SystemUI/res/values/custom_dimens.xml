@@ -34,4 +34,8 @@
     <dimen name="tri_state_up_bottom_right_radius">0.0px</dimen>
     <dimen name="tri_state_up_top_left_radius">63.0px</dimen>
     <dimen name="tri_state_up_top_right_radius">63.0px</dimen>
+
+    <!-- Network traffic monitor -->
+    <dimen name="net_traffic_multi_text_size">8dp</dimen>
+    <dimen name="net_traffic_txt_img_padding">2dp</dimen>
 </resources>
