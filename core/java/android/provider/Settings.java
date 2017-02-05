@@ -3576,6 +3576,12 @@ public final class Settings {
 
         private static final Validator ADAPTIVE_SLEEP_VALIDATOR = BOOLEAN_VALIDATOR;
 
+         /**
+         * Unlock keystore with fingerprint after reboot
+         * @hide
+         */
+        public static final String FP_UNLOCK_KEYSTORE =
+                "fp_unlock_keystore";
         /**
          * Control whether the process CPU usage meter should be shown.
          *
