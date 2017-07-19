@@ -674,6 +674,9 @@
 
     <!-- Used for long press power torch feature - automatic turn off on timeout -->
     <protected-broadcast android:name="com.android.server.policy.PhoneWindowManager.ACTION_TORCH_OFF" />
+	
+    <!-- IMS Status -->
+    <protected-broadcast android:name="android.intent.action.IMS_REGISTRATION_CHANGED" />
 
     <!-- ====================================================================== -->
     <!--                          RUNTIME PERMISSIONS                           -->
