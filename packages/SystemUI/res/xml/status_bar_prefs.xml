@@ -126,4 +126,8 @@
         android:title="@string/tuner_low_priority"
         sysui:defValue="false" />
 
+    <com.android.systemui.tuner.StatusBarSwitch
+        android:key="ims"
+        android:title="@string/status_bar_ims" />
+
 </PreferenceScreen>
