@@ -5749,4 +5749,5 @@ ul.</string>
     <string name="config_pdp_reject_service_not_subscribed"></string>
     <!-- pdp data reject dialog string for cause 55 (MULTI_CONN_TO_SAME_PDN_NOT_ALLOWED) [CHAR LIMIT=100] -->
     <string name="config_pdp_reject_multi_conn_to_same_pdn_not_allowed"></string>
+
 </resources>
