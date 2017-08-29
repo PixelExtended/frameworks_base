@@ -4807,6 +4807,12 @@ public final class Settings {
          */
         public static final String VIBRATE_ON_DISCONNECT = "vibrate_on_disconnect";
 
+	/**
+         *  Enable statusbar double tap gesture on to put device to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+
         /**
          * Whether to show VoLTE icon or not
          * @hide
@@ -4964,6 +4970,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
             PRIVATE_SETTINGS.add(SHOW_VOLTE_ICON);
             PRIVATE_SETTINGS.add(VOLTE_ICON_STYLE);
+            PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
         }
 
         /**
