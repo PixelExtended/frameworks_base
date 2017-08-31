@@ -153,4 +153,9 @@ interface IStatusBarService
      */
     void showInDisplayFingerprintView();
     void hideInDisplayFingerprintView();
+
+    /**
+     * Custom extensions
+     */
+    void toggleCameraFlash();
 }
