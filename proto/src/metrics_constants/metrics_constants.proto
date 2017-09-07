@@ -7439,6 +7439,9 @@ message MetricsEvent {
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
 
+    //Extensions
+    EXTENSIONS = 1150;
+
     // CustomSettings constant
     CUSTOM_SETTINGS = 1999;
 
