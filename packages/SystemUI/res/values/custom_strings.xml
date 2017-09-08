@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-<!-- Advance location quick setting tile -->
+   <!-- Advance location quick setting tile -->
     <string name="quick_settings_secondary_location_off"></string>
     <string name="quick_settings_location_secondary_battery_saving">Battery Saving</string>
     <string name="accessibility_quick_settings_location_battery_saving">Location reporting: battery saving mode.</string>
@@ -18,4 +18,6 @@
     <string name="global_action_reboot_bootloader">Bootloader</string>
     <string name="global_action_settings">Settings</string>
 
+   <!-- Statusbar tuner -->
+    <string name="statusbar_items_title">Statusbar icons</string>
 </resources>
