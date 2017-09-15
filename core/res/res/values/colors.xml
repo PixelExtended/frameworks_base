@@ -224,4 +224,7 @@
 
     <!-- Resolver/Chooser -->
     <color name="resolver_text_color_secondary_dark">#ffC4C6C6</color>
+
+    <color name="toast_bg">@color/white</color>
+    <color name="toast_text">@color/black</color>
 </resources>
