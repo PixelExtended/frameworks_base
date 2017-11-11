@@ -209,4 +209,7 @@
     <!-- Switch USB controller on Asus ROG devices-->
     <bool name="config_switchUsbController">false</bool>
 
+    <!-- Whether device supports an alt. ambient display -->
+    <bool name="config_alt_ambient_display">false</bool>
+
 </resources>
