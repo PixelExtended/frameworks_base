@@ -24,4 +24,6 @@
     <string name="clock_title_sneeky" translatable="false">Sneeky</string>
     <!-- Spidey Analog clock -->
     <string name="clock_title_spidey" translatable="false">Spidey</string>
+    <!-- Sound search tile -->
+    <string name="quick_settings_sound_search">Sound search</string>
 </resources>
