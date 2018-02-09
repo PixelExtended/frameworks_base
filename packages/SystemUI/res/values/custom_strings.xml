@@ -104,4 +104,7 @@
 
     <!-- Name of the clock in status bar [CHAR LIMIT=30] -->
     <string name="clock">Clock</string>
+
+    <!-- SoundSearch Tile -->
+    <string name="quick_settings_sound_search">Sound search</string>
 </resources>
