@@ -107,4 +107,7 @@
 
     <!-- Name of the nfc status bar icon. -->
     <string name="status_bar_nfc">NFC</string>
+
+    <!-- SoundSearch Tile -->
+    <string name="quick_settings_sound_search">Sound search</string>
 </resources>
