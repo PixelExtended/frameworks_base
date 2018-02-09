@@ -96,4 +96,6 @@
      <!-- Biometric Dialog - Use Face -->
     <string name="biometric_dialog_button_use_face">Use Face</string>
 
+    <!-- Sound Search tile -->
+    <string name="quick_settings_sound_search">Sound search</string>
 </resources>
