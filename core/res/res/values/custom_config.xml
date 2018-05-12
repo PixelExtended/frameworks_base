@@ -258,4 +258,9 @@
          1: Right side -->
     <integer name="config_alertSliderLocation">0</integer>
 
+   <!-- Whether device has screen with higher aspect ratio -->
+  <bool name="config_haveHigherAspectRatioScreen">false</bool>
+
+  <!-- Aspect ratio of screen -->
+  <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
 </resources>
