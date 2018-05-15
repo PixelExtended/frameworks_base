@@ -215,4 +215,7 @@
     <!-- Whether to force enable multi resolution configuration for camera -->
     <bool name="config_forceMultiResolution">false</bool>
 
+  <!-- Whether device has physical tri state switch -->
+  <bool name="config_hasAlertSlider">false</bool>
+
 </resources>
