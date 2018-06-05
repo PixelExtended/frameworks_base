@@ -142,11 +142,16 @@
     <!-- Emergency button in power menu -->
     <java-symbol type="bool" name="config_showEmergencyButtonInPowerMenu" />
 
-<!-- Smart charging battery percentage -->
+    <!-- Smart charging battery percentage -->
     <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
     <java-symbol type="integer" name="config_smartChargingBatteryResumeLevel" />
     <java-symbol type="string" name="config_SmartChargingSysfsNode" />
     <java-symbol type="string" name="config_SmartChargingSupspendValue" />
     <java-symbol type="string" name="config_SmartChargingResumeValue" />
+
+    <!-- App error dialog -->
+    <java-symbol type="id" name="aerr_copy" />
+    <java-symbol type="string" name="url_copy_success" />
+    <java-symbol type="string" name="url_copy_failed" />
 
 </resources>
