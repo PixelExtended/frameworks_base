@@ -104,6 +104,8 @@ public class MobileSignalController extends SignalController<
 
     // 4G instead of LTE
     private boolean mShow4GUserConfig;
+    // Volte Icon
+    private boolean mVoLTEicon;
 
     private ImsManager mImsManager;
     private ImsManager.Connector mImsManagerConnector;
@@ -188,6 +190,9 @@ public class MobileSignalController extends SignalController<
            resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.SHOW_FOURG),
                   false, this, UserHandle.USER_ALL);
+           resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.SHOW_VOLTE_ICON), false,
+                    this, UserHandle.USER_ALL);
            updateSettings();
         }
 
@@ -204,6 +209,9 @@ public class MobileSignalController extends SignalController<
         ContentResolver resolver = mContext.getContentResolver();
         mShow4GUserConfig = Settings.System.getIntForUser(resolver,
                 Settings.System.SHOW_FOURG, 0, UserHandle.USER_CURRENT) == 1;
+        mVoLTEicon = Settings.System.getIntForUser(resolver,
+                Settings.System.SHOW_VOLTE_ICON, 0,
+                UserHandle.USER_CURRENT) == 1;
         mapIconSets();
         updateTelephony();
    }
@@ -391,7 +399,7 @@ public class MobileSignalController extends SignalController<
     private int getVolteResId() {
         int resId = 0;
         if ( (mCurrentState.voiceCapable || mCurrentState.videoCapable)
-                &&  mCurrentState.imsRegistered ) {
+                &&  mCurrentState.imsRegistered && mVoLTEicon) {
             resId = R.drawable.ic_volte;
         }
         return resId;
