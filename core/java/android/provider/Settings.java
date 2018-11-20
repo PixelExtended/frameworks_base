@@ -5440,6 +5440,18 @@ public final class Settings {
          */
         public static final String LEFT_LONG_BACK_SWIPE_APP_ACTION = "left_long_back_swipe_app_action";
 
+	/**
+         * Hold current font name and name of the originating package Uses "|" as a delimiter
+         * @hide
+         */
+        public static final String FONT_INFO = "font_info";
+
+        /**
+         * Hold list of installed font provider packages. Uses "|" as a delimiter
+         * @hide
+         */
+        public static final String FONT_PACKAGES = "font_packages";
+
         /**
          * Display friendly name of custom application launched when
          * using the long left back swipe app action
