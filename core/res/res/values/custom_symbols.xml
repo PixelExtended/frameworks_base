@@ -140,5 +140,6 @@
     <java-symbol type="string" name="url_copy_failed" />
 
     <!-- System fonts -->
-  <java-symbol type="array" name="config_fontPackages" />
+    <java-symbol type="array" name="config_fontPackages" />
+     <java-symbol type="string" name="fontservice_incompatible_font" />
 </resources>
