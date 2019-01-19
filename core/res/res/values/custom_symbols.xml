@@ -142,4 +142,7 @@
     <!-- System fonts -->
     <java-symbol type="array" name="config_fontPackages" />
      <java-symbol type="string" name="fontservice_incompatible_font" />
+
+   <!-- Toast animation -->
+  <java-symbol type="style" name="Animation.Toast.Material" />
 </resources>
