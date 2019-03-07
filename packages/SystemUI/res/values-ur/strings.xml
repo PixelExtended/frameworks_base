@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"نئے آلہ کا جوڑا بنائیں"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"آپ کے بیٹری میٹر کو پڑھنے میں دشواری"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"مزید معلومات کے لیے تھپتھپائیں"</string>
+    <string name="media_output_title" msgid="115223550977351699">"اس پر میڈیا چلائیں"</string>
 </resources>

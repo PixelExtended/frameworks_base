@@ -1112,4 +1112,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Спалучыць з новай прыладай"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Праблема з чытаннем індыкатара зараду акумулятара"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Націсніце, каб убачыць больш"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Прайграваць медыяфайлы на"</string>
 </resources>

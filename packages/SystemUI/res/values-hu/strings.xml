@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Új eszköz párosítása"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Probléma merült fel az akkumulátor-töltésmérő olvasásakor"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Koppintással további információkat érhet el."</string>
+    <string name="media_output_title" msgid="115223550977351699">"Média lejátszása"</string>
 </resources>

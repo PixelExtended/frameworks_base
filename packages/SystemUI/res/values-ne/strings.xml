@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"नयाँ यन्त्रको जोडा बनाउनुहोस्"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"यन्त्रको ब्याट्रीको मिटर रिडिङ क्रममा समस्या भयो"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"थप जानकारी प्राप्त गर्न ट्याप गर्नुहोस्"</string>
+    <string name="media_output_title" msgid="115223550977351699">"मिडिया यसमा प्ले गर्नुहोस्"</string>
 </resources>

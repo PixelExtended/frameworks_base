@@ -549,6 +549,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         updateRingerModeExternalW(mRingerModeObservers.mRingerMode.getValue());
         updateZenModeW();
         updateZenConfig();
+        updateLinkNotificationConfigW();
         updateEffectsSuppressorW(mNoMan.getEffectsSuppressor());
         mCallbacks.onStateChanged(mState);
     }

@@ -1112,4 +1112,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"התאמה של מכשיר חדש"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"בעיה בקריאת מדדי הסוללה"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"יש להקיש כדי להציג מידע נוסף"</string>
+    <string name="media_output_title" msgid="115223550977351699">"הפעלת מדיה באמצעות"</string>
 </resources>

@@ -1112,4 +1112,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Sparuj nowe urządzenie"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Problem z odczytaniem pomiaru wykorzystania baterii"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Kliknij, aby uzyskać więcej informacji"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Odtwarzaj multimedia na"</string>
 </resources>

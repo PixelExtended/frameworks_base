@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Çifto pajisjen e re"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Problem me leximin e matësit të baterisë"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Trokit për më shumë informacione"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Luaj median te"</string>
 </resources>

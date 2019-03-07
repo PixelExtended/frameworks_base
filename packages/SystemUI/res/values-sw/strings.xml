@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Oanisha kifaa kipya"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Tatizo la kusoma mita ya betri yako"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Gusa ili upate maelezo zaidi"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Cheza muziki kwenye"</string>
 </resources>

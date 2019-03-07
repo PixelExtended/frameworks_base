@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Koble til en ny enhet"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Kunne ikke lese batterimåleren"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Trykk for å få mer informasjon"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Spill av på"</string>
 </resources>

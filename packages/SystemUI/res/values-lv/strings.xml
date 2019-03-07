@@ -1106,4 +1106,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Savienošana pārī ar jaunu ierīci"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Nevar iegūt informāciju par akumulatora uzlādes līmeni."</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Pieskarieties, lai iegūtu plašāku informāciju."</string>
+    <string name="media_output_title" msgid="115223550977351699">"Atskaņot multivides saturu šeit"</string>
 </resources>

@@ -1112,4 +1112,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Підключити новий пристрій"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Не вдалось отримати дані лічильника акумулятора"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Натисніть, щоб дізнатися більше"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Відтворювати медіа-вміст у додатку"</string>
 </resources>

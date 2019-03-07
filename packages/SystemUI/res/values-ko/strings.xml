@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"새 기기와 페어링"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"배터리 수준을 읽는 중에 문제가 발생함"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"탭하여 자세한 정보를 확인하세요."</string>
+    <string name="media_output_title" msgid="115223550977351699">"미디어 출력 대상"</string>
 </resources>

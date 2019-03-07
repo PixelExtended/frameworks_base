@@ -1100,4 +1100,5 @@
     <string name="media_output_dialog_pairing_new" msgid="9099497976087485862">"Neues Gerät koppeln"</string>
     <string name="battery_state_unknown_notification_title" msgid="8464703640483773454">"Problem beim Lesen des Akkustands"</string>
     <string name="battery_state_unknown_notification_text" msgid="13720937839460899">"Für weitere Informationen tippen"</string>
+    <string name="media_output_title" msgid="115223550977351699">"Medien hier abspielen"</string>
 </resources>
