@@ -283,7 +283,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private static final String NAVIGATION_BAR_SHOW =
             "customsystem:" + Settings.System.NAVIGATION_BAR_SHOW;
-
+    private static final String DISPLAY_CUTOUT_HIDDEN =
+            "customsystem:" + Settings.System.DISPLAY_CUTOUT_HIDDEN;
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
     private static final String BANNER_ACTION_SETUP =
@@ -652,6 +653,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mNoAnimationOnNextBarModeChange;
     private final SysuiStatusBarStateController mStatusBarStateController;
 
+    private boolean mDisplayCutoutHidden;
+
     private final KeyguardUpdateMonitorCallback mUpdateCallback =
             new KeyguardUpdateMonitorCallback() {
                 @Override
@@ -876,6 +879,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 SysuiStatusBarStateController.RANK_STATUS_BAR);
 
         mTunerService.addTunable(this, NAVIGATION_BAR_SHOW);
+        mTunerService.addTunable(this, DISPLAY_CUTOUT_HIDDEN);
 
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mDreamManager = IDreamManager.Stub.asInterface(
@@ -1911,6 +1915,14 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateTheme();
     }
 
+    private void updateCutoutOverlay() {
+        try {
+            mOverlayManager.setEnabled("org.pixelexperience.overlay.hidecutout",
+                        mDisplayCutoutHidden, mLockscreenUserManager.getCurrentUserId());
+        } catch (RemoteException ignored) {
+        }
+    }
+
     @Nullable
     public View getAmbientIndicationContainer() {
         return mAmbientIndicationContainer;
@@ -2085,6 +2097,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.SWITCH_STYLE))) {
                 stockSwitchStyle();
                 updateSwitchStyle();
+	   } else if (DISPLAY_CUTOUT_HIDDEN.equals(key)) {
+            mDisplayCutoutHidden = TunerService.parseIntegerSwitch(newValue, false);
+            updateCutoutOverlay();
             }
         }
 
