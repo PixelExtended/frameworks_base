@@ -5480,6 +5480,12 @@ public final class Settings {
          * @hide
          */
         public static final String POWERMENU_ADVANCED = "powermenu_advanced";
+		
+		/**
+         * Switch between filters for lockscreen album art
+         * @hide
+         */
+        public static final String LOCKSCREEN_ALBUMART_FILTER = "lockscreen_albumart_filter";
 
         /**
          * Whether to display power in the power menu
