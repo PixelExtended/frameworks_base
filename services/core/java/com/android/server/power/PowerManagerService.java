@@ -50,6 +50,7 @@ import android.os.BatteryManager;
 import android.os.BatteryManagerInternal;
 import android.os.BatterySaverPolicyConfig;
 import android.os.Binder;
+import android.os.FileUtils;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.IPowerManager;
@@ -113,6 +114,7 @@ import com.android.server.power.batterysaver.BatterySavingStats;
 import com.android.internal.util.custom.NavbarUtils;
 
 import java.io.FileDescriptor;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -241,6 +243,11 @@ public final class PowerManagerService extends SystemService
     private static final int HALT_MODE_SHUTDOWN = 0;
     private static final int HALT_MODE_REBOOT = 1;
     private static final int HALT_MODE_REBOOT_SAFE_MODE = 2;
+
+   // Smart charging: sysfs node of charger
+    private static final String BATTERY_CHARGER_PATH =
+            "/sys/class/power_supply/battery/battery_charging_enabled";
+    private static final String CHARGER_PATH = "/sys/class/power_supply/battery/charging_enabled";
 
     private static final int DEFAULT_BUTTON_ON_DURATION = 5 * 1000;
 
@@ -530,6 +537,16 @@ public final class PowerManagerService extends SystemService
     public final float mScreenBrightnessDefaultVr;
     public final float mScreenBrightnessDefaultButton;
     public final float mScreenBrightnessDefaultKeyboard;
+
+    // Smart charging
+    private boolean mSmartChargingEnabled;
+    private int mSmartChargingLevel;
+    private int mSmartChargingLevelDefaultConfig = 80;
+    // Handle charger
+    private boolean mUseCharger = true;
+    // Handle battery charging, when false the charger will keep the
+    // battery at the current level
+    private boolean mChargeBattery = true;
 
     // The screen brightness mode.
     // One of the Settings.System.SCREEN_BRIGHTNESS_MODE_* constants.
@@ -1200,6 +1217,13 @@ public final class PowerManagerService extends SystemService
                 Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED),
                 false, mSettingsObserver, UserHandle.USER_ALL);
 
+        resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.SMART_CHARGING),
+                false, mSettingsObserver, UserHandle.USER_ALL);
+        resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.SMART_CHARGING_LEVEL),
+                false, mSettingsObserver, UserHandle.USER_ALL);
+
         IVrManager vrManager = IVrManager.Stub.asInterface(getBinderService(Context.VR_SERVICE));
         if (vrManager != null) {
             try {
@@ -1307,6 +1331,11 @@ public final class PowerManagerService extends SystemService
                 Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
                 (mWakeUpWhenPluggedOrUnpluggedConfig ? 1 : 0)) == 1;
         mAlwaysOnEnabled = mAmbientDisplayConfiguration.alwaysOnEnabled(UserHandle.USER_CURRENT);
+        mSmartChargingEnabled = Settings.System.getInt(resolver,
+                Settings.System.SMART_CHARGING, 0) == 1;
+        mSmartChargingLevel = Settings.System.getInt(resolver,
+                Settings.System.SMART_CHARGING_LEVEL,
+                mSmartChargingLevelDefaultConfig);
 
         if (mSupportsDoubleTapWakeConfig) {
             boolean doubleTapWakeEnabled = Settings.Secure.getIntForUser(resolver,
@@ -1350,6 +1379,7 @@ public final class PowerManagerService extends SystemService
     private void handleSettingsChangedLocked() {
         updateSettingsLocked();
         updatePowerStateLocked();
+        updateSmartChargingStatus();
     }
 
     private void acquireWakeLockInternal(IBinder lock, int flags, String tag, String packageName,
@@ -2125,6 +2155,40 @@ public final class PowerManagerService extends SystemService
             }
 
             mBatterySaverStateMachine.setBatteryStatus(mIsPowered, mBatteryLevel, mBatteryLevelLow);
+            updateSmartChargingStatus();
+        }
+    }
+
+    private void updateSmartChargingStatus() {
+        if (mIsPowered || (mUseCharger == false)) {
+            boolean allowBatteryCharging = true;
+            boolean allowCharger = true;
+            if (mSmartChargingEnabled && (mBatteryLevel >= mSmartChargingLevel)) {
+                if (mBatteryLevel > mSmartChargingLevel) {
+                    allowCharger = false;
+                }
+                allowBatteryCharging = false;
+            }
+            
+            if (mChargeBattery != allowBatteryCharging) {
+                try {
+                    mChargeBattery = allowBatteryCharging;
+                    FileUtils.stringToFile(BATTERY_CHARGER_PATH, mChargeBattery ? "1" : "0");
+                } catch (IOException e) {
+                    Slog.e(TAG, "failed to write to " + BATTERY_CHARGER_PATH);
+                    mChargeBattery = !mChargeBattery;
+                }
+            }
+
+            if (mUseCharger != allowCharger) {
+                try {
+                    mUseCharger = allowCharger;
+                    FileUtils.stringToFile(CHARGER_PATH, mUseCharger ? "1" : "0");
+                } catch (IOException e) {
+                    Slog.e(TAG, "failed to write to " + CHARGER_PATH);
+                    mUseCharger = !mUseCharger;
+                }
+            }
         }
     }
 
