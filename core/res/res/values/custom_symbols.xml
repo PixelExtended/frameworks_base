@@ -69,6 +69,7 @@
   <java-symbol type="integer" name="config_fod_pressed_color" />
 
   <!-- Pocket Lock -->
+  <java-symbol type="bool" name="config_pocketModeSupported" />
   <java-symbol type="layout" name="pocket_lock_view_layout" />
   <java-symbol type="id" name="pocket_hint_container" />
   <java-symbol type="id" name="pocket_hint_image" />
