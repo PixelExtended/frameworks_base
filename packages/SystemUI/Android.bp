@@ -73,6 +73,7 @@ android_library {
         "vendor.lineage.biometrics.fingerprint.inscreen-V1.0-java",
         "vendor.lineage.powershare-V1.0-java",
         "faceunlock_framework",
+        "lottie",
     ],
     manifest: "AndroidManifest.xml",
 
@@ -149,6 +150,7 @@ android_library {
         "dagger2-2.19",
         "jsr330",
         "vendor.lineage.biometrics.fingerprint.inscreen-V1.0-java",
+        "lottie",
     ],
     libs: [
         "android.test.runner",
