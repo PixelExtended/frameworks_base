@@ -1198,7 +1198,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
         boolean hspaDataDistinguishable;
         boolean inflateSignalStrengths = false;
         boolean alwaysShowDataRatIcon = false;
-        boolean showVolteIcon;
 
         static Config readConfig(Context context) {
             Config config = new Config();
@@ -1228,8 +1227,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
               /*config.hideLtePlus = b.getBoolean(
                         CarrierConfigManager.KEY_HIDE_LTE_PLUS_DATA_ICON_BOOL);*/
             }
-
-            config.showVolteIcon = res.getBoolean(R.bool.config_display_volte);
             return config;
         }
     }
