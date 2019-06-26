@@ -5594,7 +5594,11 @@ public final class Settings {
         public static final String TINT_QS_TILES = "tint_qs_tiles";
 
         private static final Validator TINT_QS_TILES_VALIDATOR = BOOLEAN_VALIDATOR;
-
+       
+         /**
+         * @hide
+         */
+        public static final String SMART_CHARGING_RESET_STATS = "smart_charging_reset_stats";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
