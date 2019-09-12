@@ -54,8 +54,9 @@ LOCAL_REQUIRED_MODULES := \
 	IconPackRoundedSystemUIOverlay \
 	IconPackRoundedThemePickerOverlay \
 	IconShapePebbleOverlay \
-	IconShapeHeartOverlay \
-	IconShapeLeafOverlay \
+        IconShapeHeartOverlay \
+        IconShapeLeafOverlay \
+	IconShapeCircleOverlay \
 	IconShapeRoundedRectOverlay \
 	IconShapeSquareOverlay \
 	IconShapeSquircleOverlay \
