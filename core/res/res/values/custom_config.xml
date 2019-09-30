@@ -249,4 +249,13 @@
     <!-- Hide FOD while Going to sleep from lockscreen to avoid HBM flicker
          or FOD Circle hiding after the screen is put to sleep -->
     <bool name="config_hideFodCircleGoingToSleep">false</bool>
+
+    <!-- Whether device has physical tri state switch -->
+    <bool name="config_hasAlertSlider">false</bool>
+
+	<!-- The location of the devices physical tri state switch
+         0: Left side
+         1: Right side -->
+    <integer name="config_alertSliderLocation">0</integer>
+
 </resources>
