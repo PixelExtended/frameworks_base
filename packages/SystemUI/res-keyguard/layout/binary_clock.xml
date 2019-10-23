@@ -14,15 +14,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<resources>
-  <!-- Default color for hour hand of Bubble clock. -->
-  <color name="bubbleHourHandColor">#C97343</color>
-  <!-- Default color for minute hand of Bubble clock. -->
-  <color name="bubbleMinuteHandColor">#F5C983</color>
-  <!-- Accent color for Typographic clock. -->
-  <color name="typeClockAccentColor">#F5C983</color>
-    <color name="binary_clock_dot_color">#ffffff</color>
-    <color name="binary_clock_empty_dot_color">#ffffff</color>
-    <color name="binary_clock_ambient_dot_color">#ffffff</color>
-    <color name="binary_clock_ambient_empty_dot_color">#ffffff</color>
-</resources>
+<com.android.keyguard.clock.ClockLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.android.keyguard.clock.BinaryClock
+        android:id="@+id/analog_clock"
+        android:layout_width="@dimen/binary_clock_width"
+        android:layout_height="@dimen/binary_clock_height" />
+
+</com.android.keyguard.clock.ClockLayout>
