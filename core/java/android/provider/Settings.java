@@ -5467,6 +5467,11 @@ public final class Settings {
          */
         public static final String QS_SHOW_BATTERY_ESTIMATE = "qs_show_battery_estimate";
 
+	/**
+         * @hide
+         */
+        public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+
         /**
          * These are all public system settings
          *
