@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Vendor signatures -->
     <java-symbol type="array" name="config_vendorPlatformSignatures" />
@@ -34,5 +35,11 @@
     <java-symbol name="reboot_system_title" type="string" />
     <java-symbol name="reboot_system_message" type="string" />
     <java-symbol type="array" name="config_rebootActionsList" />
+    
+    <!-- Pocket Lock -->
+    <java-symbol type="layout" name="pocket_lock_view_layout" />
+    <java-symbol type="id" name="pocket_hint_container" />
+    <java-symbol type="id" name="pocket_hint_image" />
+    <java-symbol type="id" name="pocket_hint_message" />
 
 </resources>
