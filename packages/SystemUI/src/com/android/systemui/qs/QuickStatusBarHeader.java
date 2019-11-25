@@ -181,6 +181,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     // Used for RingerModeTracker
     private final LifecycleRegistry mLifecycle = new LifecycleRegistry(this);
 
+    private BatteryMeterView mBatteryMeterView;
+
     private boolean mHasTopCutout = false;
     private int mStatusBarPaddingTop = 0;
     private int mRoundedCornerPadding = 0;
@@ -288,7 +290,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mPrivacyChip.setOnClickListener(this::onClick);
         mCarrierGroup = findViewById(R.id.carrier_group);
 
-
         updateResources();
 
         Rect tintArea = new Rect(0, 0, 0, 0);
@@ -304,6 +305,11 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mIconManager.setTint(fillColor);
         mNextAlarmIcon.setImageTintList(ColorStateList.valueOf(fillColor));
         mRingerModeIcon.setImageTintList(ColorStateList.valueOf(fillColor));
+
+        mBatteryMeterView = findViewById(R.id.battery);
+        mBatteryMeterView.setForceShowPercent(true);
+        mBatteryMeterView.setOnClickListener(this);
+        mBatteryMeterView.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
 
         mClockView = findViewById(R.id.clock);
         mClockView.setOnClickListener(this);
@@ -331,6 +337,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         Dependency.get(TunerService.class).addTunable(this,
                 StatusBarIconController.ICON_BLACKLIST,
                 QS_SHOW_AUTO_BRIGHTNESS, QS_SHOW_BRIGHTNESS_SLIDER);
+
+        mBatteryMeterView.setVisibility(View.VISIBLE);
+        mBatteryRemainingIcon.setVisibility(View.GONE);
     }
 
     public QuickQSPanel getHeaderQsPanel() {
@@ -436,6 +445,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         boolean shouldUseWallpaperTextColor =
                 newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
         mClockView.useWallpaperTextColor(shouldUseWallpaperTextColor);
+        mBatteryMeterView.useWallpaperTextColor(shouldUseWallpaperTextColor);
     }
 
     @Override
@@ -764,7 +774,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             builder.appendPath(Long.toString(System.currentTimeMillis()));
             Intent todayIntent = new Intent(Intent.ACTION_VIEW, builder.build());
             mActivityStarter.postStartActivityDismissingKeyguard(todayIntent, 0);
-        } else if (v == mBatteryRemainingIcon) {
+        } else if (v == mBatteryRemainingIcon || v == mBatteryMeterView) {
             mActivityStarter.postStartActivityDismissingKeyguard(new Intent(
                 Intent.ACTION_POWER_USAGE_SUMMARY), 0);
         }
@@ -810,6 +820,10 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryRemainingIcon.onDarkChanged(tintArea, intensity, fillColor);
         mNetworkTraffic.onDarkChanged(tintArea, intensity, fillColor);
         mNetworkTrafficExpanded.onDarkChanged(tintArea, intensity, fillColor);
+
+        // Use SystemUI context to get battery meter colors, and let it use the default tint (white)
+        mBatteryMeterView.setColorsFromContext(mHost.getContext());
+        mBatteryMeterView.onDarkChanged(new Rect(), 0, DarkIconDispatcher.DEFAULT_ICON_TINT);
     }
 
     public void setCallback(Callback qsPanelCallback) {
