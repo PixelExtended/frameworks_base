@@ -94,7 +94,7 @@ public class QSTileView extends QSTileBaseView {
 
     private void updateTintEnabled() {
         mTintEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
-                Settings.System.TINT_QS_TILES, 1, UserHandle.USER_CURRENT) == 1;
+                Settings.System.TINT_QS_TILES, 0, UserHandle.USER_CURRENT) == 1;
     }
 
     @Override
