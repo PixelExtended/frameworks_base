@@ -42,4 +42,6 @@
     <dimen name="volume_dialog_panel_transparent_padding_left">20dp</dimen>
     <dimen name="volume_dialog_panel_land_margin">68dp</dimen>
 
+    <!-- Width of the battery icon in the status bar when set to circle style. -->
+    <dimen name="status_bar_battery_icon_circle_width">13.5dp</dimen>
 </resources>
