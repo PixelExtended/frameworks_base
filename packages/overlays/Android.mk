@@ -24,6 +24,16 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorSpaceOverlay \
 	AccentColorGreenOverlay \
 	AccentColorPurpleOverlay \
+	AccentColorBlueGrayOverlay \
+	AccentColorCyanOverlay \
+	AccentColorFlatPinkOverlay \
+	AccentColorIndigoOverlay \
+	AccentColorLightPurpleOverlay \
+	AccentColorPinkOverlay \
+	AccentColorRedOverlay \
+	AccentColorTealOverlay \
+	AccentColorCocaColaOverlay \
+>>>>>>> a3e2e090acc... Accents: Add new accent colors for Q
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
 	DisplayCutoutEmulationTallOverlay \
