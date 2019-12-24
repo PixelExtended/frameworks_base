@@ -33,7 +33,17 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorRedOverlay \
 	AccentColorTealOverlay \
 	AccentColorCocaColaOverlay \
->>>>>>> a3e2e090acc... Accents: Add new accent colors for Q
+        AccentColorMetallicGoldOverlay \
+        AccentColorInfernoRedOverlay \
+        AccentColorDorsetGoldOverlay \
+        AccentColorUbuntuOverlay \
+        AccentColorSalmonOverlay \
+        AccentColorPornhubOverlay \
+        AccentColorMatrixOverlay \
+        AccentColorEvolutionBlueOverlay \
+	AccentColorEvolutionGreenOverlay \
+	AccentColorEvolutionRedOverlay \
+	AccentColorEvolutionYellowOverlay \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
 	DisplayCutoutEmulationTallOverlay \
