@@ -240,4 +240,8 @@
     <!-- Notification shown in status bar when an application is successfully installed.
          [CHAR LIMIT=50] -->
     <string name="notification_installation_success_status">Successfully installed \u201c<xliff:g id="appname" example="Package Installer">%1$s</xliff:g>\u201d</string>
+<!-- Message for updating an existing app [CHAR LIMIT=NONE] -->
+    <string name="old_version_number">Installed version: <xliff:g id="old_version">%1$s</xliff:g></string>
+    <!-- Message for updating an existing system app [CHAR LIMIT=NONE] -->
+    <string name="new_version_number">To be installed: <xliff:g id="new_version">%1$s</xliff:g></string>
 </resources>
