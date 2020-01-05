@@ -127,6 +127,10 @@
   <!-- Pocket Service -->
   <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
 
- <!-- For dynamic default font styles -->
+  <!-- For dynamic default font styles -->
     <java-symbol type="string" name="config_bodyFontFamily" />
+
+  <!-- Light / Regular style fonts -->
+    <java-symbol type="string" name="config_lightFontFamily" />
+    <java-symbol type="string" name="config_regularFontFamily" />
 </resources>
