@@ -543,4 +543,7 @@ number">%d</xliff:g> remaining attempts before SIM becomes permanently unusable.
     <!-- Name of the "Type" clock face [CHAR LIMIT=15]-->
     <string name="clock_title_type">Type</string>
     <string name="clock_title_binary" translatable="false">Binary</string>
+    <string name="clock_title_default_bold" translatable="false">Default (bold)</string>
+    <string name="clock_title_samsung" translatable="false">Samsung</string>
+    <string name="clock_title_samsung_bold" translatable="false">Samsung (bold)</string>
 </resources>
