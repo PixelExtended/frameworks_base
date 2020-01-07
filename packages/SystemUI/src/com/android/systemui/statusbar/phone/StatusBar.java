@@ -79,6 +79,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -86,6 +87,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioAttributes;
 import android.metrics.LogMaker;
 import android.net.Uri;
@@ -130,6 +133,7 @@ import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.DateTimeView;
+import android.widget.ImageView;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.colorextraction.ColorExtractor;
@@ -149,6 +153,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
 import com.android.systemui.EventLogTags;
 import com.android.systemui.ForegroundServiceController;
+import com.android.systemui.ImageUtilities;
 import com.android.systemui.InitController;
 import com.android.systemui.Interpolators;
 import com.android.systemui.Prefs;
@@ -541,6 +546,10 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mWallpaperSupported;
 
     private boolean mWallpaperSupportsAmbientMode;
+    // Blur
+    private ImageView mQSBlurView;
+    private boolean blurperformed = false;
+
     private final BroadcastReceiver mWallpaperChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -1045,6 +1054,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 backdrop.findViewById(R.id.backdrop_back), mScrimController, mLockscreenWallpaper);
 
         mVisualizerView = (VisualizerView) mStatusBarWindow.findViewById(R.id.visualizerview);
+        mQSBlurView = mStatusBarWindow.findViewById(R.id.qs_blur);
 
         // Other icons
         mVolumeComponent = getComponent(VolumeComponent.class);
@@ -1128,6 +1138,22 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         // Private API call to make the shadows look better for Recents
         ThreadedRenderer.overrideProperty("ambientRatio", String.valueOf(1.5f));
+    }
+
+    public void updateBlurVisibility() {
+        int QSBlurAlpha = Math.round(255.0f * mNotificationPanel.getExpandedFraction());
+
+        if (QSBlurAlpha > 0 && !blurperformed && mState != StatusBarState.KEYGUARD) {
+            Bitmap bittemp = ImageUtilities.blurImage(mContext, ImageUtilities.screenshotSurface(mContext));
+            Drawable blurbackground = new BitmapDrawable(mContext.getResources(), bittemp);
+            blurperformed = true;
+            mQSBlurView.setBackgroundDrawable(blurbackground);
+        } else if (QSBlurAlpha == 0 || mState == StatusBarState.KEYGUARD) {
+            blurperformed = false;
+            mQSBlurView.setBackgroundColor(0);
+        }
+        mQSBlurView.setAlpha(QSBlurAlpha);
+        mQSBlurView.getBackground().setAlpha(QSBlurAlpha);
     }
 
     protected QS createDefaultQSFragment() {
