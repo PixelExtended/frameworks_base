@@ -4929,6 +4929,13 @@ public final class Settings {
         /** @hide */
         public static final Validator TORCH_LONG_PRESS_POWER_GESTURE_VALIDATOR = BOOLEAN_VALIDATOR;
 
+        /** @hide */
+        public static final String OMNI_BACK_GESTURE_BLOCK_IME = "back_gesture_block_ime";
+
+        /** @hide */
+        private static final Validator OMNI_BACK_GESTURE_BLOCK_IME_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
         /**
          * When the torch has been turned on by long press on power,
          * automatically turn off after a configurable number of seconds.
@@ -5721,6 +5728,7 @@ public final class Settings {
             TINT_QS_TILES,
             BACK_GESTURE_HAPTIC,
             SWITCH_STYLE,
+	    OMNI_BACK_GESTURE_BLOCK_IME,
         };
 
         /**
@@ -5916,6 +5924,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ANIM_TILE_DURATION);
             PRIVATE_SETTINGS.add(ANIM_TILE_INTERPOLATOR);
             PRIVATE_SETTINGS.add(QS_TILE_TITLE_VISIBILITY);
+            PRIVATE_SETTINGS.add(OMNI_BACK_GESTURE_BLOCK_IME);
             PRIVATE_SETTINGS.add(GESTURE_PILL_TOGGLE);
             PRIVATE_SETTINGS.add(NAV_BAR_COMPACT_LAYOUT);
             PRIVATE_SETTINGS.add(QUICK_SETTINGS_TILES_VIBRATE);
@@ -6084,6 +6093,7 @@ public final class Settings {
             VALIDATORS.put(ACCELEROMETER_ROTATION_ANGLES, ACCELEROMETER_ROTATION_ANGLES_VALIDATOR);
             VALIDATORS.put(NAVIGATION_BAR_MENU_ARROW_KEYS, NAVIGATION_BAR_MENU_ARROW_KEYS_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_BATTERY_STYLE, STATUS_BAR_BATTERY_STYLE_VALIDATOR);
+	    VALIDATORS.put(OMNI_BACK_GESTURE_BLOCK_IME,OMNI_BACK_GESTURE_BLOCK_IME_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_SHOW_BATTERY_PERCENT, STATUS_BAR_SHOW_BATTERY_PERCENT_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_VISUALIZER_ENABLED, LOCKSCREEN_VISUALIZER_ENABLED_VALIDATOR);
             VALIDATORS.put(INCALL_FEEDBACK_VIBRATE, INCALL_FEEDBACK_VIBRATE_VALIDATOR);
