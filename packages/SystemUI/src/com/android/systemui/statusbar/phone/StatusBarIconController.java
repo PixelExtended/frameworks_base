@@ -365,8 +365,10 @@ public interface StatusBarIconController {
         // Which is not of type StatusBarIcon.
         public void onSetIcon(int viewIndex, StatusBarIcon icon) {
             try {
-              StatusBarIconView view = (StatusBarIconView) mGroup.getChildAt(viewIndex);
-              view.set(icon);
+                 View view = mGroup.getChildAt(viewIndex);
+            if (view instanceof StatusBarIconView) {
+                ((StatusBarIconView) view).set(icon);
+            }
             }
             catch (Exception e) {
               /* Ringer status icon on statusbar won't be shown for a split second
