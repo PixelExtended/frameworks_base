@@ -109,11 +109,10 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create("google-sans", Typeface.NORMAL));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
-                    setLineSpacing(0.75f, 0.75f);
                     setText(output);
+                    setSpacingAndFonts();
                     indicatorUp = true;
                 }
                 mTrafficVisible = true;
@@ -123,10 +122,9 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create("google-sans", Typeface.NORMAL));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
-                    setLineSpacing(0.75f, 0.75f);
+                    setSpacingAndFonts();
                     setText(output);
                     indicatorDown = true;
                 }
@@ -150,47 +148,49 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         }
 
         private CharSequence formatDecimal(long speed) {
-            DecimalFormat mDecimalFormat;
-            String mUnit;
+            DecimalFormat decimalFormat;
+            String unit;
             String formatSpeed;
             SpannableString spanUnitString;
             SpannableString spanSpeedString;
 
             if (speed >= GB) {
-                mUnit = "GB";
-                mDecimalFormat = new DecimalFormat("0.00");
-                formatSpeed =  mDecimalFormat.format(speed / (float)GB);
+                unit = "GB";
+                decimalFormat = new DecimalFormat("0.00");
+                formatSpeed =  decimalFormat.format(speed / (float)GB);
             } else if (speed >= 100 * MB) {
-                mDecimalFormat = new DecimalFormat("000");
-                mUnit = "MB";
-                formatSpeed =  mDecimalFormat.format(speed / (float)MB);
+                decimalFormat = new DecimalFormat("000");
+                unit = "MB";
+                formatSpeed =  decimalFormat.format(speed / (float)MB);
             } else if (speed >= 10 * MB) {
-                mDecimalFormat = new DecimalFormat("00.0");
-                mUnit = "MB";
-                formatSpeed =  mDecimalFormat.format(speed / (float)MB);
+                decimalFormat = new DecimalFormat("00.0");
+                unit = "MB";
+                formatSpeed =  decimalFormat.format(speed / (float)MB);
             } else if (speed >= MB) {
-                mDecimalFormat = new DecimalFormat("0.00");
-                mUnit = "MB";
-                formatSpeed =  mDecimalFormat.format(speed / (float)MB);
+                decimalFormat = new DecimalFormat("0.00");
+                unit = "MB";
+                formatSpeed =  decimalFormat.format(speed / (float)MB);
             } else if (speed >= 100 * KB) {
-                mDecimalFormat = new DecimalFormat("000");
-                mUnit = "KB";
-                formatSpeed =  mDecimalFormat.format(speed / (float)KB);
+                decimalFormat = new DecimalFormat("000");
+                unit = "KB";
+                formatSpeed =  decimalFormat.format(speed / (float)KB);
             } else if (speed >= 10 * KB) {
-                mDecimalFormat = new DecimalFormat("00.0");
-                mUnit = "KB";
-                formatSpeed =  mDecimalFormat.format(speed / (float)MB);
+                decimalFormat = new DecimalFormat("00.0");
+                unit = "KB";
+                formatSpeed =  decimalFormat.format(speed / (float)MB);
             } else {
-                mDecimalFormat = new DecimalFormat("0.00");
-                mUnit = "KB";
-                formatSpeed = mDecimalFormat.format(speed / (float)KB);
+                decimalFormat = new DecimalFormat("0.00");
+                unit = "KB";
+                formatSpeed = decimalFormat.format(speed / (float)KB);
             }
 
             spanSpeedString = new SpannableString(formatSpeed);
-            spanSpeedString.setSpan(new RelativeSizeSpan(0.75f), 0, (formatSpeed).length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            spanSpeedString.setSpan(getSpeedRelativeSizeSpan(), 0, (formatSpeed).length(),
+                    Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
-            spanUnitString = new SpannableString(mUnit + symbol);
-            spanUnitString.setSpan(new RelativeSizeSpan(0.70f), 0, (mUnit + symbol).length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            spanUnitString = new SpannableString(unit + symbol);
+            spanUnitString.setSpan(getUnitRelativeSizeSpan(), 0, (unit + symbol).length(),
+                    Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             return TextUtils.concat(spanSpeedString, "\n", spanUnitString);
         }
 
@@ -204,11 +204,78 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
         private boolean shouldShowUpload(long rxData, long txData, long timeDelta) {
             long speedRxKB = (long)(rxData / (timeDelta / 1000f)) / KB;
-            long speedTxKB = (long)(txData / (timeDelta / 1000f)) / KB;
-
+                long speedTxKB = (long)(txData / (timeDelta / 1000f)) / KB;
             return (speedTxKB > speedRxKB);
         }
     };
+
+    private final KeyguardMonitor mKeyguard;
+    private final KeyguardCallback mKeyguardCallback = new KeyguardCallback();
+
+    /*
+     *  @hide
+     */
+    public NetworkTrafficSB(Context context) {
+        this(context, null);
+    }
+
+    /*
+     *  @hide
+     */
+    public NetworkTrafficSB(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    /*
+     *  @hide
+     */
+    public NetworkTrafficSB(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        mKeyguard = Dependency.get(KeyguardMonitor.class);
+        final Resources resources = getResources();
+        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_sb_txt_img_padding);
+        mTintColor = resources.getColor(android.R.color.white);
+        setMode();
+        Handler mHandler = new Handler();
+        SettingsObserver settingsObserver = new SettingsObserver(mHandler);
+        settingsObserver.observe();
+        update();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        mKeyguard.addCallback(mKeyguardCallback);
+        if (!mAttached) {
+            mAttached = true;
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            mContext.registerReceiver(mIntentReceiver, filter, null, getHandler());
+        }
+        Dependency.get(DarkIconDispatcher.class).addDarkReceiver(this);
+        update();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mKeyguard.removeCallback(mKeyguardCallback);
+        if (mAttached) {
+            mContext.unregisterReceiver(mIntentReceiver);
+            mAttached = false;
+        }
+        Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(this);
+    }
+
+    protected RelativeSizeSpan getSpeedRelativeSizeSpan() {
+        return new RelativeSizeSpan(0.75f);
+    }
+
+    protected RelativeSizeSpan getUnitRelativeSizeSpan() {
+        return new RelativeSizeSpan(0.70f);
+    }
 
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -241,69 +308,10 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         @Override
         public void onChange(boolean selfChange) {
             setMode();
-            updateSettings();
+            update();
         }
     }
 
-    private final KeyguardMonitor mKeyguard;
-    private final KeyguardCallback mKeyguardCallback = new KeyguardCallback();
-
-    /*
-     *  @hide
-     */
-    public NetworkTrafficSB(Context context) {
-        this(context, null);
-    }
-
-    /*
-     *  @hide
-     */
-    public NetworkTrafficSB(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    /*
-     *  @hide
-     */
-    public NetworkTrafficSB(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        mKeyguard = Dependency.get(KeyguardMonitor.class);
-        final Resources resources = getResources();
-        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_sb_txt_img_padding);
-        mTintColor = resources.getColor(android.R.color.white);
-        Handler mHandler = new Handler();
-        SettingsObserver settingsObserver = new SettingsObserver(mHandler);
-        settingsObserver.observe();
-        setMode();
-        updateSettings();
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        mKeyguard.addCallback(mKeyguardCallback);
-        if (!mAttached) {
-            mAttached = true;
-            IntentFilter filter = new IntentFilter();
-            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-            filter.addAction(Intent.ACTION_SCREEN_OFF);
-            filter.addAction(Intent.ACTION_SCREEN_ON);
-            mContext.registerReceiver(mIntentReceiver, filter, null, getHandler());
-        }
-        Dependency.get(DarkIconDispatcher.class).addDarkReceiver(this);
-        updateSettings();
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mKeyguard.removeCallback(mKeyguardCallback);
-        if (mAttached) {
-            mContext.unregisterReceiver(mIntentReceiver);
-            mAttached = false;
-        }
-        Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(this);
-    }
 
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
@@ -312,10 +320,10 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             if (action == null) return;
 
             if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION) && mScreenOn) {
-                updateSettings();
+                update();
             } else if (action.equals(Intent.ACTION_SCREEN_ON)) {
                 mScreenOn = true;
-                updateSettings();
+                update();
             } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mScreenOn = false;
                 clearHandlerCallbacks();
@@ -330,7 +338,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         return network != null;
     }
 
-    private void updateSettings() {
+    private void update() {
         updateVisibility();
         if (mIsEnabled) {
             if (mAttached) {
@@ -390,13 +398,9 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         indicatorDown = false;
     }
 
-    public void onDensityOrFontScaleChanged() {
-        final Resources resources = getResources();
-        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
+     protected void setSpacingAndFonts() {
         setCompoundDrawablePadding(txtImgPadding);
         setTypeface(Typeface.create("google-sans", Typeface.NORMAL));
-        setGravity(Gravity.CENTER);
-        setMaxLines(2);
         setLineSpacing(0.75f, 0.75f);
     }
 
@@ -471,4 +475,10 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
             updateSettings();
         }
     };
+
+    public void onDensityOrFontScaleChanged() {
+        setCompoundDrawablePadding(txtImgPadding);
+        setSpacingAndFonts();
+        update();
+    }
 }
