@@ -109,10 +109,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setGravity(Gravity.CENTER);
-                    setMaxLines(2);
-                    setText(output);
-                    setSpacingAndFonts();
                     indicatorUp = true;
                 }
                 mTrafficVisible = true;
@@ -122,9 +118,6 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setGravity(Gravity.CENTER);
-                    setMaxLines(2);
-                    setSpacingAndFonts();
                     setText(output);
                     indicatorDown = true;
                 }
@@ -364,6 +357,10 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         mHideArrow = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_HIDEARROW, 0,
                 UserHandle.USER_CURRENT) == 1;
+        setGravity(Gravity.CENTER);
+        setMaxLines(2);
+        setSpacingAndFonts();
+        updateTrafficDrawable();
     }
 
     private void clearHandlerCallbacks() {
