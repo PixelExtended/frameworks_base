@@ -49,6 +49,9 @@
    <!-- Pocket Lock -->
     <bool name="config_pocketModeSupported">true</bool>
 
-  <!-- Defines custom OEM sensor for pocket detection. -->
+   <!-- Defines custom OEM sensor for pocket detection. -->
     <string name="config_pocketJudgeVendorSensorName"></string>
+
+   <!-- Whether key handler sends intent when changing slider position -->
+    <string name="config_alertSliderIntent"></string>
 </resources>
