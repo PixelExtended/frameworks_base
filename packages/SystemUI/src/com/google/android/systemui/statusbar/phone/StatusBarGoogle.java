@@ -89,6 +89,7 @@ import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.RemoteInputQuickSettingsDisabler;
 import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
+import com.android.systemui.statusbar.policy.TaskHelper;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.volume.VolumeComponent;
 
@@ -174,6 +175,7 @@ public class StatusBarGoogle extends StatusBar {
             Optional<Divider> dividerOptional,
             LightsOutNotifController lightsOutNotifController,
             FlashlightController flashlightController,
+            TaskHelper taskHelper,
             StatusBarNotificationActivityStarter.Builder
                     statusBarNotificationActivityStarterBuilder,
             ShadeController shadeController,
@@ -254,6 +256,7 @@ public class StatusBarGoogle extends StatusBar {
                 dividerOptional,
                 lightsOutNotifController,
                 flashlightController,
+		taskHelper,
                 statusBarNotificationActivityStarterBuilder,
                 shadeController,
                 superStatusBarViewFactory,
