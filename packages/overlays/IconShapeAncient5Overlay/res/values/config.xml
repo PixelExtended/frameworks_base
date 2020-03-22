@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+** Copyright 2018, The Android Open Source Project
+** Copyright 2020, The Ancient OS Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Specifies the path that is used by AdaptiveIconDrawable class to crop launcher icons. -->
+    <string name="config_icon_mask" translatable="false">"M46.85,0.91C15.96,3.35,-4.95,32.28,2.6,62.12C2.75,62.7,2.52,62.7,4.61,62.11C33.06,54.02,49.28,61.72,53.54,85.35C54.16,88.82,54.6,93.87,54.6,97.57C54.6,98.36,54.61,99,54.63,99C56.18,99,61.76,97.86,64.57,96.96C87.87,89.55,101.91,66.77,98.29,42.29L98.07,40.82L97.01,40.76C87.4,40.25,81.41,38.94,75.38,36C63.6,30.28,56.77,18.45,56.03,2.53L55.97,1.21L55.71,1.16C54.37,0.88,49.13,0.73,46.85,0.91M57.5,1.96C57.5,3.5,58,7.78,58.46,10.15C61.64,26.61,71.89,36.07,89.3,38.59C92.32,39.04,97.7,39.41,97.7,39.18C97.7,38.97,97.02,36.46,96.63,35.2C91.11,17.55,75.86,4.25,57.93,1.45L57.5,1.38L57.5,1.96M21,60.27C16.53,60.52,10.7,61.61,4.85,63.27C2.9,63.82,3.03,63.69,3.36,64.76C9.77,85.85,30.95,100.66,52.48,99.14L53.4,99.07L53.4,97.51C53.4,93.74,52.96,88.86,52.29,85.2C49.07,67.49,38.73,59.26,21,60.27"</string>
+    <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
+    <bool name="config_useRoundIcon">true</bool>
+    <!-- Corner radius of system dialogs -->
+    <dimen name="config_dialogCornerRadius">20dp</dimen>
+    <!-- Corner radius for bottom sheet system dialogs -->
+    <dimen name="config_bottomDialogCornerRadius">20dp</dimen>
+
+</resources>
