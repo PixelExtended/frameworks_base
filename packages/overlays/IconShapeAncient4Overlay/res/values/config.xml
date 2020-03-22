@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+** Copyright 2018, The Android Open Source Project
+** Copyright 2020, The Ancient OS Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Specifies the path that is used by AdaptiveIconDrawable class to crop launcher icons. -->
+    <string name="config_icon_mask" translatable="false">"M47.48,1.75C37.22,3,28.09,11.43,23.14,24.25C22.84,25.04,22.66,25.36,22.54,25.38C15.05,26.68,7.48,34.89,3.95,45.55C-3.57,68.22,6.2,94.63,23.4,98.12L24.55,98.35L51.85,98.35C77.64,98.35,79.2,98.34,80.02,98.17C89.62,96.21,96.9,85.85,98.34,72.08C100.07,55.6,92.41,40.05,81.14,37.17L80.26,36.95L80.13,36.15C76.6,14.61,62.65,-0.09,47.48,1.75M12.23,62.15C12.45,62.54,12.93,63.32,13.3,63.9C14.11,65.14,14.09,65.06,14.14,68.55C14.3,78.29,19.11,86.37,26.11,88.65C26.93,88.92,26.98,88.95,27.21,89.39C27.55,90.04,28.83,91.29,29.65,91.79C30.04,92.02,30.53,92.36,30.74,92.55L31.13,92.9L29.97,92.9C20.26,92.9,12.16,84.1,10.68,71.95C10.34,69.07,10.65,63.79,11.31,61.5C11.51,60.83,11.51,60.83,11.67,61.15C11.75,61.32,12,61.77,12.23,62.15"</string>
+    <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
+    <bool name="config_useRoundIcon">true</bool>
+    <!-- Corner radius of system dialogs -->
+    <dimen name="config_dialogCornerRadius">20dp</dimen>
+    <!-- Corner radius for bottom sheet system dialogs -->
+    <dimen name="config_bottomDialogCornerRadius">20dp</dimen>
+
+</resources>
