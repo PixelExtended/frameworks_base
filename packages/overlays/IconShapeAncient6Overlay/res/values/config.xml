@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+** Copyright 2018, The Android Open Source Project
+** Copyright 2020, The Ancient OS Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Specifies the path that is used by AdaptiveIconDrawable class to crop launcher icons. -->
+    <string name="config_icon_mask" translatable="false">"M47.45,1.46C37.55,2.8,29.8,10.61,28.44,20.58C28.34,21.28,28.26,21.86,28.25,21.88C28.24,21.89,27.81,21.81,27.29,21.71C17.69,19.73,7.52,24.97,3.28,34.09C-1.89,45.21,2.59,58.5,13.38,63.99C14.06,64.33,14.6,64.64,14.58,64.68C14.56,64.72,14.3,65.25,13.99,65.85C9.47,74.71,11.2,85.48,18.25,92.45C26.9,101.01,40.9,100.76,49.32,91.91C50.16,91.03,50.3,90.91,50.39,91.07C50.54,91.35,52.57,93.32,53.3,93.91C63.44,101.98,78.1,99.64,85.24,88.8C89.16,82.86,90.07,75.34,87.7,68.55C87.44,67.8,87.11,67.08,85.82,64.48C85.8,64.45,86.28,64.16,86.87,63.85C103.18,55.25,102.72,31.37,86.1,23.42C81.97,21.44,76.08,20.73,72.44,21.76C72.24,21.81,72.22,21.76,72.11,20.88C70.54,8.6,59.41,-0.17,47.45,1.46M82.21,29.21C90.97,34.56,93.4,42.25,89.38,51.85C88.59,53.73,87.82,54.23,86.64,53.62C85.7,53.14,85.52,52.32,86.05,51.04C89.51,42.72,88.04,37.08,81.27,32.64C79.15,31.26,79,31.09,79,30.19C79,28.61,80.49,28.15,82.21,29.21"</string>
+    <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
+    <bool name="config_useRoundIcon">true</bool>
+    <!-- Corner radius of system dialogs -->
+    <dimen name="config_dialogCornerRadius">20dp</dimen>
+    <!-- Corner radius for bottom sheet system dialogs -->
+    <dimen name="config_bottomDialogCornerRadius">20dp</dimen>
+
+</resources>
