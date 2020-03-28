@@ -284,6 +284,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
     private boolean mLockIconPressed;
     private int mActiveMobileDataSubscription = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private final Executor mBackgroundExecutor;
+    private final boolean mFaceAuthOnlyOnSecurityView;
 
     private final boolean mFingerprintWakeAndUnlock;
 
@@ -1571,7 +1572,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         mDeviceProvisioned = isDeviceProvisionedInSettingsDb();
         mStrongAuthTracker = new StrongAuthTracker(context, this::notifyStrongAuthStateChanged);
         mFingerprintWakeAndUnlock = mContext.getResources().getBoolean(
-                com.android.systemui.R.bool.config_fingerprintWakeAndUnlock);
+                R.bool.config_fingerprintWakeAndUnlock);
+        mFaceAuthOnlyOnSecurityView = mContext.getResources().getBoolean(
+                R.bool.config_faceAuthOnlyOnSecurityView);
         mBackgroundExecutor = backgroundExecutor;
         mBroadcastDispatcher = broadcastDispatcher;
         mRingerModeTracker = ringerModeTracker;
@@ -1966,7 +1969,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
     public boolean shouldListenForFace() {
         final boolean statusBarShadeLocked =
                 mStatusBarStateController.getState() == StatusBarState.SHADE_LOCKED;
-        final boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep
+        boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep
                 && !statusBarShadeLocked;
         final int user = getCurrentUser();
         final int strongAuth = mStrongAuthTracker.getStrongAuthForUser(user);
@@ -1990,6 +1993,11 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         boolean strongAuthAllowsScanning = (!isEncryptedOrTimedOut || canBypass && !mBouncer)
                 && !isLockOutOrLockDown;
 
+        boolean unlockPossible = true;
+        if ((!mBouncer || !awakeKeyguard) && mFaceAuthOnlyOnSecurityView){
+            unlockPossible = false;
+        }
+
         // Only listen if this KeyguardUpdateMonitor belongs to the primary user. There is an
         // instance of KeyguardUpdateMonitor for each user but KeyguardUpdateMonitor is user-aware.
         final boolean shouldListen =
@@ -1998,7 +2006,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 && !mSwitchingUser && !isFaceDisabled(user) && becauseCannotSkipBouncer
                 && !mKeyguardGoingAway && mFaceSettingEnabledForUser.get(user) && !mLockIconPressed
                 && strongAuthAllowsScanning && mIsPrimaryUser
-                && !mSecureCameraLaunched;
+                && !mSecureCameraLaunched
+                && unlockPossible;
 
         // Aggregate relevant fields for debug logging.
         if (DEBUG_FACE || DEBUG_SPEW) {
