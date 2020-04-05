@@ -5549,6 +5549,14 @@ public final class Settings {
          */
         public static final String SHOW_VOLTE_ICON = "volte_icon";
 
+       /**
+         * QS blur
+         * @hide
+         */
+        public static final String QS_BLUR = "qs_blur";
+        /** @hide */
+        private static final Validator QS_BLUR_VALIDATOR = BOOLEAN_VALIDATOR;
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
@@ -5615,6 +5623,7 @@ public final class Settings {
             ALARM_ALERT,
             NOTIFICATION_LIGHT_PULSE,
             NOTIFICATION_HEADERS,
+            QS_BLUR,
         };
 
         /**
@@ -6018,6 +6027,7 @@ public final class Settings {
             VALIDATORS.put(NETWORK_TRAFFIC_AUTOHIDE, NETWORK_TRAFFIC_AUTOHIDE_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_UNIT_TYPE, NETWORK_TRAFFIC_UNIT_TYPE_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_HEADERS, NOTIFICATION_HEADERS_VALIDATOR);
+            VALIDATORS.put(QS_BLUR, QS_BLUR_VALIDATOR);
         }
 
         /**
