@@ -543,4 +543,5 @@ number">%d</xliff:g> remaining attempts before SIM becomes permanently unusable.
     <string name="clock_title_default_bold" translatable="false">Default (bold)</string>
     <string name="clock_title_samsung" translatable="false">Samsung</string>
     <string name="clock_title_samsung_bold" translatable="false">Samsung (bold)</string>
+    <string name="date_long_title_today">Today is %s</string>
 </resources>
