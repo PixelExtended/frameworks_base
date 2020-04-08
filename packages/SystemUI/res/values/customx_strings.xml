@@ -116,4 +116,7 @@
 
     <!-- Name of the volte status bar icon. -->
     <string name="status_bar_volte">VoLTE</string>
+
+     <!-- Alerting notification header label -->
+    <string name="notification_section_header_alerting">Alerting notifications</string>
 </resources>
