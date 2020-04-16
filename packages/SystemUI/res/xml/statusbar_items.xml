@@ -78,5 +78,16 @@
             android:title="@string/battery"
             android:summary="%s"
             android:entries="@array/battery_options" />
+       
+        <com.android.systemui.tuner.StatusBarSwitch
+           android:key="camera"
+           android:title="@string/status_bar_camera" />
 
+        <com.android.systemui.tuner.StatusBarSwitch
+           android:key="location"
+           android:title="@string/status_bar_location" />
+
+        <com.android.systemui.tuner.StatusBarSwitch
+            android:key="microphone"
+            android:title="@string/status_bar_microphone" />
 </PreferenceScreen>
