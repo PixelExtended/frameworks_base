@@ -5588,6 +5588,15 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * Whether to use tint on QS tiles
+         * @hide
+         */
+        public static final String TINT_QS_TILES = "tint_qs_tiles";
+
+        private static final Validator TINT_QS_TILES_VALIDATOR = BOOLEAN_VALIDATOR;
+
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5654,6 +5663,7 @@ public final class Settings {
             NOTIFICATION_LIGHT_PULSE,
             NOTIFICATION_HEADERS,
             QS_BLUR,
+            TINT_QS_TILES,
         };
 
         /**
@@ -6056,6 +6066,7 @@ public final class Settings {
             VALIDATORS.put(TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK, TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK_VALIDATOR);
             VALIDATORS.put(FEATURE_TOUCH_HOVERING, FEATURE_TOUCH_HOVERING_VALIDATOR);
             VALIDATORS.put(HIGH_TOUCH_SENSITIVITY_ENABLE, HIGH_TOUCH_SENSITIVITY_ENABLE_VALIDATOR);
+            VALIDATORS.put(TINT_QS_TILES, TINT_QS_TILES_VALIDATOR);
         }
 
         /**

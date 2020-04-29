@@ -5059,6 +5059,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_TILE_TITLE_VISIBILITY),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.TINT_QS_TILES),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5075,7 +5078,11 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_LANDSCAPE))) {
                 setQsRowsColumns();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_TITLE_VISIBILITY))) {
-                updateQsPanelResources();
+                updateQsPanelResources()
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.TINT_QS_TILES))) {
+                if (mQSPanel != null) {
+                    mQSPanel.getHost().reloadAllTiles();
+                }
             }
         }
 
