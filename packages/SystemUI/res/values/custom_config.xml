@@ -40,7 +40,7 @@
     <string name="config_stitchEditor">com.asus.stitchimage/com.asus.stitchimage.editor.ScreenshotEditorActivity</string>
 
     <!-- Whether to show VoLTE icon in the status bar -->
-    <bool name="config_display_volte">true</bool>
+    <bool name="config_display_volte">true</boool>
 
     <!-- Whether to disable assist hint on lockscreen -->
     <bool name="config_disableAssistHintOnLockscreen">false</bool>

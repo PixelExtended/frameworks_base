@@ -923,7 +923,7 @@ public class NotificationManagerService extends SystemService {
                         () -> mAm.crashApplication(uid, initialPid, pkg, -1,
                             "Bad notification(tag=" + tag + ", id=" + id + ") posted from package "
                                 + pkg + ", crashing app(uid=" + uid + ", pid=" + initialPid + "): "
-                                + message));
+                                + message, true /* force */));
             }
         }
 
@@ -6103,6 +6103,10 @@ public class NotificationManagerService extends SystemService {
         }
         // not if in call or the screen's on
         if (isInCall() || mScreenOn) {
+            return false;
+        }
+        // check current user
+        if (!isNotificationForCurrentUser(record)) {
             return false;
         }
 

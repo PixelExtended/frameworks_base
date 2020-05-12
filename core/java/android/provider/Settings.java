@@ -5537,7 +5537,6 @@ public final class Settings {
         /** @hide */
         private static final Validator BACK_GESTURE_HEIGHT_VALIDATOR =
                 ANY_INTEGER_VALIDATOR;
-
         /**
          * Controls whether to show R style notification headers
          * @hide
@@ -5545,7 +5544,6 @@ public final class Settings {
         public static final String NOTIFICATION_HEADERS = "notification_headers";
 
         private static final Validator NOTIFICATION_HEADERS_VALIDATOR = BOOLEAN_VALIDATOR;
-
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.

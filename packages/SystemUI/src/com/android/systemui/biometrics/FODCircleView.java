@@ -22,6 +22,7 @@ import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STR
 import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN;
 
 import android.app.ActivityManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -45,9 +46,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.android.internal.widget.LockPatternUtils;
+import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
-import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.systemui.R;
 import com.android.systemui.Dependency;
 import com.android.systemui.statusbar.policy.ConfigurationController;
@@ -89,6 +91,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private boolean mCanUnlockWithFp;
 
     private Handler mHandler;
+
+    private LockPatternUtils mLockPatternUtils;
 
     private Timer mBurnInProtectionTimer;
 
@@ -134,12 +138,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         @Override
         public void onKeyguardBouncerChanged(boolean isBouncer) {
             mIsBouncer = isBouncer;
-
             if (mIsKeyguard && mUpdateMonitor.isFingerprintDetectionRunning()) {
-                final SecurityMode sec = mUpdateMonitor.getSecurityMode();
-                final boolean maybeShow = sec == SecurityMode.Pattern ||
-                        sec == SecurityMode.PIN;
-                if (maybeShow || !mIsBouncer) {
+                if (isPinOrPattern(mUpdateMonitor.getCurrentUser()) || !isBouncer) {
                     show();
                 } else {
                     hide();
@@ -182,7 +182,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         @Override
         public void onStrongAuthStateChanged(int userId) {
-            mCanUnlockWithFp = canUnlockWithFp(mUpdateMonitor);
+            mCanUnlockWithFp = canUnlockWithFp();
             if (mIsShowing && !mCanUnlockWithFp){
                 hide();
             }
@@ -217,11 +217,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
     }
 
-    public static boolean canUnlockWithFp(KeyguardUpdateMonitor updateMonitor) {
-        int currentUser = KeyguardUpdateMonitor.getCurrentUser();
-        boolean biometrics = updateMonitor.isUnlockingWithBiometricsPossible(currentUser);
+    private boolean canUnlockWithFp() {
+        int currentUser = ActivityManager.getCurrentUser();
+        boolean biometrics = mUpdateMonitor.isUnlockingWithBiometricsPossible(currentUser);
         KeyguardUpdateMonitor.StrongAuthTracker strongAuthTracker =
-                updateMonitor.getStrongAuthTracker();
+                mUpdateMonitor.getStrongAuthTracker();
         int strongAuth = strongAuthTracker.getStrongAuthForUser(currentUser);
         if (biometrics && !strongAuthTracker.hasUserAuthenticatedSinceBoot()) {
             return false;
@@ -295,10 +295,12 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         updatePosition();
         hide();
 
+        mLockPatternUtils = new LockPatternUtils(mContext);
+
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
 
-        mCanUnlockWithFp = canUnlockWithFp(mUpdateMonitor);
+        mCanUnlockWithFp = canUnlockWithFp();
 
         updateCutoutFlags();
 
@@ -426,8 +428,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             return;
         }
 
-        if (mIsBouncer) {
-            // Ignore show calls when Keyguard pin screen is being shown
+        if (mIsBouncer && !isPinOrPattern(mUpdateMonitor.getCurrentUser())) {
+            // Ignore show calls when Keyguard password screen is being shown
             return;
         }
 
@@ -527,6 +529,20 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
 
         mWindowManager.updateViewLayout(this, mParams);
+    }
+
+    private boolean isPinOrPattern(int userId) {
+        int passwordQuality = mLockPatternUtils.getActivePasswordQuality(userId);
+        switch (passwordQuality) {
+            // PIN
+            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+            // Pattern
+            case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                return true;
+        }
+
+        return false;
     }
 
     private class BurnInProtectionTask extends TimerTask {
