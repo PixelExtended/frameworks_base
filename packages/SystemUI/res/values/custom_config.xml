@@ -17,6 +17,7 @@
     <bool name="doze_brightness_sensor_reports_proximity" translatable="false">true</bool>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <!-- Allow devices override audio panel location to the left side -->
     <bool name="config_audioPanelOnLeftSide">false</bool>
 
@@ -48,4 +49,9 @@
 
 =======
 >>>>>>> parent of e9dca583665... SystemUI: runtime configurable audio panel location
+=======
+    <!-- Allow devices override audio panel location to the left side -->
+    <bool name="config_audioPanelOnLeftSide">false</bool>
+
+>>>>>>> parent of e9a791d14d6... Revert "SystemUI: allow devices override audio panel location"
 </resources>
