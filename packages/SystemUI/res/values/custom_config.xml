@@ -16,6 +16,7 @@
          near events -->
     <bool name="doze_brightness_sensor_reports_proximity" translatable="false">true</bool>
 
+<<<<<<< HEAD
     <!-- Allow devices override audio panel location to the left side -->
     <bool name="config_audioPanelOnLeftSide">false</bool>
 
@@ -45,4 +46,6 @@
     <!-- Whether to disable assist hint on lockscreen -->
     <bool name="config_disableAssistHintOnLockscreen">false</bool>
 
+=======
+>>>>>>> parent of e9dca583665... SystemUI: runtime configurable audio panel location
 </resources>
