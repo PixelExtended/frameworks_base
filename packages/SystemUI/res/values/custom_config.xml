@@ -13,4 +13,7 @@
          causes a poor experience. -->
     <bool name="config_fingerprintWakeAndUnlock">true</bool>
 
+    <!-- Show VoWIFI -->
+    <bool name="config_display_vowifi">true</bool>
+
 </resources>
