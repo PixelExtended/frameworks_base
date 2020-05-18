@@ -4898,4 +4898,8 @@ private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObser
         }
         return null;
     }
+
+    public int getFodHeight(boolean includeDecor) {
+        return mFODCircleViewImpl.getHeight(includeDecor);
+    }
 }
