@@ -27,5 +27,9 @@
 
     <!-- Name of a font family to use for medium body text. -->
     <string name="config_bodyFontFamilyMedium">Slate</string>
+<!-- Name of a font family to use as light font. For theming purpose. -->
+    <string name="config_lightFontFamily" translatable="false">@string/config_bodyFontFamily</string>
+    <!-- Name of a font family to use as regular font. For theming purpose. -->
+    <string name="config_regularFontFamily" translatable="false">@string/config_bodyFontFamily</string>
 </resources>
 
