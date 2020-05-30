@@ -64,6 +64,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontGoogleSansOverlay \
 	FontRubikRubikOverlay \
         FontSlateForOnePlusOverlay \
+        FontCircularStdOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularPixelLauncherOverlay \
 	IconPackCircularPixelThemePickerOverlay \
