@@ -94,6 +94,7 @@ public class SystemSettings {
         Settings.System.TORCH_LONG_PRESS_POWER_TIMEOUT,
         Settings.System.LOCKSCREEN_MEDIA_METADATA,
         Settings.System.QS_MEDIA_PLAYER,
-        Settings.System.RINGTONE_VIBRATION_PATTERN
+        Settings.System.RINGTONE_VIBRATION_PATTERN,
+        Settings.System.CUSTOM_RINGTONE_VIBRATION_PATTERN,
     };
 }
