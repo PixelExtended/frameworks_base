@@ -92,6 +92,12 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeTeardropOverlay \
         PrimaryColorAOSiPBlackOverlay \
         PrimaryColorOneplusDarkOverlay \
+        PrimaryColorAOSiPNatureOverlay \
+        PrimaryColorAOSiPOceanOverlay \
+        PrimaryColorCharcoalBlackOverlay \
+        PrimaryColorLeadBlackOverlay \
+        PrimaryColorSolarizedDarkOverlay \
+        PrimaryFlameOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
