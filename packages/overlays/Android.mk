@@ -90,7 +90,6 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeRoundedRectOverlay \
 	IconShapeSquircleOverlay \
 	IconShapeTeardropOverlay \
-        PrimaryColorAOSiPBlackOverlay \
         PrimaryColorOneplusDarkOverlay \
         PrimaryColorAOSiPNatureOverlay \
         PrimaryColorAOSiPOceanOverlay \
@@ -98,6 +97,10 @@ LOCAL_REQUIRED_MODULES := \
         PrimaryColorLeadBlackOverlay \
         PrimaryColorSolarizedDarkOverlay \
         PrimaryFlameOverlay \
+        PrimaryColorDarkBlueOverlay \
+        PrimaryColorEyeSootherOverlay \
+        PrimaryColorBlissClearOverlay \
+        PrimaryColorBlissBlackOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
