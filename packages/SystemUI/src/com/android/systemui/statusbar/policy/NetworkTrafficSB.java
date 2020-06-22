@@ -109,7 +109,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+                    setTypeface(Typeface.create("google-sans", Typeface.NORMAL));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
                     setLineSpacing(0.75f, 0.75f);
@@ -123,7 +123,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
-                    setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+                    setTypeface(Typeface.create("google-sans", Typeface.NORMAL));
                     setGravity(Gravity.CENTER);
                     setMaxLines(2);
                     setLineSpacing(0.75f, 0.75f);
@@ -269,7 +269,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         super(context, attrs, defStyle);
         mKeyguard = Dependency.get(KeyguardMonitor.class);
         final Resources resources = getResources();
-        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
+        txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_sb_txt_img_padding);
         mTintColor = resources.getColor(android.R.color.white);
         Handler mHandler = new Handler();
         SettingsObserver settingsObserver = new SettingsObserver(mHandler);
@@ -394,7 +394,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
         final Resources resources = getResources();
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
         setCompoundDrawablePadding(txtImgPadding);
-        setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        setTypeface(Typeface.create("google-sans", Typeface.NORMAL));
         setGravity(Gravity.CENTER);
         setMaxLines(2);
         setLineSpacing(0.75f, 0.75f);
