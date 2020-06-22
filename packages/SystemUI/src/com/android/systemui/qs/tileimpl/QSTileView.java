@@ -146,6 +146,11 @@ public class QSTileView extends QSTileBaseView {
             mLabel.setText(state.label);
         }
         if (!Objects.equals(mSecondLine.getText(), state.secondaryLabel)) {
+          if (state.state == Tile.STATE_ACTIVE && mTintEnabled) {
+                mSecondLine.setTextColor(mColorLabelActive);
+            } else if (state.state == Tile.STATE_INACTIVE || !mTintEnabled) {
+                mSecondLine.setTextColor(mColorLabelDefault);
+            }
             mSecondLine.setText(state.secondaryLabel);
             mSecondLine.setVisibility(TextUtils.isEmpty(state.secondaryLabel) ? View.GONE
                     : View.VISIBLE);
