@@ -90,6 +90,9 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeRoundedRectOverlay \
 	IconShapeSquircleOverlay \
 	IconShapeTeardropOverlay \
+        IconShapePebbleOverlay \
+        IconShapeTaperedRectOverlay \
+        IconShapeVesselOverlay \
         PrimaryColorOneplusDarkOverlay \
         PrimaryColorAOSiPNatureOverlay \
         PrimaryColorAOSiPOceanOverlay \
