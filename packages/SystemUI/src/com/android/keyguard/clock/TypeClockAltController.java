@@ -221,6 +221,6 @@ public class TypeClockAltController implements ClockPlugin {
 
     @Override
     public boolean shouldShowStatusArea() {
-        return true;
+        return false;
     }
 }
