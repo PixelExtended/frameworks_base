@@ -1519,6 +1519,9 @@
 
     <!-- Name of the work status bar icon. -->
     <string name="status_bar_work">Work profile</string>
+ 	
+    <!-- Name of the nfc status bar icon. -->
+    <string name="status_bar_nfc">NFC</string>
 
     <!-- Name of the airplane status bar icon. -->
     <string name="status_bar_airplane">Airplane mode</string>
