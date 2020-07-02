@@ -5594,6 +5594,22 @@ public final class Settings {
         private static final Validator TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
+	/**
+         * System-wide switch style
+         * 0 = Default
+         * 1 = OnePlus
+         * 2 = Narrow
+         * 3 = Contained
+         * 4 = Telegram
+         * 5 = Md2
+         * 6 = Retro
+         * @hide
+         */
+        public static final String SWITCH_STYLE = "switch_style";
+        /** @hide */
+        private static final Validator SWITCH_STYLE_VALIDATOR =
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 6);
+
         /**
          * Whether to use tint on QS tiles
          * @hide
@@ -5694,6 +5710,7 @@ public final class Settings {
             QS_BLUR,
             TINT_QS_TILES,
             BACK_GESTURE_HAPTIC,
+            SWITCH_STYLE,
         };
 
         /**
@@ -6099,6 +6116,7 @@ public final class Settings {
             VALIDATORS.put(HIGH_TOUCH_SENSITIVITY_ENABLE, HIGH_TOUCH_SENSITIVITY_ENABLE_VALIDATOR);
             VALIDATORS.put(TINT_QS_TILES, TINT_QS_TILES_VALIDATOR);
             VALIDATORS.put(BACK_GESTURE_HAPTIC, BACK_GESTURE_HAPTIC_VALIDATOR);
+            VALIDATORS.put(SWITCH_STYLE, SWITCH_STYLE_VALIDATOR);
         }
 
         /**
