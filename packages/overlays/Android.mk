@@ -67,6 +67,10 @@ LOCAL_REQUIRED_MODULES := \
 	FontRubikRubikOverlay \
         FontSlateForOnePlusOverlay \
         FontCircularStdOverlay \
+	FontTinkerbell \
+	FontLinotte \
+	FontCagliostroSourceOverlay \
+	FontLGSmartGothicSourceOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularPixelLauncherOverlay \
 	IconPackCircularPixelThemePickerOverlay \
