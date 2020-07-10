@@ -469,7 +469,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
     private final class KeyguardCallback implements KeyguardMonitor.Callback {
         @Override
         public void onKeyguardShowingChanged() {
-            updateSettings();
+            update();
         }
     };
 
