@@ -103,6 +103,9 @@
    <!-- Change clockface -->
     <string name="change_clock_face">Swipe to change the clock face</string>
 
-     <!-- Oneplus Numbers clock -->
+    <!-- Oneplus Numbers clock -->
     <string name="clock_title_oneplus_numbers" translatable="false">OnePlus Numbers</string>
+
+   <!-- Oneplus Analog clock -->
+    <string name="clock_title_oneplus_minimal" translatable="false">OnePlus Minimal</string>
 </resources>
