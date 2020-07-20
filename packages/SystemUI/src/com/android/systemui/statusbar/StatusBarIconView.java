@@ -285,7 +285,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
     public void setNotification(StatusBarNotification notification) {
         mNotification = notification;
         mShowNotificationCount = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_NOTIF_COUNT, 0, UserHandle.USER_CURRENT) == 1;
+                Settings.System.STATUS_BAR_NOTIF_COUNT, 1, UserHandle.USER_CURRENT) == 1;
         if (notification != null) {
             setContentDescription(notification.getNotification());
         }
