@@ -227,4 +227,6 @@
 
     <color name="toast_bg">@color/white</color>
     <color name="toast_text">@color/black</color>
+     <color name="gradient_start">#ffe70e0e</color>
+    <color name="gradient_end">#ff11b411</color>
 </resources>
