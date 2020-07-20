@@ -397,7 +397,7 @@ public class NetworkTrafficSB extends TextView implements StatusIconDisplayable 
 
      protected void setSpacingAndFonts() {
         setCompoundDrawablePadding(txtImgPadding);
-        setTypeface(Typeface.create("google-sans", Typeface.BOLD));
+        setTypeface(Typeface.create("google-sans", Typeface.NORMAL));
         setLineSpacing(0.75f, 0.75f);
     }
 
