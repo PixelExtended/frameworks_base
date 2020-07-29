@@ -549,4 +549,9 @@ number">%d</xliff:g> remaining attempts before SIM becomes permanently unusable.
     <string name="clock_title_mnml_minimal" translatable="false">MNML\'s Minimal</string>
     <string name="clock_title_type_alt" translatable="false">Type (center)</string>
     <string name="clock_title_lineage" translatable="false">LineageOS</string>
+    <string name="clock_title_swing" translatable="false">Swing animation</string>
+    <string name="clock_title_loading" translatable="false">Loading animation</string>
+    <string name="clock_title_bubble_animation" translatable="false">Bubble animation</string>
+    <string name="clock_title_rainbow_circle_animation" translatable="false">Rainbow circle</string>
+   <string name="clock_title_fire_circle_animation" translatable="false">Fire circle</string>
 </resources>
