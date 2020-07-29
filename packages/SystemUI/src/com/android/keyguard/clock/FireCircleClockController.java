@@ -36,7 +36,7 @@ import java.util.TimeZone;
 /**
  * Plugin for the default clock face used only to provide a preview.
  */
-public class LoadingClockController implements ClockPlugin {
+public class FireCircleClockController implements ClockPlugin {
 
     /**
      * Resources used to get title and thumbnail.
@@ -82,7 +82,7 @@ public class LoadingClockController implements ClockPlugin {
      * @param inflater Inflater used to inflate custom clock views.
      * @param colorExtractor Extracts accent color from wallpaper.
      */
-    public LoadingClockController(Resources res, LayoutInflater inflater,
+    public FireCircleClockController(Resources res, LayoutInflater inflater,
             SysuiColorExtractor colorExtractor, Context context) {
         mResources = res;
         mLayoutInflater = inflater;
@@ -91,7 +91,7 @@ public class LoadingClockController implements ClockPlugin {
 
     private void createViews() {
         mView = (ClockLayout) mLayoutInflater
-                .inflate(R.layout.loading_animation_clock, null);
+                .inflate(R.layout.fire_circle_animation_clock, null);
         mClock = (TextClock) mView.findViewById(R.id.clock);
         mLogo = (LottieAnimationView) mView.findViewById(R.id.logo);
     }
@@ -109,7 +109,7 @@ public class LoadingClockController implements ClockPlugin {
 
     @Override
     public String getTitle() {
-        return mResources.getString(R.string.clock_title_loading);
+        return mResources.getString(R.string.clock_title_fire_circle_animation);
     }
 
     @Override

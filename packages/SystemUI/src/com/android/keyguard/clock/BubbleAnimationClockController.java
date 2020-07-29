@@ -94,7 +94,6 @@ public class BubbleAnimationClockController implements ClockPlugin {
                 .inflate(R.layout.bubble_animation_clock, null);
         mClock = (TextClock) mView.findViewById(R.id.clock);
         mLogo = (LottieAnimationView) mView.findViewById(R.id.logo);
-            mClock.setTextColor(mWhiteColor);
     }
 
     @Override

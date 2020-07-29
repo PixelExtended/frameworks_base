@@ -94,7 +94,6 @@ public class RainbowCircleClockController implements ClockPlugin {
                 .inflate(R.layout.rainbow_cirlce_animation, null);
         mClock = (TextClock) mView.findViewById(R.id.clock);
         mLogo = (LottieAnimationView) mView.findViewById(R.id.logo);
-            mClock.setTextColor(mWhiteColor);
     }
 
     @Override
