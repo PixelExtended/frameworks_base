@@ -61,13 +61,6 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    public BooleanState newTileState() {
-        BooleanState state = new BooleanState();
-        state.handlesLongClick = false;
-        return state;
-    }
-
-    @Override
     protected void handleDestroy() {
         super.handleDestroy();
         stopCountDown();
@@ -121,7 +114,19 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleLongClick() {
-        // Do nothing
+        // Set duration to infinity on long click
+        int infinityIndex = DURATIONS.length - 1;
+        if (mLastClickTime == infinityIndex) {
+            // Already at infinity
+            return;
+        }
+        mDuration = infinityIndex;
+        startCountDown(DURATIONS[mDuration]);
+        if (!mWakeLock.isHeld()) {
+            mWakeLock.acquire();
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+        refreshState();
     }
 
     @Override
@@ -194,7 +199,6 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
                     R.string.accessibility_quick_settings_caffeine_off);
             state.state = Tile.STATE_INACTIVE;
         }
-        state.handlesLongClick = false;
     }
 
     private final class Receiver extends BroadcastReceiver {
