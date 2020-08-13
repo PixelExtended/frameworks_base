@@ -61,6 +61,11 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
+    public BooleanState newTileState() {
+        return new BooleanState();
+    }
+
+    @Override
     protected void handleDestroy() {
         super.handleDestroy();
         stopCountDown();
