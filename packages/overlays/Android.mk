@@ -104,12 +104,15 @@ LOCAL_REQUIRED_MODULES := \
         PrimaryColorAOSiPOceanOverlay \
         PrimaryColorCharcoalBlackOverlay \
         PrimaryColorLeadBlackOverlay \
+        PrimaryEtherealOverlay \
+        PrimaryColorDerpClearOverlay \
         PrimaryColorSolarizedDarkOverlay \
         PrimaryFlameOverlay \
         PrimaryColorDarkBlueOverlay \
         PrimaryColorEyeSootherOverlay \
         PrimaryColorBlissClearOverlay \
         PrimaryColorBlissBlackOverlay \
+        PrimaryEthereal2Overlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
