@@ -3156,6 +3156,15 @@ public final class Settings {
 
         private static final Validator END_BUTTON_BEHAVIOR_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 3);
+        /**
+         * fod anim
+         * @hide
+         */
+        public static final String FOD_RECOGNIZING_ANIMATION = "fod_anim";
+
+        /** @hide */
+        public static final Validator FOD_ANIM_VALIDATOR =
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 21);
 
         /**
          * END_BUTTON_BEHAVIOR value for "go home".
@@ -6044,6 +6053,7 @@ public final class Settings {
             VALIDATORS.put(WIFI_STATIC_IP, WIFI_STATIC_IP_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_GATEWAY, WIFI_STATIC_GATEWAY_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_NETMASK, WIFI_STATIC_NETMASK_VALIDATOR);
+	    VALIDATORS.put(FOD_RECOGNIZING_ANIMATION, FOD_ANIM_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_DNS1, WIFI_STATIC_DNS1_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_DNS2, WIFI_STATIC_DNS2_VALIDATOR);
             VALIDATORS.put(SHOW_BATTERY_PERCENT, SHOW_BATTERY_PERCENT_VALIDATOR);
