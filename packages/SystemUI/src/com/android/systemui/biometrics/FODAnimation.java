@@ -26,8 +26,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.android.keyguard.KeyguardUpdateMonitor;
-import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.tuner.TunerService;
@@ -44,11 +42,7 @@ public class FODAnimation extends ImageView implements TunerService.Tunable {
     private int mIsRecognizingAnim;
     private AnimationDrawable recognizingAnim;
     private WindowManager mWindowManager;
-    private boolean mIsDreaming;
-    private boolean mIsPulsing;
     private boolean mIsKeyguard;
-
-    private KeyguardUpdateMonitor mUpdateMonitor;
 
     private final int[] ANIMATION_STYLES = {
         R.drawable.fod_miui_pulse_recognizing_white_anim,
@@ -75,30 +69,11 @@ public class FODAnimation extends ImageView implements TunerService.Tunable {
         R.drawable.fod_coloros7_2_recognizing_anim
     };
 
-    private KeyguardUpdateMonitorCallback mMonitorCallback = new KeyguardUpdateMonitorCallback() {
-        @Override
-        public void onDreamingStateChanged(boolean dreaming) {
-            mIsDreaming = dreaming;
-        }
-
-        @Override
-        public void onPulsing(boolean pulsing) {
-            super.onPulsing(pulsing);
-            mIsPulsing = pulsing;
-	        if (mIsPulsing) {
-                mIsDreaming = false;
-            }
-	    }
-    };
-
     public FODAnimation(Context context, int mPositionX, int mPositionY) {
         super(context);
 
         mContext = context;
         mWindowManager = mContext.getSystemService(WindowManager.class);
-
-        mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
-        mUpdateMonitor.registerCallback(mMonitorCallback);
 
         mAnimationSize = mContext.getResources().getDimensionPixelSize(R.dimen.fod_animation_size);
         mAnimParams.height = mAnimationSize;
@@ -132,7 +107,7 @@ public class FODAnimation extends ImageView implements TunerService.Tunable {
     }
 
     public void showFODanimation() {
-        if (mAnimParams != null && !mShowing && mIsKeyguard && !mIsDreaming) {
+        if (mAnimParams != null && !mShowing && mIsKeyguard) {
             mShowing = true;
             if (this.getWindowToken() == null){
                 mWindowManager.addView(this, mAnimParams);
