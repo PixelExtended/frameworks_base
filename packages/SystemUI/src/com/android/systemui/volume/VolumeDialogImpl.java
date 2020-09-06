@@ -119,6 +119,8 @@ import com.android.systemui.statusbar.policy.AccessibilityManagerWrapper;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 
+import com.android.systemui.tuner.TunerService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +138,9 @@ public class VolumeDialogImpl implements VolumeDialog,
 
     private static final long USER_ATTEMPT_GRACE_PERIOD = 1000;
     private static final int UPDATE_ANIMATION_DURATION = 80;
+
+    public static final String SHOW_APP_VOLUME =
+            "customsystem:" + Settings.System.SHOW_APP_VOLUME;
 
     static final int DIALOG_TIMEOUT_MILLIS = 3000;
     static final int DIALOG_SAFETYWARNING_TIMEOUT_MILLIS = 5000;
@@ -200,6 +205,9 @@ public class VolumeDialogImpl implements VolumeDialog,
     private boolean mHasSeenODICaptionsTooltip;
     private ViewStub mODICaptionsTooltipViewStub;
     private View mODICaptionsTooltipView = null;
+    private TunerService mTunerService;
+
+    private boolean mShowAppVolume;
 
     // Hide the ringer button or not
     private boolean mHideRingerButton;
@@ -230,6 +238,11 @@ public class VolumeDialogImpl implements VolumeDialog,
         mDeviceProvisionedController = Dependency.get(DeviceProvisionedController.class);
         mShowActiveStreamOnly = showActiveStreamOnly();
         mHasSeenODICaptionsTooltip = true;
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0);
+        mAppIconMuteColorFilter = new ColorMatrixColorFilter(colorMatrix);
+        mTunerService = Dependency.get(TunerService.class);
+        Dependency.get(TunerService.class).addTunable(mTunable, SHOW_APP_VOLUME);
         if (!mShowActiveStreamOnly) {
             mLeftVolumeRocker = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
             mHideRingerButton = mContext.getResources().getBoolean(R.bool.config_hideRingerButton);
@@ -238,9 +251,6 @@ public class VolumeDialogImpl implements VolumeDialog,
             mSpacer = mContext.getResources().getDimension(R.dimen.volume_dialog_row_spacer);
         }
            setDarkMode();
-           ColorMatrix colorMatrix = new ColorMatrix();
-           colorMatrix.setSaturation(0);
-           mAppIconMuteColorFilter = new ColorMatrixColorFilter(colorMatrix);
     }
 
     @Override
@@ -456,6 +466,22 @@ public class VolumeDialogImpl implements VolumeDialog,
             mainLocation[0] + mDialogView.getWidth(),
             mainLocation[1] + mDialogView.getHeight()
         );
+    };
+
+    private final TunerService.Tunable mTunable = new TunerService.Tunable() {
+        @Override
+        public void onTuningChanged(String key, String newValue) {
+            if (key.equals(SHOW_APP_VOLUME)) {
+                final boolean showAppVolume = TunerService.parseIntegerSwitch(newValue, false);
+                if (mShowAppVolume != showAppVolume) {
+                    mShowAppVolume = showAppVolume;
+                    mHandler.post(() -> {
+                        // Trigger panel rebuild on next show
+                        mConfigChanged = true;
+                    });
+                }
+            }
+        }
     };
 
     protected ViewGroup getDialogView() {
@@ -821,7 +847,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             final VolumeRow row = mAppRows.get(i);
             removeAppRow(row);
         }
-        if (!expand) return;
+        if (!mShowAppVolume || !expand) return;
         List<AppTrackData> trackDatas = mController.getAudioManager().listAppTrackDatas();
         for (AppTrackData data : trackDatas) {
             if (data.isActive()) {
