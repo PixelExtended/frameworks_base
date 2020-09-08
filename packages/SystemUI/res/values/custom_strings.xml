@@ -104,4 +104,7 @@
     <string name="app_picker_dialog_title">Select an app</string>
     <string name="active_edge_app_select_title">Select app</string>
     <string name="active_edge_activity_select_title">Select activity</string>
+
+   <!-- Anti flicker QS tile -->
+    <string name="quick_settings_anti_flicker">Anti flicker</string>
 </resources>
