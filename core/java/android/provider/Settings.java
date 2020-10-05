@@ -5732,6 +5732,12 @@ public final class Settings {
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
 
         /**
+         * Whether or not to vibrate when back gesture is used
+         * @hide
+         */
+        public static final String BACK_GESTURE_HAPTIC = "back_gesture_haptic";
+
+        /**
          * These are all public system settings
          *
          * @hide
@@ -5869,6 +5875,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
+            PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
         }
 
         /**
