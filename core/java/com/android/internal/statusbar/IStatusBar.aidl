@@ -326,4 +326,7 @@ oneway interface IStatusBar
     void unregisterNearbyMediaDevicesProvider(in INearbyMediaDevicesProvider provider);
 
     void toggleCameraFlash();
+
+    void screenPinningStateChanged(boolean enabled);
+    void leftInLandscapeChanged(boolean isLeft);
 }
