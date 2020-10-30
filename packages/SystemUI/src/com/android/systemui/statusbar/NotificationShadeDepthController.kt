@@ -180,7 +180,7 @@ class NotificationShadeDepthController @Inject constructor(
         if (showingHomeControls) {
             globalActionsRadius = 0
         }
-        var blur = max(shadeRadius.toInt(), globalActionsRadius)
+        var blur = max(shadeRadius.toInt(), globalActionsSpring.radius)
 
         // Make blur be 0 if it is necessary to stop blur effect.
         if (scrimsVisible) {
