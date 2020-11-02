@@ -60,6 +60,21 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeTaperedRectOverlay \
 	IconShapeTeardropOverlay \
 	IconShapeVesselOverlay \
+        IconPackKaiAndroidOverlay \
+	IconPackKaiPixelLauncherOverlay \
+	IconPackKaiPixelThemePickerOverlay \
+	IconPackKaiSettingsOverlay \
+	IconPackKaiSystemUIOverlay \
+        IconPackSamAndroidOverlay \
+	IconPackSamPixelLauncherOverlay \
+	IconPackSamPixelThemePickerOverlay \
+	IconPackSamSettingsOverlay \
+	IconPackSamSystemUIOverlay \
+	IconPackVictorAndroidOverlay \
+	IconPackVictorPixelLauncherOverlay \
+	IconPackVictorPixelThemePickerOverlay \
+	IconPackVictorSettingsOverlay \
+	IconPackVictorSystemUIOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
