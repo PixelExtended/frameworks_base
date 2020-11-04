@@ -541,7 +541,8 @@ public class KeyguardIndicationController implements StateListener,
     }
 
     private boolean hasActiveInDisplayFp() {
-        boolean hasInDisplayFingerprint = FodUtils.hasFodSupport(mContext);
+        boolean hasInDisplayFingerprint = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_supportsInDisplayFingerprint);
         int userId = KeyguardUpdateMonitor.getCurrentUser();
         FingerprintManager fpm = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
         return hasInDisplayFingerprint && fpm.getEnrolledFingerprints(userId).size() > 0;
