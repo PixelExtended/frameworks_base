@@ -2185,7 +2185,7 @@ private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObser
 
     private void setFpToDismissNotifications() {
         mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 0,
+                Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 1,
                 UserHandle.USER_CURRENT) == 1;
     }
 
