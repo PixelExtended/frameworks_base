@@ -155,7 +155,12 @@ interface IStatusBarService
     void hideInDisplayFingerprintView();
   
     /**
-     * DerpFest
+     * Custom
      */
     void toggleCameraFlash();
+
+    /**
+     * Starts the default assistant app.
+     */
+    void startAssist(in Bundle args);
 }
