@@ -16,4 +16,47 @@
     <dimen name="status_bar_mobile_type_padding">2dp</dimen>
     <dimen name="status_bar_mobile_type_padding_limit">10dp</dimen>
 
+    <!-- Tri-state UI -->
+    <dimen name="tri_state_down_dialog_position">850.0px</dimen>
+    <dimen name="tri_state_down_dialog_position_l">650.0px</dimen>
+    <dimen name="tri_state_middle_dialog_position">650.0px</dimen>
+    <dimen name="tri_state_middle_dialog_position_l">650.0px</dimen>
+    <dimen name="tri_state_up_dialog_position">450.0px</dimen>
+    <dimen name="tri_state_up_dialog_position_l">650.0px</dimen>
+    <dimen name="tri_state_up_dialog_position_deep">21.0px</dimen>
+    <dimen name="tri_state_up_dialog_position_deep_land">21.0px</dimen>
+    <dimen name="tri_state_dialog_elevation">4.0dip</dimen>
+    <dimen name="tri_state_dialog_icon_size">24.0dip</dimen>
+    <dimen name="tri_state_dialog_padding">8.0dip</dimen>
+    <dimen name="tri_state_mid_bottom_left_radius">24.0dip</dimen>
+    <dimen name="tri_state_mid_bottom_right_radius">24.0dip</dimen>
+    <dimen name="tri_state_mid_top_left_radius">24.0dip</dimen>
+    <dimen name="tri_state_mid_top_right_radius">24.0dip</dimen>
+    <dimen name="tri_state_position_padding_extra">@*android:dimen/status_bar_height</dimen>
+
+    <dimen name="left_tri_state_down_bottom_left_radius">24.0dip</dimen>
+    <dimen name="left_tri_state_down_bottom_right_radius">24.0dip</dimen>
+    <dimen name="left_tri_state_down_top_left_radius">0.0dip</dimen>
+    <dimen name="left_tri_state_down_top_right_radius">24.0dip</dimen>
+    <dimen name="left_tri_state_up_bottom_left_radius">0.0dip</dimen>
+    <dimen name="left_tri_state_up_bottom_right_radius">24.0dip</dimen>
+    <dimen name="left_tri_state_up_top_left_radius">24.0dip</dimen>
+    <dimen name="left_tri_state_up_top_right_radius">24.0dip</dimen>
+    <dimen name="right_tri_state_down_bottom_left_radius">24.0dip</dimen>
+    <dimen name="right_tri_state_down_bottom_right_radius">24.0dip</dimen>
+    <dimen name="right_tri_state_down_top_left_radius">24.0dip</dimen>
+    <dimen name="right_tri_state_down_top_right_radius">0.0dip</dimen>
+    <dimen name="right_tri_state_up_bottom_left_radius">24.0dip</dimen>
+    <dimen name="right_tri_state_up_bottom_right_radius">0.0dip</dimen>
+    <dimen name="right_tri_state_up_top_left_radius">24.0dip</dimen>
+    <dimen name="right_tri_state_up_top_right_radius">24.0dip</dimen>
+
+    <!-- Additional gesture navbar lengths -->
+    <dimen name="navigation_home_handle_width_medium">140dp</dimen>
+    <dimen name="navigation_home_handle_width_long">170dp</dimen>
+    <dimen name="navigation_home_handle_width_very_long">190dp</dimen>
+
+    <!-- Screenrecord -->
+    <dimen name="screenrecord_dot_size">48dp</dimen>
+
 </resources>
