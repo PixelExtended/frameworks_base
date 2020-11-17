@@ -62,6 +62,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -642,33 +643,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private ActivityIntentHelper mActivityIntentHelper;
 
-    private StatusBarSettingsObserver mStatusBarSettingsObserver = new StatusBarSettingsObserver(mHandler);
-    private class StatusBarSettingsObserver extends ContentObserver {
-        StatusBarSettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        void observe() {
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
-                    false, this, UserHandle.USER_ALL);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            update();
-        }
-
-        public void update() {
-            if (mNotificationShadeWindowViewController != null) {
-                mNotificationShadeWindowViewController.updateSettings();
-            }
-        }
-    }
-
     /**
      * Public constructor for StatusBar.
      *
@@ -896,9 +870,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         createAndAddWindows(result);
 
-        mStatusBarSettingsObserver.observe();
-        mStatusBarSettingsObserver.update();
-
         if (mWallpaperSupported) {
             // Make sure we always have the most current wallpaper info.
             IntentFilter wallpaperChangedFilter = new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
@@ -919,6 +890,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 result.mNavbarColorManagedByIme);
         mAppFullscreen = result.mAppFullscreen;
         mAppImmersive = result.mAppImmersive;
+
+	mCustomSettingsObserver.observe();
+        mCustomSettingsObserver.update();
 
         // StatusBarManagerService has a back up of IME token and it's restored here.
         setImeWindowStatus(mDisplayId, result.mImeToken, result.mImeWindowVis,
@@ -1023,7 +997,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                         }
                     }
                 }, OverlayPlugin.class, true /* Allow multiple plugins */);
-    }
+	}
 
     // ================================================================================
     // Constructing the view
@@ -1970,6 +1944,41 @@ public class StatusBar extends SystemUI implements DemoMode,
     @VisibleForTesting
     void setUserSetupForTest(boolean userSetup) {
         mUserSetup = userSetup;
+    }
+
+ private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
+    private class CustomSettingsObserver extends ContentObserver {
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            /*if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.XXX))) {
+                doXXX();
+            }*/
+        }
+
+        public void update() {
+            setStatusDoubleTapToSleep();
+        }
+    }
+
+    private void setStatusDoubleTapToSleep() {
+        if (mNotificationShadeWindowViewController != null) {
+            mNotificationShadeWindowViewController.updateSettings();
+        }
     }
 
     /**
