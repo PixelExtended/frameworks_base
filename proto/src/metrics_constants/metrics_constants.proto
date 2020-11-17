@@ -7431,6 +7431,6 @@ message MetricsEvent {
     
     // CustomSettings constant
     CUSTOM_SETTINGS = 1999;
-    
+    CUSTOM_QS = 2000;
   }
 }
