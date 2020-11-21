@@ -19,18 +19,25 @@ package com.android.systemui.biometrics;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.ContentResolver;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.hardware.biometrics.BiometricSourceType;
+import android.net.Uri;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
@@ -74,6 +81,7 @@ public class FODCircleView extends ImageView {
 
     private boolean mIsBouncer;
     private boolean mIsDreaming;
+    private boolean mIsKeyguard;
     private boolean mIsCircleShowing;
 
     private Handler mHandler;
@@ -83,6 +91,9 @@ public class FODCircleView extends ImageView {
     private LockPatternUtils mLockPatternUtils;
 	
     private Timer mBurnInProtectionTimer;
+
+    private FODAnimation mFODAnimation;
+    private boolean mIsRecognizingAnimEnabled;
 
     private IFingerprintInscreenCallback mFingerprintInscreenCallback =
             new IFingerprintInscreenCallback.Stub() {
@@ -114,8 +125,18 @@ public class FODCircleView extends ImageView {
         }
 
         @Override
+        public void onKeyguardVisibilityChanged(boolean showing) {
+            mIsKeyguard = showing;
+            updateStyle();
+            if (mFODAnimation != null) {
+                mFODAnimation.setAnimationKeyguard(mIsKeyguard);
+            }
+        }
+
+        @Override
         public void onKeyguardBouncerChanged(boolean isBouncer) {
             mIsBouncer = isBouncer;
+            updateStyle();
             if (mUpdateMonitor.isFingerprintDetectionRunning()) {
                 if (isPinOrPattern(mUpdateMonitor.getCurrentUser()) || !isBouncer) {
                     show();
@@ -125,17 +146,21 @@ public class FODCircleView extends ImageView {
             } else {
                 hide();
             }
+            if (mFODAnimation != null) {
+                mFODAnimation.setAnimationKeyguard(mIsBouncer);
+            }
         }
 
         @Override
         public void onScreenTurnedOff() {
-            hide();
+            hideCircle();
         }
 
         @Override
-        public void onScreenTurnedOn() {
-            if (mUpdateMonitor.isFingerprintDetectionRunning()) {
-                show();
+        public void onBiometricHelp(int msgId, String helpString,
+                BiometricSourceType biometricSourceType) {
+            if (msgId == -1){ // Auth error
+                mHandler.post(() -> mFODAnimation.hideFODanimation());
             }
         }
     };
@@ -206,6 +231,8 @@ public class FODCircleView extends ImageView {
 
         mWindowManager.addView(this, mParams);
 
+        mCustomSettingsObserver.observe();
+        mCustomSettingsObserver.update();
         updatePosition();
         hide();
 
@@ -213,6 +240,35 @@ public class FODCircleView extends ImageView {
 
         mUpdateMonitor = Dependency.get(KeyguardUpdateMonitor.class);
         mUpdateMonitor.registerCallback(mMonitorCallback);
+
+        mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
+    }
+
+    private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
+    private class CustomSettingsObserver extends ContentObserver {
+
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.FOD_ANIM),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.FOD_ANIM))) {
+                updateStyle();
+            }
+        }
+
+        public void update() {
+            updateStyle();
+        }
     }
 
     @Override
@@ -232,19 +288,25 @@ public class FODCircleView extends ImageView {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN && newIsInside) {
             showCircle();
+            if (mIsRecognizingAnimEnabled) {
+                mHandler.post(() -> mFODAnimation.showFODanimation());
+            }
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             hideCircle();
+            mHandler.post(() -> mFODAnimation.hideFODanimation());
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             return true;
         }
 
+        mHandler.post(() -> mFODAnimation.hideFODanimation());
         return false;
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        updateStyle();
         updatePosition();
     }
 
@@ -326,13 +388,8 @@ public class FODCircleView extends ImageView {
     }
 
     public void show() {
-        if (!mUpdateMonitor.isScreenOn()) {
-            // Keyguard is shown just after screen turning off
-            return;
-        }
-
-        if (mIsBouncer && !isPinOrPattern(mUpdateMonitor.getCurrentUser())) {
-            // Ignore show calls when Keyguard password screen is being shown
+        if (mIsBouncer) {
+            // Ignore show calls when Keyguard pin screen is being shown
             return;
         }
 
@@ -352,6 +409,14 @@ public class FODCircleView extends ImageView {
 
     private void updateAlpha() {
         setAlpha(mIsDreaming ? 0.5f : 1.0f);
+    }
+
+    private void updateStyle() {
+        mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FOD_RECOGNIZING_ANIMATION, 0) != 0;
+        if (mFODAnimation != null) {
+            mFODAnimation.update();
+        }
     }
 
     private void updatePosition() {
@@ -389,6 +454,7 @@ public class FODCircleView extends ImageView {
         if (mIsDreaming) {
             mParams.x += mDreamingOffsetX;
             mParams.y += mDreamingOffsetY;
+            mFODAnimation.updateParams(mParams.y);
         }
 
         mWindowManager.updateViewLayout(this, mParams);
