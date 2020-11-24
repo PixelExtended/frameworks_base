@@ -552,6 +552,10 @@ public class FODCircleView extends ImageView implements TunerService.Tunable, Co
         setDim(true);
         dispatchPress();
 
+        if (mIsFodAnimationAvailable) {
+            mHandler.post(() -> mFODAnimation.showFODanimation());
+        }
+
         setImageDrawable(null);
         invalidate();
         if (mIsRecognizingAnimEnabled) {
@@ -566,6 +570,10 @@ public class FODCircleView extends ImageView implements TunerService.Tunable, Co
 
         dispatchRelease();
         setDim(false);
+
+        if (mIsFodAnimationAvailable) {
+            mHandler.post(() -> mFODAnimation.hideFODanimation());
+        }
 
         setKeepScreenOn(false);
         if (mIsRecognizingAnimEnabled) {
