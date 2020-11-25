@@ -1100,6 +1100,18 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
         mActionsView.addView(editChip);
         chips.add(editChip);
 
+        ScreenshotActionChip deleteChip = (ScreenshotActionChip) inflater.inflate(
+                R.layout.global_screenshot_action_chip, mActionsView, false);
+        deleteChip.setText(imageData.deleteAction.title);
+        deleteChip.setIcon(imageData.deleteAction.getIcon(), true);
+        deleteChip.setPendingIntent(imageData.deleteAction.actionIntent, () -> {
+            mUiEventLogger.log(ScreenshotEvent.SCREENSHOT_DELETE_TAPPED);
+            dismissScreenshot("chip tapped", false);
+            mOnCompleteRunnable.run();
+        });
+        mActionsView.addView(deleteChip);
+        chips.add(deleteChip);
+
         mScreenshotPreview.setOnClickListener(v -> {
             try {
                 imageData.editAction.actionIntent.send();
@@ -1327,7 +1339,7 @@ public class GlobalScreenshot implements ViewTreeObserver.OnComputeInternalInset
             // And delete the image from the media store
             final Uri uri = Uri.parse(intent.getStringExtra(SCREENSHOT_URI_ID));
             new DeleteImageInBackgroundTask(context).execute(uri);
-            if (intent.getBooleanExtra(EXTRA_SMART_ACTIONS_ENABLED, false)) {
+	            if (intent.getBooleanExtra(EXTRA_SMART_ACTIONS_ENABLED, false)) {
                 ScreenshotSmartActions.notifyScreenshotAction(
                         context, intent.getStringExtra(EXTRA_ID), ACTION_TYPE_DELETE, false);
             }
