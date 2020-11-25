@@ -34,6 +34,7 @@ import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
+import com.android.systemui.qs.tiles.CompassTile;
 import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DataSwitchTile;
 import com.android.systemui.qs.tiles.DndTile;
@@ -87,6 +88,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<ScreenRecordTile> mScreenRecordTileProvider;
     private final Provider<PowerShareTile> mPowerShareTileProvider;
     private final Provider<CaffeineTile> mCaffeineTileProvider;
+    private final Provider<CompassTile> mCompassTileProvider;
     private final Provider<DataSwitchTile> mDataSwitchTileProvider;
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<SoundSearchTile> mSoundSearchTileProvider;
@@ -118,6 +120,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<ScreenRecordTile> screenRecordTileProvider,
             Provider<PowerShareTile> powerShareTileProvider,
             Provider<CaffeineTile> caffeineTileProvider,
+            Provider<CompassTile> compassTileProvider,
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<HeadsUpTile> headsUpTileProvider,
             Provider<SyncTile> syncTileProvider,
@@ -126,6 +129,7 @@ public class QSFactoryImpl implements QSFactory {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
+        mCompassTileProvider = compassTileProvider;
         mDndTileProvider = dndTileProvider;
         mColorInversionTileProvider = colorInversionTileProvider;
         mAirplaneModeTileProvider = airplaneModeTileProvider;
@@ -184,6 +188,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mLocationTileProvider.get();
             case "cast":
                 return mCastTileProvider.get();
+            case "compass":
+                return mCompassTileProvider.get();
             case "hotspot":
                 return mHotspotTileProvider.get();
             case "user":
