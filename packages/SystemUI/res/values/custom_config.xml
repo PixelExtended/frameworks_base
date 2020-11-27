@@ -4,7 +4,6 @@
     <integer name="config_maxVisibleNotificationIconsOnLock">5</integer>
 
     <!-- Color of the FOD view -->
-    <color name="config_fodColor">#00ff00</color>
     <color name="config_fodColorBackground">#20000000</color>
 
     <!-- Should we listen for fingerprints when the screen is off?  Devices
