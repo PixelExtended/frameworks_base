@@ -65,4 +65,6 @@
   <java-symbol type="array" name="config_rebootActionsList" />
   <java-symbol type="array" name="values_globalActionsList" />
 
+  <!-- Default fod pressed icon -->
+  <java-symbol type="integer" name="config_fod_pressed_color" />
 </resources>
