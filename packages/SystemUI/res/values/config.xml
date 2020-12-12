@@ -123,11 +123,7 @@
 
     <!-- Tiles native to System UI. Order should match "quick_settings_tiles_default" -->
     <string name="quick_settings_tiles_stock" translatable="false">
-<<<<<<< HEAD
-        wifi,cell,battery,dnd,flashlight,rotation,bt,airplane,nfc,location,hotspot,inversion,saver,dark,work,cast,night,screenrecord,reverse,powershare,caffeine,heads_up,sync,dataswitch,soundsearch
-=======
-        wifi,cell,battery,dnd,flashlight,rotation,bt,airplane,nfc,location,hotspot,inversion,saver,dark,work,cast,night,screenrecord,reverse,caffeine,heads_up,sync,dataswitch,soundsearch,compass
->>>>>>> e644112e325... Add Compass QS Tile
+        wifi,cell,battery,dnd,flashlight,rotation,bt,airplane,nfc,location,hotspot,inversion,saver,dark,work,cast,night,screenrecord,reverse,powershare,caffeine,heads_up,sync,dataswitch,soundsearch,compass
     </string>
 
     <!-- The tiles to display in QuickSettings -->
