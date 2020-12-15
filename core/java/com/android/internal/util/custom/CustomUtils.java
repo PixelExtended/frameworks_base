@@ -45,7 +45,7 @@ import com.android.internal.statusbar.IStatusBarService;
 
 import java.util.Locale;
 
-public class derpUtils {
+public class CustomUtils {
 
     public static boolean isPackageInstalled(Context context, String pkg, boolean ignoreState) {
         if (pkg != null) {
