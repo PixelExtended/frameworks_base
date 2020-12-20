@@ -52,8 +52,7 @@ public class AmbientDisplayConfiguration {
                 || wakeDisplayGestureEnabled(user)
                 || pickupGestureEnabled(user)
                 || tapGestureEnabled(user)
-                || doubleTapGestureEnabled(user)
-                || isPowerBtnFlashlightEnabled(user);
+                || doubleTapGestureEnabled(user);
     }
 
     /** {@hide} */
@@ -218,11 +217,5 @@ public class AmbientDisplayConfiguration {
 
     private boolean boolSetting(String name, int user, int def) {
         return Settings.Secure.getIntForUser(mContext.getContentResolver(), name, def, user) != 0;
-    }
-
-    /** {@hide} */
-    public boolean isPowerBtnFlashlightEnabled(int user) {
-        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.TORCH_POWER_BUTTON_GESTURE, 0, user) != 0;
     }
 }

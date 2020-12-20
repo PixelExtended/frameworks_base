@@ -415,11 +415,6 @@ public final class DozeServiceHost implements DozeHost {
         }
     }
 
-    @Override
-    public void performToggleFlashlight() {
-        mStatusBar.toggleFlashlight();
-    }
-
     /**
      * When the dozing host is waiting for scrims to fade out to change the display state.
      */
@@ -465,11 +460,5 @@ public final class DozeServiceHost implements DozeHost {
 
     public boolean isDozeSuppressed() {
         return mSuppressed;
-    }
-
-    public void toggleFlashlightProximityCheck() {
-        for (Callback callback : mCallbacks) {
-            callback.toggleFlashlightProximityCheck();
-        }
     }
 }
