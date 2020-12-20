@@ -287,6 +287,11 @@
     <!-- Sync tile -->
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+ 
+   <!-- Live wallpapers -->
+    <protected-broadcast android:name="com.breel.wallpapers.NOTIFICATION_RECEIVED"/>
+    <permission android:name="com.breel.wallpapers.notifications"/>
+    <uses-permission android:name="com.breel.wallpapers.notifications"/>
 
     <application
         android:name=".SystemUIApplication"
