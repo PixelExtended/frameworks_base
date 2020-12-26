@@ -63,4 +63,7 @@
 
     <!-- Per app volume -->
     <dimen name="volume_row_app_icon_padding">8dp</dimen>
+
+    <!-- Recognizing fingerprint animation -->
+    <dimen name="fod_animation_size">280dp</dimen>
 </resources>
