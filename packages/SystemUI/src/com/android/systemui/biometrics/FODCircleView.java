@@ -52,6 +52,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.android.internal.util.custom.CustomUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -115,6 +116,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
+    private boolean mIsFodAnimationAvailable = false;
 
     private int mSelectedIcon;
     private final int[] ICON_STYLES = {
@@ -232,7 +234,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         public void onKeyguardVisibilityChanged(boolean showing) {
             mIsKeyguard = showing;
             updateStyle();
-            if (mFODAnimation != null) {
+            if (mIsFodAnimationAvailable && mFODAnimation != null) {
                 mFODAnimation.setAnimationKeyguard(mIsKeyguard);
             }
             handlePocketManagerCallback(showing);
@@ -251,7 +253,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             } else {
                 hide();
             }
-            if (mFODAnimation != null) {
+            if (mIsFodAnimationAvailable && mFODAnimation != null) {
                 mFODAnimation.setAnimationKeyguard(mIsBouncer);
             }
         }
@@ -281,7 +283,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         @Override
         public void onBiometricHelp(int msgId, String helpString,
                 BiometricSourceType biometricSourceType) {
-            if (msgId == -1){ // Auth error
+            if (msgId == -1 && mIsFodAnimationAvailable) { // Auth error
                 mHandler.post(() -> mFODAnimation.hideFODanimation());
             }
         }
@@ -432,7 +434,13 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         mUpdateMonitor = Dependency.get(KeyguardUpdateMonitor.class);
         mUpdateMonitor.registerCallback(mMonitorCallback);
-        mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
+
+        mIsFodAnimationAvailable = CustomUtils.isPackageInstalled(context,
+                                    context.getResources().getString(
+                                    com.android.internal.R.string.config_fodAnimationPackage));
+        if (mIsFodAnimationAvailable) {
+            mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
+        }
 
         if (context.getResources().getBoolean(
             com.android.internal.R.bool.config_supportsScreenOffInDisplayFingerprint)){
@@ -512,7 +520,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             return true;
         }
 
-        mHandler.post(() -> mFODAnimation.hideFODanimation());
+        if (mIsFodAnimationAvailable) {
+            mHandler.post(() -> mFODAnimation.hideFODanimation());
+        }
         return false;
     }
 
@@ -585,7 +595,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         setDim(true);
         dispatchPress();
 
-        mHandler.post(() -> mFODAnimation.showFODanimation());
+        if (mIsFodAnimationAvailable) {
+            mHandler.post(() -> mFODAnimation.showFODanimation());
+        }
 
         setImageDrawable(null);
         invalidate();
@@ -600,7 +612,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         dispatchRelease();
         setDim(false);
 
-        mHandler.post(() -> mFODAnimation.hideFODanimation());
+        if (mIsFodAnimationAvailable) {
+            mHandler.post(() -> mFODAnimation.hideFODanimation());
+        }
 
         setKeepScreenOn(false);
     }
@@ -676,7 +690,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mPressedColor = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_COLOR, mDefaultPressedColor);
 
-        if (mFODAnimation != null) {
+        if (mIsFodAnimationAvailable && mFODAnimation != null) {
             mFODAnimation.update(mIsRecognizingAnimEnabled);
         }
     }
@@ -717,7 +731,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         if (mIsDreaming) {
             mParams.x += mDreamingOffsetX;
             mParams.y += mDreamingOffsetY;
-            mFODAnimation.updateParams(mParams.y);
+            if (mIsFodAnimationAvailable) {
+                mFODAnimation.updateParams(mParams.y);
+            }
         }
 
         mWindowManager.updateViewLayout(this, mParams);
