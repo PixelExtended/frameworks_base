@@ -80,4 +80,7 @@
 
   <!-- Pocket Service -->
   <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
+
+   <!-- Smart charging battery percentage -->
+   <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
 </resources>
