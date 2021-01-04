@@ -4174,11 +4174,6 @@
         android:description="@string/permdesc_requestIgnoreBatteryOptimizations"
         android:protectionLevel="normal" />
 
-    <!-- Allows an application to collect battery statistics
-         <p>Protection level: signature|privileged|development -->
-    <permission android:name="android.permission.BATTERY_STATS"
-        android:protectionLevel="signature|privileged|development" />
-
     <!--Allows an application to manage statscompanion.
     <p>Not for use by third-party applications.
          @hide -->
