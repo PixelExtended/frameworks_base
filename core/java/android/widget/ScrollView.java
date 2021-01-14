@@ -343,7 +343,8 @@ public class ScrollView extends FrameLayout {
 
     private void initScrollView() {
         mScroller = new OverScroller(getContext());
-        setFocusable(true);
+        mScroller.setFriction(0.006f);
+	setFocusable(true);
         setDescendantFocusability(FOCUS_AFTER_DESCENDANTS);
         setWillNotDraw(false);
         final ViewConfiguration configuration = ViewConfiguration.get(mContext);
