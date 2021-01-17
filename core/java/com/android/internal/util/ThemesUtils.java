@@ -21,5 +21,8 @@ public class ThemesUtils {
     public static final String[] SWITCH_STYLE = {
         "com.android.system.switch.md2", // 1
         "com.android.system.switch.oneplus", // 2
+	"com.android.system.switch.narrow", // 3
+        "com.android.system.switch.contained", // 4
+        "com.android.system.switch.retro", // 5
     };
 }
