@@ -73,6 +73,7 @@ import android.util.Slog;
 import android.util.SparseBooleanArray;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
@@ -813,16 +814,14 @@ public class VolumeDialogImpl implements VolumeDialog,
                 mExpandRows.setExpanded(mExpanded);
             });
         }
-        if (expand) {
-            updateAppRows();
-        }
-    }
+   }
 
-    private void updateAppRows() {
+    private void updateAppRows(boolean expand) {
         for (int i = mAppRows.size() - 1; i >= 0; i--) {
             final VolumeRow row = mAppRows.get(i);
             removeAppRow(row);
         }
+        if (!expand) return;
         List<AppTrackData> trackDatas = mController.getAudioManager().listAppTrackDatas();
         for (AppTrackData data : trackDatas) {
             if (data.isActive()) {
