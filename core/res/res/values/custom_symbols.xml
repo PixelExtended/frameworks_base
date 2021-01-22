@@ -139,8 +139,4 @@
     <java-symbol type="string" name="url_copy_success" />
     <java-symbol type="string" name="url_copy_failed" />
 
-    <!-- Smart charging -->
-     <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
-     <java-symbol type="integer" name="config_smartChargingBatteryResumeLevel" />
-
 </resources>
