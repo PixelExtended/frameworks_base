@@ -459,7 +459,7 @@ public class BatteryMeterView extends LinearLayout implements
         }
     }
 
-    public void updateColors(int foregroundColor, int backgroundColor, int singleToneColor) {
+    private void updateColors(int foregroundColor, int backgroundColor, int singleToneColor) {
         mDrawable.setColors(foregroundColor, backgroundColor, singleToneColor);
         mTextColor = singleToneColor;
         if (mBatteryPercentView != null) {
