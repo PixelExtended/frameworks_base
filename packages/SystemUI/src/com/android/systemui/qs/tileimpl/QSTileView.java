@@ -26,6 +26,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.os.UserHandle;
+import android.provider.Settings;
+
 import com.android.settingslib.Utils;
 import com.android.systemui.FontSizeUtils;
 import com.android.systemui.R;
