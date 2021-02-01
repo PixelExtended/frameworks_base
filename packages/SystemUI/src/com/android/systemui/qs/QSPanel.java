@@ -483,6 +483,9 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         if (mListening) {
             refreshAllTiles();
         }
+        if (mCustomizePanel != null) {
+            mCustomizePanel.updateResources();
+        }
         if (mTileLayout != null) {
             mTileLayout.updateResources();
         }
@@ -567,13 +570,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             mTileLayout = newLayout;
             if (mHost != null) setTiles(mHost.getTiles());
             newLayout.setListening(mListening);
-            if (needsDynamicRowsAndColumns()) {
-                boolean isLandscape = getResources().getConfiguration().orientation
-                            == Configuration.ORIENTATION_LANDSCAPE;
-                newLayout.setMinRows(horizontal ? 2 : (mMediaHost.getVisible() ? 2 : (isLandscape ? 1 : 3)));
+            /*if (needsDynamicRowsAndColumns()) {
+                newLayout.setMinRows(horizontal ? 2 : 1);
                 // Let's use 3 columns to match the current layout
                 newLayout.setMaxColumns(horizontal ? 3 : TileLayout.NO_MAX_COLUMNS);
-            }
+            }*/
             updateTileLayoutMargins();
             updateFooterMargin();
             updateDividerMargin();
@@ -604,9 +605,9 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         return true;
     }
 
-    protected boolean needsDynamicRowsAndColumns() {
+    /*protected boolean needsDynamicRowsAndColumns() {
         return true;
-    }
+    }*/
 
     private void switchAllContentToParent(ViewGroup parent, QSTileLayout newLayout) {
         int index = parent == this ? mMovableContentStartIndex : 0;
