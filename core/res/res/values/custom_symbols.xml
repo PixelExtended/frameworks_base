@@ -113,7 +113,4 @@
     <java-symbol type="integer" name="config_pressOnAssistBehavior" />
     <java-symbol type="integer" name="config_longPressOnAssistBehavior" />
 
-    <!-- Camera key type -->
-    <java-symbol type="bool" name="config_singleStageCameraKey" />
-
 </resources>
