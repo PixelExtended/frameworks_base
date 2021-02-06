@@ -113,4 +113,7 @@
     <java-symbol type="integer" name="config_pressOnAssistBehavior" />
     <java-symbol type="integer" name="config_longPressOnAssistBehavior" />
 
+    <!-- Screen recorder framerate limit -->
+    <java-symbol type="integer" name="config_screenRecorderMaxFramerate" />
+
 </resources>
