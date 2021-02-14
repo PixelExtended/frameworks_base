@@ -502,6 +502,7 @@ public class KeyguardIndicationController implements StateListener,
 
     private void updateChargingIndication() {
         if (!mDozing && mPowerPluggedIn) {
+            mChargingIndicationView.setVisibility(View.VISIBLE);
             if (hasActiveInDisplayFp()) {
                 if (mFODPositionY != 0) {
                     // Get screen height
@@ -533,7 +534,6 @@ public class KeyguardIndicationController implements StateListener,
                     mChargingIndicationView.setLayoutParams(params);
                 }
             }
-            mChargingIndicationView.setVisibility(View.VISIBLE);
             mChargingIndicationView.playAnimation();
         } else {
             mChargingIndicationView.setVisibility(View.GONE);
@@ -541,8 +541,8 @@ public class KeyguardIndicationController implements StateListener,
     }
 
     private boolean hasActiveInDisplayFp() {
-        PackageManager packageManager = mContext.getPackageManager();
-        boolean hasInDisplayFingerprint = packageManager.hasSystemFeature(CustomConstants.Features.FOD);
+        boolean hasInDisplayFingerprint = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_supportsInDisplayFingerprint);
         int userId = KeyguardUpdateMonitor.getCurrentUser();
         FingerprintManager fpm = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
         return hasInDisplayFingerprint && fpm.getEnrolledFingerprints(userId).size() > 0;
