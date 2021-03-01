@@ -62,4 +62,8 @@
     <!-- App Lock -->
     <dimen name="applock_icon_dimension">54dp</dimen>
 
+   <!--Quick Settings-->
+    <dimen name="quick_settings_top_margin_media">4dp</dimen>
+    <dimen name="quick_settings_top_margin_media_extra">10dp</dimen>
+    <dimen name="qs_media_action_button_size">48dp</dimen>
 </resources>
