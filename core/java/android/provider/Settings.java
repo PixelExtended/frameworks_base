@@ -5057,12 +5057,6 @@ public final class Settings {
         public static final String DOUBLE_TAP_SLEEP_LOCKSCREEN = "double_tap_sleep_lockscreen";
 
         /**
-         * Three Finger Gesture from Oppo
-         * @hide
-         */
-
-        public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
-        /**
          * Unlock keystore with fingerprint after reboot
          * @hide
          */
@@ -5510,6 +5504,12 @@ public final class Settings {
          */
         public static final String BACK_SWIPE_EXTENDED = "back_swipe_extended";
 
+         /**
+         * Swipe to screenshot
+         * @hide
+         */
+        public static final String SWIPE_TO_SCREENSHOT = "swipe_to_screenshot";
+
         /**
          * Gestures nav: left long back swipe action
          * @hide
@@ -5776,6 +5776,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_ADJUSTMENT);
             PRIVATE_SETTINGS.add(DISPLAY_PICTURE_ADJUSTMENT);
             PRIVATE_SETTINGS.add(LIVE_DISPLAY_HINTED);
+            PRIVATE_SETTINGS.add(SWIPE_TO_SCREENSHOT);
         }
         /**
          * These entries are considered common between the personal and the managed profile,
