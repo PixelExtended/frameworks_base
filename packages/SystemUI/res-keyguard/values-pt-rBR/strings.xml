@@ -138,4 +138,104 @@
     <string name="clock_title_default" msgid="6342735240617459864">"Padrão"</string>
     <string name="clock_title_bubble" msgid="2204559396790593213">"Bolha"</string>
     <string name="clock_title_analog" msgid="8409262532900918273">"Analógico"</string>
+
+    <!-- Time displayed on typographic clock face, which displays the time in words.
+             Example:
+
+                 It's
+                 Four
+                 Twenty
+                 Nine
+
+         This string requires two arguments: the first in the hours of the time and
+         the second is the minutes of the time. The hours string is obtained from
+         string-array type_clock_hours below and the minutes string is obtained
+         from string-array type_clock_minutes below.
+
+    [CHAR LIMIT=8] -->
+    <plurals name="type_clock_header">
+        <item quantity="one"><annotation name="color">São</annotation>\n^1\n^2</item>
+        <item quantity="few"><annotation name="color">Ponto</annotation>\n^1\n^2</item>
+        <item quantity="other"><annotation name="color">São</annotation>\n^1\n^2</item>
+    </plurals>
+
+    <!-- Hour displayed in words on the typographic clock face. [CHAR LIMIT=12] -->
+    <string-array name="type_clock_hours">
+        <item>Doze</item>
+        <item>Uma</item>
+        <item>Duas</item>
+        <item>Três</item>
+        <item>Quatro</item>
+        <item>Cinco</item>
+        <item>Seis</item>
+        <item>Sete</item>
+        <item>Oito</item>
+        <item>Nove</item>
+        <item>Dez</item>
+        <item>Onze</item>
+    </string-array>
+
+    <!-- Minutes displayed in words on the typographic clock face. [CHAR LIMIT=20] -->
+    <string-array name="type_clock_minutes">
+        <item>O\u2019Ponto</item>
+        <item>O\u2019Um</item>
+        <item>O\u2019Dois</item>
+        <item>O\u2019Três</item>
+        <item>O\u2019Quatro</item>
+        <item>O\u2019Cinco</item>
+        <item>O\u2019Seis</item>
+        <item>O\u2019Sete</item>
+        <item>O\u2019Oito</item>
+        <item>O\u2019Nove</item>
+        <item>Dez</item>
+        <item>Onze</item>
+        <item>Doze</item>
+        <item>Treze</item>
+        <item>Quatorze</item>
+        <item>Quinze</item>
+        <item>Dezesseis</item>
+        <item>Dezessete</item>
+        <item>Dezoito</item>
+        <item>Dezenove</item>
+        <item>Vinte</item>
+        <item>Vinte\nUm</item>
+        <item>Vinte\nDois</item>
+        <item>Vinte\nTrês</item>
+        <item>Vinte\nQuatro</item>
+        <item>Vinte\nCinco</item>
+        <item>Vinte\nSeis</item>
+        <item>Vinte\nSete</item>
+        <item>Vinte\nOito</item>
+        <item>Vinte\nNove</item>
+        <item>Trinta</item>
+        <item>Trinta\nUm</item>
+        <item>Trinta\nDois</item>
+        <item>Trinta\nTrês</item>
+        <item>Trinta\nQuatro</item>
+        <item>Trinta\nCinco</item>
+        <item>Trinta\nSeis</item>
+        <item>Trinta\nSete</item>
+        <item>Trinta\nOito</item>
+        <item>Trinta\nNove</item>
+        <item>Quarenta</item>
+        <item>Quarenta\nUm</item>
+        <item>Quarenta\nDois</item>
+        <item>Quarenta\nTrês</item>
+        <item>Quarenta\nQuatro</item>
+        <item>Quarenta\nCinco</item>
+        <item>Quarenta\nSeis</item>
+        <item>Quarenta\nSete</item>
+        <item>Quarenta\nOito</item>
+        <item>Quarenta\nNove</item>
+        <item>Cinquenta</item>
+        <item>Cinquenta\nUm</item>
+        <item>Cinquenta\nDois</item>
+        <item>Cinquenta\nTrês</item>
+        <item>Cinquenta\nQuatro</item>
+        <item>Cinquenta\nCinco</item>
+        <item>Cinquenta\nSeis</item>
+        <item>Cinquenta\nSete</item>
+        <item>Cinquenta\nOito</item>
+        <item>Cinquenta\nNove</item>
+    </string-array>
 </resources>
