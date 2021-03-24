@@ -1416,4 +1416,13 @@
     <!-- Recognizing fingerprint animation -->
     <dimen name="fod_animation_size">280dp</dimen>
     <dimen name="fod_animation_offset">0dp</dimen>
+
+    <!-- Output switcher panel related dimensions -->
+    <dimen name="media_output_dialog_list_margin">12dp</dimen>
+    <dimen name="media_output_dialog_list_max_height">364dp</dimen>
+    <dimen name="media_output_dialog_header_album_icon_size">52dp</dimen>
+    <dimen name="media_output_dialog_header_back_icon_size">36dp</dimen>
+    <dimen name="media_output_dialog_header_icon_padding">16dp</dimen>
+    <dimen name="media_output_dialog_icon_corner_radius">16dp</dimen>
+    <dimen name="media_output_dialog_title_anim_y_delta">12.5dp</dimen>
 </resources>
