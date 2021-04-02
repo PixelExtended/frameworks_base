@@ -67,7 +67,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.PowerManager;
-import android.os.Process;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -199,7 +198,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     static final String GLOBAL_ACTION_KEY_SCREENSHOT = "screenshot";
     private static final String GLOBAL_ACTION_KEY_REBOOT_RECOVERY = "reboot_recovery";
     private static final String GLOBAL_ACTION_KEY_REBOOT_BOOTLOADER = "reboot_bootloader";
-    private static final String GLOBAL_ACTION_KEY_REBOOT_HOT = "reboot_hot";
 
     public static final String PREFS_CONTROLS_SEEDING_COMPLETED = "SeedingCompleted";
     public static final String PREFS_CONTROLS_FILE = "controls_prefs";
@@ -668,8 +666,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             if (advancedRebootEnabled(mContext) && GLOBAL_ACTION_KEY_REBOOT_RECOVERY.equals(actionKey)) {
                 RebootRecoveryAction a = new RebootRecoveryAction();
                 addIfShouldShowAction(items, a);
-            } else if (GLOBAL_ACTION_KEY_REBOOT_HOT.equals(actionKey)) {
-                items.add(new RebootHotAction());
             } else if (advancedRebootEnabled(mContext) && GLOBAL_ACTION_KEY_REBOOT_BOOTLOADER.equals(actionKey)) {
                 RebootBootloaderAction a = new RebootBootloaderAction();
                 addIfShouldShowAction(items, a);
@@ -743,9 +739,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 addIfShouldShowAction(tempActions, rbtRecoveryAction);
             } else if (advancedRebootEnabled(mContext) && GLOBAL_ACTION_KEY_REBOOT_BOOTLOADER.equals(actionKey)) {
                 addIfShouldShowAction(tempActions, rbtBlAction);
-            } else if (GLOBAL_ACTION_KEY_REBOOT_HOT.equals(actionKey) &&
-                    advancedRebootEnabled(mContext)) {
-                addIfShouldShowAction(tempActions, new RebootHotAction());
             } else if (GLOBAL_ACTION_KEY_SCREENSHOT.equals(actionKey)) {
                 addIfShouldShowAction(tempActions, new ScreenshotAction());
             } else if (GLOBAL_ACTION_KEY_LOGOUT.equals(actionKey)) {
@@ -1109,33 +1102,6 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         @Override
         public void onPress() {
             mWindowManagerFuncs.reboot(false, PowerManager.REBOOT_RECOVERY);
-        }
-    }
-
-    private final class RebootHotAction extends SinglePressAction {
-        private RebootHotAction() {
-            super(com.android.systemui.R.drawable.ic_restart_hot,
-                    com.android.systemui.R.string.global_action_reboot_hot);
-        }
-
-        @Override
-        public boolean showDuringKeyguard() {
-            return true;
-        }
-
-        @Override
-        public boolean showDuringRestrictedKeyguard() {
-            return false;
-        }
-
-        @Override
-        public boolean showBeforeProvisioning() {
-            return true;
-        }
-
-        @Override
-        public void onPress() {
-            Process.killProcess(Process.myPid());
         }
     }
 
