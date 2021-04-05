@@ -245,7 +245,6 @@ import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.volume.VolumeComponent;
 
-import com.android.internal.util.custom.cutout.CutoutUtils;
 import com.android.internal.util.custom.NavbarUtils;
 
 import java.io.FileDescriptor;
@@ -1917,30 +1916,17 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateTheme();
     }
 
-    private boolean isCenteredClock() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_CLOCK, 2) == 1;
-    }
-
-    private void moveClockToLeft() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_CLOCK, 2);
-    }
-
     private boolean isNetworkTrafficOnStatusbar() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.NETWORK_TRAFFIC_LOCATION, 0) == 1;
+                Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION, 0) == 1;
     }
 
     private void setNetworkTrafficToQs() {
         Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.NETWORK_TRAFFIC_LOCATION, 2);
+                Settings.System.NETWORK_TRAFFIC_VIEW_LOCATION, 2);
     }
 
     private void updateCutoutOverlay() {
-        if (!mDisplayCutoutHidden && CutoutUtils.hasCenteredCutout(mContext, true) && isCenteredClock()){
-            moveClockToLeft();
-        }
         if (!mDisplayCutoutHidden && CutoutUtils.hasCenteredCutout(mContext, true) && isNetworkTrafficOnStatusbar()){
             setNetworkTrafficToQs();
         }
