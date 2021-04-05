@@ -245,6 +245,7 @@ import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.volume.VolumeComponent;
 
+import com.android.internal.util.custom.cutout.CutoutUtils;
 import com.android.internal.util.custom.NavbarUtils;
 
 import java.io.FileDescriptor;
