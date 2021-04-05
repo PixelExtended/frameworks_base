@@ -50,6 +50,7 @@ import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
 
 import com.android.internal.util.custom.CustomUtils;
@@ -78,8 +79,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private final int mNavigationBarSize;
     private final boolean mShouldBoostBrightness;
     private final Paint mPaintFingerprintBackground = new Paint();
-    private final WindowManager.LayoutParams mParams = new WindowManager.LayoutParams();
-    private final WindowManager.LayoutParams mPressedParams = new WindowManager.LayoutParams();
+    private final LayoutParams mParams = new LayoutParams();
+    private final LayoutParams mPressedParams = new LayoutParams();
     private final WindowManager mWindowManager;
 
     private IFingerprintInscreen mFingerprintInscreenDaemon;
@@ -375,7 +376,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             throw new RuntimeException("Failed to retrieve FOD circle position or size");
         }
 
-        Resources res = context.getResources();
+        Resources res = mContext.getResources();
 
         mColorBackground = res.getColor(R.color.config_fodColorBackground);
         mDefaultPressedColor = res.getInteger(com.android.internal.R.
@@ -387,7 +388,13 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                  FODCircleView.class.getSimpleName());
 
-        mWindowManager = context.getSystemService(WindowManager.class);
+        mWindowManager = mContext.getSystemService(WindowManager.class);
+        mIsFodAnimationAvailable = CustomUtils.isPackageInstalled(context,
+                                    context.getResources().getString(
+                                    com.android.internal.R.string.config_fodAnimationPackage));
+        if (mIsFodAnimationAvailable) {
+            mFODAnimation = new FODAnimation(mContext, mWindowManager, mPositionX, mPositionY);
+        }
 
         mNavigationBarSize = res.getDimensionPixelSize(R.dimen.navigation_bar_size);
 
@@ -413,7 +420,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mParams.setTitle("Fingerprint on display");
         mPressedParams.setTitle("Fingerprint on display.touched");
 
-        mPressedView = new ImageView(context)  {
+        mPressedView = new ImageView(mContext)  {
             @Override
             protected void onDraw(Canvas canvas) {
                 if (mIsCircleShowing) {
@@ -434,13 +441,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         mUpdateMonitor = Dependency.get(KeyguardUpdateMonitor.class);
         mUpdateMonitor.registerCallback(mMonitorCallback);
-
-        mIsFodAnimationAvailable = CustomUtils.isPackageInstalled(context,
-                                    context.getResources().getString(
-                                    com.android.internal.R.string.config_fodAnimationPackage));
-        if (mIsFodAnimationAvailable) {
-            mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
-        }
 
         if (context.getResources().getBoolean(
             com.android.internal.R.bool.config_supportsScreenOffInDisplayFingerprint)){
