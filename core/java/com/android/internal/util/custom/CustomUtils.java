@@ -27,6 +27,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager;
@@ -39,6 +41,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.UserHandle;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.os.RemoteException;
@@ -69,6 +72,9 @@ public class CustomUtils {
     public static final String INTENT_SCREENSHOT = "action_take_screenshot";
     public static final String INTENT_REGION_SCREENSHOT = "action_take_region_screenshot";
     private static final String TAG = CustomUtils.class.getSimpleName();
+    public static final String PACKAGE_SYSTEMUI = "com.android.systemui";
+
+    private static OverlayManager mOverlayService;
 
     public static boolean isPackageInstalled(Context context, String pkg, boolean ignoreState) {
         if (pkg != null) {
@@ -195,18 +201,6 @@ public class CustomUtils {
         am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
     }
 
-    // Clear notifications
-    public static void clearAllNotifications() {
-        IStatusBarService service = getStatusBarService();
-        if (service != null) {
-            try {
-                service.onClearAllNotifications(ActivityManager.getCurrentUser());
-            } catch (RemoteException e) {
-                // do nothing.
-            }
-        }
-    }
-
     // Screenshot
     public static void takeScreenshot(boolean full) {
         IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
@@ -214,30 +208,6 @@ public class CustomUtils {
             wm.sendCustomAction(new Intent(INTENT_SCREENSHOT));
         } catch (RemoteException e) {
             e.printStackTrace();
-        }
-    }
-
-    // Toggle notifications panel
-    public static void toggleNotifications() {
-        IStatusBarService service = getStatusBarService();
-        if (service != null) {
-            try {
-                service.togglePanel();
-            } catch (RemoteException e) {
-                // do nothing.
-            }
-        }
-    }
-
-    // Toggle qs panel
-    public static void toggleQsPanel() {
-        IStatusBarService service = getStatusBarService();
-        if (service != null) {
-            try {
-                service.toggleSettingsPanel();
-            } catch (RemoteException e) {
-                // do nothing.
-            }
         }
     }
 
@@ -345,6 +315,57 @@ public class CustomUtils {
         return packageNames;
     }
 
+    // Toggle notifications panel
+    public static void toggleNotifications() {
+        FireActions.toggleNotifications();
+    }
+
+    // Toggle qs panel
+    public static void toggleQsPanel() {
+        FireActions.toggleQsPanel();
+    }
+
+   // Clear-all notifications
+    public static void clearAllNotifications() {
+        FireActions.clearAllNotifications();
+    }
+
+// Method to detect whether an overlay is enabled or not
+    public static boolean isThemeEnabled(String packageName) {
+        mOverlayService = new OverlayManager();
+        try {
+            List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
+                    UserHandle.myUserId());
+            for (int i = 0, size = infos.size(); i < size; i++) {
+                if (infos.get(i).packageName.equals(packageName)) {
+                    return infos.get(i).isEnabled();
+                }
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static class OverlayManager {
+        private final IOverlayManager mService;
+
+        public OverlayManager() {
+            mService = IOverlayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.OVERLAY_SERVICE));
+        }
+
+        public void setEnabled(String pkg, boolean enabled, int userId)
+                throws RemoteException {
+            mService.setEnabled(pkg, enabled, userId);
+        }
+
+        public List<OverlayInfo> getOverlayInfosForTarget(String target, int userId)
+                throws RemoteException {
+            return mService.getOverlayInfosForTarget(target, userId);
+        }
+    }
+
 	// Check if device has a notch
     public static boolean hasNotch(Context context) {
         int result = 0;
@@ -401,6 +422,42 @@ public class CustomUtils {
                 }
             }
         }
+
+	// Toggle notifications panel
+	public static void toggleNotifications() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.togglePanel();
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
+
+    // Toggle qs panel
+    public static void toggleQsPanel() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.toggleSettingsPanel();
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
+
+// Clear notifications
+    public static void clearAllNotifications() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.onClearAllNotifications(ActivityManager.getCurrentUser());
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
 
         public static void toggleCameraFlash() {
             IStatusBarService service = getStatusBarService();
