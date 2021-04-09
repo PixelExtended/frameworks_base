@@ -5558,6 +5558,16 @@ public final class Settings {
         public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_ACTIVITY_ACTION = "right_vertical_back_swipe_app_activity_action";
 
 	/**
+         * Set edge gesture Y dead zone
+         * 0 - disabled - stock behavior - default
+         * 1 - smaller top area of the screen
+         * 2 - small top area of the screen
+         * 3 - half top of the screen
+         * @hide
+         */
+        public static final String EDGE_GESTURE_Y_DEAD_ZONE = "edge_gesture_y_dead_zone";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
