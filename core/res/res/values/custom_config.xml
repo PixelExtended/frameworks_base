@@ -206,4 +206,7 @@
     <!-- Name of a font family to use as regular font. For theming purpose. -->
     <string name="config_regularFontFamily" translatable="false">sans-serif-regular</string>
 
+    <!-- Switch USB controller on Asus ROG devices-->
+    <bool name="config_switchUsbController">false</bool>
+
 </resources>

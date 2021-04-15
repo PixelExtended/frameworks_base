@@ -106,4 +106,7 @@
     <java-symbol type="string" name="config_lightFontFamily" />
     <java-symbol type="string" name="config_regularFontFamily" />
 
+    <!-- Switch USB controller on Asus ROG devices-->
+    <java-symbol type="bool" name="config_switchUsbController" />
+
 </resources>
