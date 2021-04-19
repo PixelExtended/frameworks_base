@@ -108,6 +108,4 @@
    <!-- Change clockface -->
     <string name="change_clock_face">Swipe to change the clock face</string>
 
-   <!-- Scrolling Screenshot string -->
-    <string name="scrollss">Scroll</string>
 </resources>
