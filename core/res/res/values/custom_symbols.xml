@@ -152,6 +152,7 @@
     <java-symbol type="bool" name="config_defaultAutoOutdoorMode" />
     <java-symbol type="bool" name="config_defaultColorEnhancement" />
     <java-symbol type="bool" name="config_defaultCABC" />
+    <java-symbol type="bool" name="config_defaultAntiFlicker" />
     <java-symbol type="bool" name="config_filterDisplayModes" />
     <java-symbol type="array" name="config_displayModeMappings" />
 
@@ -161,4 +162,7 @@
 
     <!-- Screen off delay -->
     <java-symbol type="integer" name="config_screen_off_delay" />
+
+   <!-- Toast animation -->
+  <java-symbol type="style" name="Animation.Toast.Material" />
 </resources>

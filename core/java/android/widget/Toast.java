@@ -33,6 +33,8 @@ import android.compat.annotation.UnsupportedAppUsage;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Binder;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -82,6 +84,8 @@ import java.util.List;
 public class Toast {
     static final String TAG = "Toast";
     static final boolean localLOGV = false;
+
+    private Drawable mCustomIcon;
 
     /** @hide */
     @IntDef(prefix = { "LENGTH_" }, value = {
@@ -196,6 +200,7 @@ public class Toast {
         String pkg = mContext.getOpPackageName();
         TN tn = mTN;
         tn.mNextView = mNextView;
+        tn.mCustomIcon = mCustomIcon;
         final int displayId = mContext.getDisplayId();
 
         try {
@@ -551,6 +556,14 @@ public class Toast {
         }
     }
 
+    /**
+     * Set a custom toast icon, instead of the app icon
+     * @param icon The custom Drawable icon
+     */
+    public void setIcon(@Nullable Drawable icon) {
+        mCustomIcon = icon;
+    }
+
     // =======================================================================================
     // All the gunk below is the interaction with the Notification Service, which handles
     // the proper ordering of these system-wide.
@@ -594,6 +607,8 @@ public class Toast {
         int mDuration;
 
         WindowManager mWM;
+
+        Drawable mCustomIcon;
 
         final String mPackageName;
         final Binder mToken;
@@ -693,9 +708,29 @@ public class Toast {
                 // remove the old view if necessary
                 handleHide();
                 mView = mNextView;
+                Context context = mView.getContext().getApplicationContext();
                 mPresenter.show(mView, mToken, windowToken, mDuration, mGravity, mX, mY,
                         mHorizontalMargin, mVerticalMargin,
                         new CallbackBinder(getCallbacks(), mHandler));
+                String packageName = mView.getContext().getOpPackageName();
+                if (context == null) {
+                    context = mView.getContext();
+                }
+                ImageView appIcon = (ImageView) mView.findViewById(android.R.id.icon);
+                if (appIcon != null) { // using app icon
+                    if (mCustomIcon == null) {
+                        PackageManager pm = context.getPackageManager();
+                        Drawable icon = null;
+                        try {
+                            icon = pm.getApplicationIcon(packageName);
+                        } catch (PackageManager.NameNotFoundException e) {
+                            // nothing to do
+                        }
+                        appIcon.setImageDrawable(icon);
+                    } else { // using a custom icon
+                        appIcon.setImageDrawable(mCustomIcon);
+                    }
+                }
             }
         }
 

@@ -4023,11 +4023,10 @@ public final class Settings {
         public static final int SCREEN_BRIGHTNESS_MODE_AUTOMATIC = 1;
 
         /**
-         * Indicates whether we should only show the app lock view when the device is woken up
-         * Or always.
+         * APP_LOCK_LOCK_AFTER key for user selected app lock timeout
          * @hide
          */
-        public static final String APP_LOCK_SHOW_ONLY_ON_WAKE = "app_lock_show_only_on_wake";
+        public static final String APP_LOCK_LOCK_AFTER = "applock_lock_after";
 
         /**
          * Control whether to enable adaptive sleep mode.
@@ -5401,6 +5400,12 @@ public final class Settings {
         public static final String DISPLAY_AUTO_OUTDOOR_MODE = "display_auto_outdoor_mode";
 
         /**
+         * Anti flicker
+         * 0 = 0ff, 1 = on
+         */
+        public static final String DISPLAY_ANTI_FLICKER = "display_anti_flicker";
+
+        /**
          * Reader mode
          * 0 = 0ff, 1 = on
          */
@@ -5757,6 +5762,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_TEMPERATURE_NIGHT);
             PRIVATE_SETTINGS.add(DISPLAY_TEMPERATURE_MODE);
             PRIVATE_SETTINGS.add(DISPLAY_AUTO_OUTDOOR_MODE);
+            PRIVATE_SETTINGS.add(DISPLAY_ANTI_FLICKER);
             PRIVATE_SETTINGS.add(DISPLAY_READING_MODE);
             PRIVATE_SETTINGS.add(DISPLAY_CABC);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_ENHANCE);
