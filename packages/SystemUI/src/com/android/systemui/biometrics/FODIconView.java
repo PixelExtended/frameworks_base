@@ -36,6 +36,11 @@ public class FODIconView extends ImageView {
     private int mSize;
     private final WindowManager mWindowManager;
 
+    private int mSelectedAnim;
+    private final int[] ANIMATION_STYLES_NAMES = {
+        R.drawable.fod_icon_aod_anim
+    };
+
     public FODIconView(Context context, int i, int i2, int i3) {
         super(context);
         this.mPositionX = i2;
@@ -58,12 +63,19 @@ public class FODIconView extends ImageView {
         boolean z = Settings.System.getInt(getContext().getContentResolver(), "fod_icon_animation", 0) != 0;
         this.mIsFODIconAnimated = z;
         if (z) {
-            setBackgroundResource(R.drawable.fod_icon_anim);
+            setBackgroundResource(ANIMATION_STYLES_NAMES[mSelectedAnim]);
             this.iconAnim = (AnimationDrawable) getBackground();
         } else {
             setImageResource(R.drawable.fod_icon_default);
         }
         hide();
+
+        update(z);
+    }
+
+    public void update(boolean isEnabled) {
+        mSelectedAnim = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FOD_ICON_ANIM_TYPE, 0);
     }
 
     public void hide() {
@@ -97,7 +109,7 @@ public class FODIconView extends ImageView {
         this.mIsFODIconAnimated = z;
         if (z) {
             setImageResource(0);
-            setBackgroundResource(R.drawable.fod_icon_anim);
+            setBackgroundResource(ANIMATION_STYLES_NAMES[mSelectedAnim]);
             this.iconAnim = (AnimationDrawable) getBackground();
             return;
         }
