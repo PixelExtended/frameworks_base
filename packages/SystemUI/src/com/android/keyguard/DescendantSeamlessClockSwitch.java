@@ -23,8 +23,23 @@ public class DescendantSeamlessClockSwitch {
 
     private static final String[] CLOCK_FACES = {
         "com.android.keyguard.clock.DefaultClockController",
+        "com.android.keyguard.clock.DefaultBoldClockController",
+        "com.android.keyguard.clock.AnalogClockController",
         "com.android.keyguard.clock.BubbleClockController",
-        "com.android.keyguard.clock.AnalogClockController"
+        "com.android.keyguard.clock.SamsungClockController",
+        "com.android.keyguard.clock.SamsungBoldClockController",
+        "com.android.keyguard.clock.TypeClockController",
+        "com.android.keyguard.clock.IDEClockController",
+        "com.android.keyguard.clock.DividedLinesClockController",
+        "com.android.keyguard.clock.BinaryClockController",
+        "com.android.keyguard.clock.TypeClockAltController",
+        "com.android.keyguard.clock.SamsungHighlightClockController",
+        "com.android.keyguard.clock.SpectrumClockController",
+        "com.android.keyguard.clock.SfunyClockController",
+        "com.android.keyguard.clock.MNMLBoxClockController",
+        "com.android.keyguard.clock.MNMLMinimalClockController",
+        "com.android.keyguard.clock.FluidClockController",
+        "com.android.keyguard.clock.ShapeShiftClockController"
     };
 
     public static int getCurrentPosition(String currentClockFace) {
@@ -90,7 +105,13 @@ public class DescendantSeamlessClockSwitch {
             targetView.setTextColor(color);
             targetView.setVisibility(View.VISIBLE);
         } else {
-            targetView.setVisibility(View.GONE);
+	        targetView.animate().alpha(0f).setDuration(200).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    targetView.setVisibility(View.GONE);
+                }
+            });
         }
     }
 }
+
