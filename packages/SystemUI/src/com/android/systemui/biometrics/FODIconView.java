@@ -38,7 +38,9 @@ public class FODIconView extends ImageView {
 
     private int mSelectedAnim;
     private final int[] ANIMATION_STYLES_NAMES = {
-        R.drawable.fod_icon_aod_anim
+        R.drawable.fod_icon_aod_anim,
+        R.drawable.zaid_oneui_fod,
+        R.drawable.oneui2_fod
     };
 
     public FODIconView(Context context, int i, int i2, int i3) {
@@ -63,6 +65,7 @@ public class FODIconView extends ImageView {
         boolean z = Settings.System.getInt(getContext().getContentResolver(), "fod_icon_animation", 0) != 0;
         this.mIsFODIconAnimated = z;
         if (z) {
+            update(z);
             setBackgroundResource(ANIMATION_STYLES_NAMES[mSelectedAnim]);
             this.iconAnim = (AnimationDrawable) getBackground();
         } else {
@@ -109,6 +112,7 @@ public class FODIconView extends ImageView {
         this.mIsFODIconAnimated = z;
         if (z) {
             setImageResource(0);
+            update(z);
             setBackgroundResource(ANIMATION_STYLES_NAMES[mSelectedAnim]);
             this.iconAnim = (AnimationDrawable) getBackground();
             return;
