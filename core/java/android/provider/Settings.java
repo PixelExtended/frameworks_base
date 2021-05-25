@@ -5578,12 +5578,6 @@ public final class Settings {
         public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
 
         /**
-         * Settings dashboard icon style
-         * @hide
-         */
-        public static final String THEMING_SETTINGS_DASHBOARD_ICONS = "theming_settings_dashboard_icons";
-
-        /**
          * Use doubletap as doze pulse triggers
          * @hide
          */
