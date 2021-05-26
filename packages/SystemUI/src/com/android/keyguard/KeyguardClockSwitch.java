@@ -35,7 +35,6 @@ import com.android.internal.colorextraction.ColorExtractor.OnColorsChangedListen
 import com.android.keyguard.clock.ClockManager;
 import com.android.keyguard.KeyguardSliceView;
 import com.android.systemui.Dependency;
-import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.Interpolators;
 import com.android.systemui.OnSwipeTouchListener;
 import com.android.systemui.R;

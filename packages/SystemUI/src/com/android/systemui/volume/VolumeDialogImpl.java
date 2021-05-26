@@ -362,7 +362,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (mRinger != null) {
             mRingerIcon = mRinger.findViewById(R.id.ringer_icon);
             mZenIcon = mRinger.findViewById(R.id.dnd_icon);
-            Util.setVisOrGone(mRinger, !mHasAlertSlider);
+            Util.setVisOrGone(mRinger, !mHideRingerButton);
         }
 
         mODICaptionsView = mDialog.findViewById(R.id.odi_captions);
@@ -655,8 +655,8 @@ public class VolumeDialogImpl implements VolumeDialog,
             });
             mMediaButton.setOnClickListener(v -> {
                 int x = (int) (isLandscape() ? (isAudioPanelOnLeftSide() ? (
-                        (mWidth + mSpacer) * (mHasAlertSlider ? 1 : 2) + mWidth / 2)
-                        : (mHasAlertSlider ? mWidth * 1.5 + mSpacer : mWidth / 2))
+                        (mWidth + mSpacer) * (mHideRingerButton ? 1 : 2) + mWidth / 2)
+                        : (mHideRingerButton ? mWidth * 1.5 + mSpacer : mWidth / 2))
                         : (1.5 * mWidth + mSpacer));
                 int endRadius = (int) Math.hypot((isLandscape() ? 2.2 : 1.1) * (1.5 * mWidth +
                         mSpacer), mHeight);
@@ -1965,7 +1965,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             if (mRow.ss == null) return;
             if (D.BUG) Log.d(TAG, AudioSystem.streamToString(mRow.stream)
                     + " onProgressChanged " + progress + " fromUser=" + fromUser);
-            if ((mRow.stream == STREAM_RING || mRow.stream == STREAM_NOTIFICATION) && mHasAlertSlider) {
+            if ((mRow.stream == STREAM_RING || mRow.stream == STREAM_NOTIFICATION) && mHideRingerButton) {
                 if (mRow.ss.muted) {
                     seekBar.setProgress(0);
                     return;
@@ -1981,7 +1981,7 @@ public class VolumeDialogImpl implements VolumeDialog,
             }
             final int userLevel = getImpliedLevel(seekBar, progress);
 
-            if ((mRow.stream == STREAM_RING || mRow.stream == STREAM_NOTIFICATION) && mHasAlertSlider) {
+            if ((mRow.stream == STREAM_RING || mRow.stream == STREAM_NOTIFICATION) && mHideRingerButton) {
                 if (mRow.ss.level > mRow.ss.levelMin && userLevel == 0) {
                     seekBar.setProgress((mRow.ss.levelMin + 1) * 100);
                     Util.setText(mRow.header,
