@@ -18,15 +18,26 @@ package com.android.systemui.biometrics;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import com.android.systemui.R;
 
-public class FODIconView extends ImageView {
+import com.android.systemui.Dependency;
+import com.android.systemui.R;
+import com.android.systemui.omni.OmniSettingsService;
+
+import java.io.FileDescriptor;
+
+public class FODIconView extends ImageView implements OmniSettingsService.OmniSettingsObserver {
     private AnimationDrawable iconAnim;
     private boolean mIsFODIconAnimated;
     private boolean mIsKeyguard;
@@ -35,6 +46,7 @@ public class FODIconView extends ImageView {
     private int mPositionY;
     private int mSize;
     private final WindowManager mWindowManager;
+    private BitmapDrawable mCustomImage;
 
     private int mSelectedAnim;
     private final int[] ANIMATION_STYLES_NAMES = {
@@ -70,7 +82,8 @@ public class FODIconView extends ImageView {
             setBackgroundResource(ANIMATION_STYLES_NAMES[mSelectedAnim]);
             this.iconAnim = (AnimationDrawable) getBackground();
         } else {
-            setImageResource(R.drawable.fod_icon_default);
+            update(z);
+            setCustomIcon();
         }
         hide();
 
@@ -78,6 +91,7 @@ public class FODIconView extends ImageView {
     }
 
     public void update(boolean isEnabled) {
+        Dependency.get(OmniSettingsService.class).addStringObserver(this, Settings.System.OMNI_CUSTOM_FP_ICON);
         mSelectedAnim = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_ICON_ANIM_TYPE, 0);
     }
@@ -119,16 +133,45 @@ public class FODIconView extends ImageView {
             return;
         }
         setBackgroundResource(0);
-        setImageResource(R.drawable.fod_icon_default);
+        update(z);
+        setCustomIcon();
+    }
+
+    private void setCustomIcon(){
+        if (mCustomImage != null) {
+            setImageDrawable(mCustomImage);
+        } else {
+            setImageResource(R.drawable.fod_icon_default);
+        }
+    }
+
+    @Override
+    public void onStringSettingChanged(String key, String customIconURI) {
+        if (!TextUtils.isEmpty(customIconURI)) {
+            loadCustomImage(customIconURI);
+        } else {
+            mCustomImage = null;
+        }
+    }
+
+    private void loadCustomImage(String customIconURI) {
+        try {
+            ParcelFileDescriptor parcelFileDescriptor =
+                    getContext().getContentResolver().openFileDescriptor(Uri.parse(customIconURI), "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+            parcelFileDescriptor.close();
+            mCustomImage = new BitmapDrawable(getResources(), image);
+        }
+        catch (Exception e) {
+            mCustomImage = null;
+        }
     }
 
     public void setIsKeyguard(boolean z) {
         this.mIsKeyguard = z;
-        if (z && !this.mIsFODIconAnimated) {
-            setColorFilter(-1);
-        } else if (this.mIsKeyguard || !this.mIsFODIconAnimated) {
+        if (this.mIsKeyguard || !this.mIsFODIconAnimated) {
             setBackgroundTintList(null);
-            setColorFilter((ColorFilter) null);
         } else {
             setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#807B7E")));
         }
