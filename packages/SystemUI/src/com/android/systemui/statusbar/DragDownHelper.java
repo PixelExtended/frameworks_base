@@ -21,8 +21,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.os.PowerManager;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -61,13 +59,14 @@ public class DragDownHelper implements Gefingerpoken {
     private float mLastHeight;
     private FalsingManager mFalsingManager;
 
+    // omni additions start
     private boolean mDoubleTapToSleepEnabled;
     private int mStatusBarHeaderHeight;
     private long mLastDownEvent = -1;
     private long mDoubleTapTimeout;
     private Runnable mGoToSleep;
 
-    public DragDownHelper(final Context context, View host, ExpandHelper.Callback callback,
+    public DragDownHelper(Context context, View host, ExpandHelper.Callback callback,
             DragDownCallback dragDownCallback,
             FalsingManager falsingManager) {
         mMinDragDistance = context.getResources().getDimensionPixelSize(
@@ -75,6 +74,7 @@ public class DragDownHelper implements Gefingerpoken {
         final ViewConfiguration configuration = ViewConfiguration.get(context);
         mTouchSlop = configuration.getScaledTouchSlop();
         mSlopMultiplier = configuration.getScaledAmbiguousGestureMultiplier();
+        mDoubleTapTimeout = ViewConfiguration.get(context).getDoubleTapTimeout();
         mCallback = callback;
         mDragDownCallback = dragDownCallback;
         mHost = host;
@@ -101,7 +101,6 @@ public class DragDownHelper implements Gefingerpoken {
                 mStartingChild = null;
                 mInitialTouchY = y;
                 mInitialTouchX = x;
-
                 if (mDoubleTapToSleepEnabled && y < mStatusBarHeaderHeight) {
                     long eventTime = event.getEventTime();
                     if (mLastDownEvent != -1) {
@@ -312,7 +311,7 @@ public class DragDownHelper implements Gefingerpoken {
          */
         boolean isDragDownAnywhereEnabled();
     }
-
+	
     public void updateDoubleTapToSleep(boolean updateDoubleTapToSleep) {
         mDoubleTapToSleepEnabled = updateDoubleTapToSleep;
     }
