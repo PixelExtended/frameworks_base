@@ -417,7 +417,7 @@ public abstract class PanelViewController {
                 // We need to collapse the panel since we peeked to the small height.
                 mView.postOnAnimation(mPostCollapseRunnable);
             }
-        } else if (!mStatusBar.isBouncerShowing() && !mDoubleTapToSleepEnabled) {
+        } else if (!mStatusBar.isBouncerShowing()) {
             boolean expands = onEmptySpaceClick(mInitialTouchX);
             onTrackingStopped(expands);
         }
@@ -1246,7 +1246,7 @@ public abstract class PanelViewController {
                         onTrackingStarted();
                     }
                     if (isFullyCollapsed() && !mHeadsUpManager.hasPinnedHeadsUp()
-                            && !mStatusBar.isBouncerShowing()) {
+                            && !mStatusBar.isBouncerShowing() && !mDoubleTapToSleepEnabled) {
                         startOpening(event);
                     }
                     break;
