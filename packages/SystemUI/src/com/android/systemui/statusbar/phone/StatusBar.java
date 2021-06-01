@@ -2225,7 +2225,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         public void update() {
             setFpToDismissNotifications();
-            setStatusDoubleTapToSleep();
             setQsBatteryPercentMode();
             setQsRowsColumns();
             setScreenBrightnessMode();
