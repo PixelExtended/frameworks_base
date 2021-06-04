@@ -558,14 +558,14 @@ public class VolumeDialogImpl implements VolumeDialog,
         row.icon.setVisibility(View.VISIBLE);
         PackageManager pm = mContext.getPackageManager();
         try {
-            row.icon.setImageDrawable(pm.getApplicationIcon(row.packageName));
-        } catch (PackageManager.NameNotFoundException e) {
+            row.icon.setImageDrawable(pm.getApplicationLogo(row.packageName));
+        } catch (Exception e) {
             row.icon.setImageDrawable(pm.getDefaultActivityIcon());
             Log.e(TAG, "Failed to get icon of " + row.packageName, e);
         }
 
         row.icon.setColorFilter(row.appMuted ? mAppIconMuteColorFilter : null);
-        
+
         row.icon.setOnClickListener(v -> {
                 rescheduleTimeoutH();
                 AudioManager audioManager = mController.getAudioManager();
