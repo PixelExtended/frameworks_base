@@ -163,4 +163,7 @@
 
    <!-- Toast animation -->
   <java-symbol type="style" name="Animation.Toast.Material" />
+
+    <!-- App Lock -->
+    <java-symbol type="string" name="lockscreen_pattern_instructions" />
 </resources>
