@@ -40,7 +40,9 @@ public class DescendantSeamlessClockSwitch {
         "com.android.keyguard.clock.MNMLMinimalClockController",
         "com.android.keyguard.clock.FluidClockController",
         "com.android.keyguard.clock.ShapeShiftClockController",
-        "com.android.keyguard.clock.OPNumbersClockController"
+        "com.android.keyguard.clock.OPNumbersClockController",
+        "com.android.keyguard.clock.OPMinimalClockController",
+        "com.android.keyguard.clock.OPRomanClockController",
     };
 
     public static int getCurrentPosition(String currentClockFace) {
