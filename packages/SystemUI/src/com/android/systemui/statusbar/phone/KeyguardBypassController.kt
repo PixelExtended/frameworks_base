@@ -102,13 +102,13 @@ open class KeyguardBypassController : Dumpable {
 
          if (context.resources.getBoolean(
                 com.android.internal.R.bool.config_faceAuthOnlyOnSecurityView)){
-            bypassEnabledBiometric = false
+            bypassEnabled = false
         }else{
             val defaultMethod = if (context.resources.getBoolean(
                             com.android.internal.R.bool.config_faceAuthDismissesKeyguard)) 0 else 1
             tunerService.addTunable(object : TunerService.Tunable {
                 override fun onTuningChanged(key: String?, newValue: String?) {
-                    bypassEnabledBiometric = tunerService.getValue(key, defaultMethod) == 0
+                    bypassEnabled = tunerService.getValue(key, defaultMethod) == 0
                 }
             }, Settings.Secure.FACE_UNLOCK_METHOD)
         }
