@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:paddingEnd="?attr/dialogPreferredPadding"
                     android:paddingStart="?attr/dialogPreferredPadding"
-                    style="@style/TextAppearance.DeviceDefault.Subhead" />
+                    style="@style/TextAppearance.Material.Subhead" />
 
                 <Space
                     android:id="@+id/textSpacerNoButtons"
