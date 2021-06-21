@@ -5790,6 +5790,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_ICONS_STYLE);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
+            PRIVATE_SETTINGS.add(APP_LOCK_LOCK_AFTER);
         }
         /**
          * These entries are considered common between the personal and the managed profile,
