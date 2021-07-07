@@ -285,7 +285,7 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         updateClockVisibility();
     }
 
-    public boolean shouldBeVisible() {
+    private boolean shouldBeVisible() {
         return mClockVisibleByPolicy && mClockVisibleByUser;
     }
 
