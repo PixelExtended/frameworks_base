@@ -21,8 +21,19 @@ import android.content.om.OverlayInfo;
 import android.os.RemoteException;
 import android.util.Log;
 
+import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.UserHandle;
+import android.content.Context;
+import android.os.ServiceManager;
+
 public class ThemesUtils {
 
+    public static final String PACKAGE_SYSTEMUI = "com.android.systemui";
+
+    private static OverlayManager mOverlayService;
     public static final String TAG = "ThemesUtils";
 
     // Switch themes
@@ -58,6 +69,42 @@ public class ThemesUtils {
             } catch (RemoteException e) {
                 Log.w(TAG, "Can't change switch theme", e);
             }
+        }
+    }
+
+// Method to detect whether an overlay is enabled or not
+    public static boolean isThemeEnabled(String packageName) {
+        mOverlayService = new OverlayManager();
+        try {
+            List<OverlayInfo> infos = mOverlayService.getOverlayInfosForTarget("android",
+                    UserHandle.myUserId());
+            for (int i = 0, size = infos.size(); i < size; i++) {
+                if (infos.get(i).packageName.equals(packageName)) {
+                    return infos.get(i).isEnabled();
+                }
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static class OverlayManager {
+        private final IOverlayManager mService;
+
+        public OverlayManager() {
+            mService = IOverlayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.OVERLAY_SERVICE));
+        }
+
+        public void setEnabled(String pkg, boolean enabled, int userId)
+                throws RemoteException {
+            mService.setEnabled(pkg, enabled, userId);
+        }
+
+        public List<OverlayInfo> getOverlayInfosForTarget(String target, int userId)
+                throws RemoteException {
+            return mService.getOverlayInfosForTarget(target, userId);
         }
     }
 
