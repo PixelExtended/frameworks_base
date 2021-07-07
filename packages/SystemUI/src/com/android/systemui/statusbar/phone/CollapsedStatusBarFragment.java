@@ -308,7 +308,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void hideSystemIconArea(boolean animate) {
-        animateHide(mNetworkTrafficHolder, animate);
+        animateHide(mNetworkTrafficHolder, animate, true);
         animateHide(mCenterClockLayout, animate, true);
         if (mClockStyle == 2) {
             animateHide(mRightClock, animate, true);

@@ -111,13 +111,15 @@ public class BatteryMeterView extends LinearLayout implements
     private int mTextColor;
     private int mLevel;
     private int mShowPercentMode = MODE_DEFAULT;
+
     private boolean mCharging;
-    public int mBatteryStyle = BATTERY_STYLE_PORTRAIT;
-    public int mShowBatteryPercent;
     // Error state where we know nothing about the current battery state
     private boolean mBatteryStateUnknown;
     // Lazily-loaded since this is expected to be a rare-if-ever state
     private Drawable mUnknownStateDrawable;
+
+    public int mBatteryStyle = BATTERY_STYLE_PORTRAIT;
+    public int mShowBatteryPercent;
 
     private DualToneHandler mDualToneHandler;
     private int mUser;
@@ -427,13 +429,6 @@ public class BatteryMeterView extends LinearLayout implements
             mThemedDrawable.setShowPercent(false);
             mCircleDrawable.setShowPercent(false);
             mFullCircleDrawable.setShowPercent(false);
-        boolean shouldShow =
-                (mShowPercentAvailable && systemSetting && mShowPercentMode != MODE_OFF)
-                || mShowPercentMode == MODE_ON
-                || mShowPercentMode == MODE_ESTIMATE;
-        shouldShow = shouldShow && !mBatteryStateUnknown;
-
-        if (shouldShow) {
             if (!showing) {
                 mBatteryPercentView = loadPercentView();
                 if (mPercentageStyleId != 0) { // Only set if specified as attribute
@@ -490,7 +485,7 @@ public class BatteryMeterView extends LinearLayout implements
         updateSettings();
     }
 
-   @Override
+    @Override
     public void onOverlayChanged() {
         updateShowPercent();
         updateSettings();
@@ -516,7 +511,7 @@ public class BatteryMeterView extends LinearLayout implements
         if (mBatteryStateUnknown) {
             mBatteryIconView.setImageDrawable(getUnknownStateDrawable());
         } else {
-            mBatteryIconView.setImageDrawable(mDrawable);
+          updateBatteryStyle();
         }
 
         updateShowPercent();
