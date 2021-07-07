@@ -5032,15 +5032,6 @@ public final class Settings {
                 "lockscreen_scramble_pin_layout";
 
         /**
-         * Whether to show the clock in the right or left position or show it in the center
-         * 0: show the clock in the right position (LTR)
-         * 1: show the clock in the center
-         * 2: show the clock in the left position (LTR)
-         * default: 0
-         */
-        public static final String STATUS_BAR_CLOCK = "status_bar_clock";
-
-        /**
          * Whether to control brightness from status bar
          * 0 = 0ff, 1 = on
          */
@@ -5396,7 +5387,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_QUICK_QS_PULLDOWN);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
             PRIVATE_SETTINGS.add(LOCKSCREEN_PIN_SCRAMBLE_LAYOUT);
-            PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK);
             PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
             PRIVATE_SETTINGS.add(CLICK_PARTIAL_SCREENSHOT);
             PRIVATE_SETTINGS.add(INCREASING_RING);
