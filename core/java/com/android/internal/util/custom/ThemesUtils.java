@@ -36,17 +36,15 @@ public class ThemesUtils {
     private static OverlayManager mOverlayService;
     public static final String TAG = "ThemesUtils";
 
-    // Switch themes
+   // Switch themes
     private static final String[] SWITCH_THEMES = {
-        "com.android.system.switch.stock", // 0
-        "com.android.system.switch.oneplus", // 1
-        "com.android.system.switch.narrow", // 2
-        "com.android.system.switch.contained", // 3
-        "com.android.system.switch.telegram", // 4
-        "com.android.system.switch.md2", // 5
-        "com.android.system.switch.retro", // 6
-        "com.android.system.switch.oos", // 7
-        "com.android.system.switch.android12", // 8
+        "com.android.system.switch.aosp", // 0
+        "com.android.system.switch.contained", // 1
+        "com.android.system.switch.telegram", // 2
+        "com.android.system.switch.md2", // 3
+        "com.android.system.switch.retro", // 4
+        "com.android.system.switch.oos", // 5
+        "com.android.system.switch.android12", // 6
     };
 
     public static final String[] STATUSBAR_HEIGHT = {
