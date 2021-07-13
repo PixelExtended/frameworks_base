@@ -412,7 +412,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     @Override
     public void onTuningChanged(String key, String newValue) {
         if (key.equals("ims")) {
-            mShowImsIcon = TunerService.parseIntegerSwitch(newValue, false);
+            mShowImsIcon = TunerService.parseIntegerSwitch(newValue, true);
             updateImsIcon();
         }
     }
