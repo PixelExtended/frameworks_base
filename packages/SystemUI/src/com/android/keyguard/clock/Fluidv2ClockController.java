@@ -225,6 +225,10 @@ public class Fluidv2ClockController implements ClockPlugin {
     }
 
     @Override
-    public void onTimeZoneChanged(TimeZone timeZone) {}
+    public void onTimeZoneChanged(TimeZone timeZone) {} 
 
+   @Override
+    public boolean shouldShowStatusArea() {
+        return false;
+    }
 }
