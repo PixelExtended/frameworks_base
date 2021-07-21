@@ -12,6 +12,7 @@ import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -193,6 +194,7 @@ public class NetworkTraffic extends TextView {
 
                 // Update view if there's anything new to show
                 if (!output.contentEquals(getText())) {
+                    updateTextViewStyle();
                     setText(output);
                     mIndicatorUp = mTxKbps != 0;
                     mIndicatorDown = false;
@@ -204,6 +206,7 @@ public class NetworkTraffic extends TextView {
 
                 // Update view if there's anything new to show
                 if (!output.contentEquals(getText())) {
+		    updateTextViewStyle();
                     setText(output);
                     mIndicatorDown = mRxKbps != 0;
                     mIndicatorUp = false;
@@ -222,10 +225,10 @@ public class NetworkTraffic extends TextView {
         }
 
         private String formatOutput(long size) {
-            String[] units = new String[]{"", "kB/s", "MB/s", "GB/s", "TB/s", "PB/s"};
+            String[] units = new String[]{"", "KB/s", "MB/s", "GB/s", "TB/s", "PB/s"};
             int mod = 1024;
             if (mUnitType == UNIT_TYPE_BITS){
-                units = new String[]{"", "kbps", "Mbps", "Gbps", "Tbps", "Pbps"};
+                units = new String[]{"", "Kbps", "Mbps", "Gbps", "Tbps", "Pbps"};
                 mod = 1000;
                 size = size * 8;
             }
@@ -389,6 +392,15 @@ public class NetworkTraffic extends TextView {
         mTxtSizeStatusbar = resources.getDimensionPixelSize(R.dimen.net_traffic_status_bar_text_size);
         mTxtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
         setCompoundDrawablePadding(mTxtImgPadding);
+        updateTextViewStyle();
+    }
+
+    protected void updateTextViewStyle(){
+        if (getMyMode() == MODE_STATUS_BAR) {
+            setAutoSizeTextTypeUniformWithConfiguration(
+                    1, mTxtSizeStatusbar, 1, TypedValue.COMPLEX_UNIT_PX);
+            setTypeface(Typeface.create("google-sans", Typeface.BOLD));
+        }
     }
 
     protected void updateVisibility() {

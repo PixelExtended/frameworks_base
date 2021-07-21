@@ -45,7 +45,6 @@
                 android:textSize="@dimen/net_traffic_status_bar_text_size"
                 android:gravity="center_vertical|start"
                 android:paddingEnd="2dp"
-                android:textAppearance="@style/TextAppearance.StatusBar.Clock"
             />
         </com.android.systemui.statusbar.CustomStatusBarItemHolder>
 
