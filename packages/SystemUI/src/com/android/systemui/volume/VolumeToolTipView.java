@@ -72,7 +72,7 @@ public class VolumeToolTipView extends LinearLayout {
         ShapeDrawable arrowDrawable = new ShapeDrawable(TriangleShape.create(arrowWidth, arrowHeight, true));
         if (isLandscape) {
             boolean isPointingLeft = getContext().getResources().getBoolean(
-                    R.bool.config_audioPanelOnLeftSide);
+	    com.android.internal.R.bool.config_audioPanelOnLeftSide);
             arrowView.setRotation(isPointingLeft ? 270 : 90);
         }
 

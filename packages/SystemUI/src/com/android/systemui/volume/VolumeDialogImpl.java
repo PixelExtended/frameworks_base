@@ -244,7 +244,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         mTunerService = Dependency.get(TunerService.class);
         Dependency.get(TunerService.class).addTunable(mTunable, SHOW_APP_VOLUME);
         if (!mShowActiveStreamOnly) {
-            mLeftVolumeRocker = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
+            mLeftVolumeRocker = mContext.getResources().getBoolean(com.android.internal.R.bool.config_audioPanelOnLeftSide);
             mHideRingerButton = mContext.getResources().getBoolean(R.bool.config_hideRingerButton);
             mVibrateOnSlider = mContext.getResources().getBoolean(R.bool.config_vibrateOnIconAnimation);
             mElevation = mContext.getResources().getDimension(R.dimen.volume_dialog_elevation);
