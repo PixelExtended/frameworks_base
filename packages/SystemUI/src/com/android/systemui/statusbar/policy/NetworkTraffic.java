@@ -21,6 +21,7 @@ import android.net.NetworkRequest;
 import android.net.NetworkStats;
 import android.net.NetworkInfo;
 import android.net.TrafficStats;
+import android.util.TypedValue;
 import android.os.Handler;
 import android.os.INetworkManagementService;
 import android.os.Message;
