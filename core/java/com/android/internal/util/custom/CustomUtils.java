@@ -16,6 +16,7 @@
 
 package com.android.internal.util.custom;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.content.Context.VIBRATOR_SERVICE;
 
 import android.Manifest;
@@ -26,6 +27,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager;
@@ -34,6 +37,7 @@ import android.content.res.Resources;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -55,7 +59,6 @@ import android.view.WindowManagerGlobal;
 import com.android.internal.R;
 import com.android.internal.statusbar.IStatusBarService;
 
-import com.android.internal.statusbar.IStatusBarService;
 import static android.content.Context.VIBRATOR_SERVICE;
 
 import java.util.Locale;
@@ -67,45 +70,7 @@ public class CustomUtils {
     private static final String TAG = CustomUtils.class.getSimpleName();
     public static final String PACKAGE_SYSTEMUI = "com.android.systemui";
 
-
-   //	 Advance Gestures Utils
-
-  // Launch Voice Search activity
-    public static void launchVoiceSearch(Context context) {
-        Intent intent = new Intent(Intent.ACTION_SEARCH_LONG_PRESS);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-        try {
-            context.startActivity(intent);
-        } catch (Exception e) {
-            Log.e(TAG, "Could not launch voice search");
-        }
-    }
-
-   // Launch default camera activity
-    public static void launchCamera(Context context) {
-        Intent intent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(intent);
-    }
-
-   // Kill Foreground APP
-    public static void killForegroundApp() {
-        FireActions.killForegroundApp();
-    }
-
-    public static void killForegroundApp() {
-            IStatusBarService service = getStatusBarService();
-            if (service != null) {
-                try {
-                    service.killForegroundApp();
-                } catch (RemoteException e) {
-                    // do nothing.
-                }
-            }
-        }
-
-   public static boolean isPackageInstalled(Context context, String pkg, boolean ignoreState) {
+    public static boolean isPackageInstalled(Context context, String pkg, boolean ignoreState) {
         if (pkg != null) {
             try {
                 PackageInfo pi = context.getPackageManager().getPackageInfo(pkg, 0);
@@ -119,12 +84,35 @@ public class CustomUtils {
 
         return true;
     }
-
     public static boolean isPackageInstalled(Context context, String pkg) {
         return isPackageInstalled(context, pkg, true);
     }
 
-   // Switch to last app
+    // Adv. Gestures Utls
+    public static void killForegroundApp() {
+        FireActions.killForegroundApp();
+    }
+
+    // Launch default camera activity
+    public static void launchCamera(Context context) {
+        Intent intent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
+    }
+
+    // Launch Voice Search activity
+    public static void launchVoiceSearch(Context context) {
+        Intent intent = new Intent(Intent.ACTION_SEARCH_LONG_PRESS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "Could not launch voice search");
+        }
+    }
+
+// Switch to last app
     public static void switchToLastApp(Context context) {
         final ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -169,5 +157,30 @@ public class CustomUtils {
             }
         }
         return packageNames;
+    }
+
+    private static final class FireActions {
+        private static IStatusBarService mStatusBarService = null;
+        private static IStatusBarService getStatusBarService() {
+            synchronized (FireActions.class) {
+                if (mStatusBarService == null) {
+                    mStatusBarService = IStatusBarService.Stub.asInterface(
+                            ServiceManager.getService("statusbar"));
+                }
+                return mStatusBarService;
+            }
+        }
+
+	public static void killForegroundApp() {
+            IStatusBarService service = getStatusBarService();
+            if (service != null) {
+                try {
+                    service.killForegroundApp();
+                } catch (RemoteException e) {
+                    // do nothing.
+                }
+            }
+        }
+
     }
 }
