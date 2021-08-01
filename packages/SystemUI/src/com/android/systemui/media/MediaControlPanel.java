@@ -97,6 +97,7 @@ public class MediaControlPanel {
     // This will provide the corners for the album art.
     private final ViewOutlineProvider mViewOutlineProvider;
     private final MediaOutputDialogFactory mMediaOutputDialogFactory;
+
     /**
      * Initialize a new control panel
      * @param context
