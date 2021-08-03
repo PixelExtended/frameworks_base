@@ -159,4 +159,6 @@
     <java-symbol type="anim" name="custom_app_in" />
     <java-symbol type="anim" name="custom_app_out" />
 
+    <!-- Default fod pressed icon -->
+    <java-symbol type="integer" name="config_fod_pressed_color" />
 </resources>

@@ -239,4 +239,7 @@
 
    <!-- Allow devices override audio panel location to the left side -->
     <bool name="config_audioPanelOnLeftSide">false</bool>
+
+    <!-- Default fod pressed color -->
+    <integer name="config_fod_pressed_color">1</integer>
 </resources>
