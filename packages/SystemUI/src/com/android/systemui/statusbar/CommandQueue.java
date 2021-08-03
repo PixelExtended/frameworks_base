@@ -129,6 +129,7 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
     private static final int MSG_SHOW_IN_DISPLAY_FINGERPRINT_VIEW  = 57 << MSG_SHIFT;
     private static final int MSG_HIDE_IN_DISPLAY_FINGERPRINT_VIEW  = 58 << MSG_SHIFT;
     private static final int MSG_SET_BLOCKED_GESTURAL_NAVIGATION   = 59 << MSG_SHIFT;
+    private static final int MSG_KILL_FOREGROUND_APP               = 60 << MSG_SHIFT;
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -344,10 +345,12 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
          * @param enabled
          */
         default void onTracingStateChanged(boolean enabled) { }
+        default void killForegroundApp() { }
     }
 
     public CommandQueue(Context context) {
         this(context, null);
+
     }
 
     public CommandQueue(Context context, ProtoTracer protoTracer) {
@@ -994,6 +997,13 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
         }
     }
 
+   @Override
+    public void killForegroundApp() {
+        synchronized (mLock) {
+            mHandler.removeMessages(MSG_KILL_FOREGROUND_APP);
+            mHandler.sendEmptyMessage(MSG_KILL_FOREGROUND_APP);
+        }
+    }
     private final class H extends Handler {
         private H(Looper l) {
             super(l);
@@ -1350,7 +1360,12 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController<
                         mCallbacks.get(i).setBlockedGesturalNavigation((Boolean) msg.obj);
                     }
                     break;
-            }
-        }
-    }
+                case MSG_KILL_FOREGROUND_APP:
+                    for (int i = 0; i < mCallbacks.size(); i++) {
+                        mCallbacks.get(i).killForegroundApp();
+                    }
+                    break;
+               }
+          }
+     }
 }

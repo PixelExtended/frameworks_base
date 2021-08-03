@@ -99,6 +99,7 @@ import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.RemoteInputQuickSettingsDisabler;
 import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
+import com.android.systemui.statusbar.policy.TaskHelper;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.volume.VolumeComponent;
 
@@ -203,6 +204,7 @@ public interface StatusBarGoogleModule {
             DismissCallbackRegistry dismissCallbackRegistry,
             StatusBarTouchableRegionManager statusBarTouchableRegionManager,
             TunerService tunerService,
+            TaskHelper taskHelper,
             FODCircleViewImpl fodCircleViewImpl) {
         return new StatusBarGoogle(
                 smartSpaceController,
@@ -284,6 +286,7 @@ public interface StatusBarGoogleModule {
                 notificationShadeDepthController,
                 statusBarTouchableRegionManager,
                 tunerService,
+                taskHelper,
                 fodCircleViewImpl);
     }
 }

@@ -152,6 +152,11 @@
      <java-symbol type="string" name="config_SmartChargingSuspendValue" />
      <java-symbol type="string" name="config_SmartChargingResumeValue" />
 
-  <!-- Left Vol Panel  -->
+    <!-- Left Vol Panel  -->
     <java-symbol type="bool" name="config_audioPanelOnLeftSide" />
+
+   <!-- Switch to last app  -->
+    <java-symbol type="anim" name="custom_app_in" />
+    <java-symbol type="anim" name="custom_app_out" />
+
 </resources>
