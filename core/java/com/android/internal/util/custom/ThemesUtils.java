@@ -75,6 +75,18 @@ public class ThemesUtils {
     public static final String[] BRIGHTNESS_SLIDER_MEMESTROKE = {
             "com.android.systemui.brightness.slider.memestroke",
     };
+    public static final String[] BRIGHTNESS_SLIDER_OOS = {
+            "com.android.theme.systemui_slider_oos",
+    };
+    public static final String[] BRIGHTNESS_SLIDER_RUI = {
+            "com.android.theme.systemui_slider_rui",
+    };
+    public static final String[] BRIGHTNESS_SLIDER_A12 = {
+            "com.android.theme.systemui_slider_a12",
+    };
+    public static final String[] BRIGHTNESS_SLIDER_SPARK = {
+            "com.android.theme.systemui_slider_spark",
+    };
 
     public static void updateSwitchStyle(IOverlayManager om, int userId, int switchStyle) {
         if (switchStyle == 1) {
