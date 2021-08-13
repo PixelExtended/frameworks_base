@@ -58,6 +58,24 @@ public class ThemesUtils {
             "com.gnonymous.gvisualmod.urm_m", // 2
             "com.gnonymous.gvisualmod.urm_l", // 3
     };
+
+    // Brightness Slider Styles, DU-Way
+    public static final String[] BRIGHTNESS_SLIDER_DANIEL = {
+            "com.android.systemui.brightness.slider.daniel",
+    };
+    public static final String[] BRIGHTNESS_SLIDER_MEMEMINII = {
+            "com.android.systemui.brightness.slider.mememini",
+    };
+    public static final String[] BRIGHTNESS_SLIDER_MEMEROUND = {
+            "com.android.systemui.brightness.slider.memeround",
+    };
+    public static final String[] BRIGHTNESS_SLIDER_MEMEROUNDSTROKE = {
+            "com.android.systemui.brightness.slider.memeroundstroke",
+    };
+    public static final String[] BRIGHTNESS_SLIDER_MEMESTROKE = {
+            "com.android.systemui.brightness.slider.memestroke",
+    };
+
     public static void updateSwitchStyle(IOverlayManager om, int userId, int switchStyle) {
         if (switchStyle == 1) {
             stockSwitchStyle(om, userId);
