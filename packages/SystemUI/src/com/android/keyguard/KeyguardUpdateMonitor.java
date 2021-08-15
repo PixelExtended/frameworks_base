@@ -301,7 +301,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
 
     SettingsObserver mSettingsObserver;
 
-    private final boolean mFingerprintWakeAndUnlock;
     private final boolean mFaceAuthOnlyOnSecurityView;
     private static final int FACE_UNLOCK_BEHAVIOR_DEFAULT = 0;
     private static final int FACE_UNLOCK_BEHAVIOR_SWIPE = 1;
@@ -1631,8 +1630,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         mSubscriptionManager = SubscriptionManager.from(context);
         mDeviceProvisioned = isDeviceProvisionedInSettingsDb();
         mStrongAuthTracker = new StrongAuthTracker(context, this::notifyStrongAuthStateChanged);
-        mFingerprintWakeAndUnlock = mContext.getResources().getBoolean(
-                com.android.systemui.R.bool.config_fingerprintWakeAndUnlock);
         mFaceAuthOnlyOnSecurityView = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_faceAuthOnlyOnSecurityView);
         mFingerprintWakeAndUnlock = Settings.System.getIntForUser(
@@ -1897,7 +1894,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         }
         mSettingsObserver = new SettingsObserver(mHandler);
         mSettingsObserver.observe();
-        Dependency.get(SyberiaSettingsService.class).addIntObserver(this, Settings.System.FP_WAKE_UNLOCK);
+        Dependency.get(OmniSettingsService.class).addIntObserver(this, Settings.System.FP_WAKE_UNLOCK);
     }
 
     @Override
