@@ -52,7 +52,8 @@
 
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="microphone"
-        android:title="@string/status_bar_microphone" />
+        android:title="@string/status_bar_microphone" 
+        sysui:defValue="false" />
 
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="zen"
@@ -82,7 +83,8 @@
 
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="location"
-        android:title="@string/status_bar_location" />
+        android:title="@string/status_bar_location"
+        sysui:defValue="false" />
 
     <!-- other weird signal stuff -->
 
@@ -92,7 +94,8 @@
 
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="camera"
-        android:title="@string/status_bar_camera" />
+        android:title="@string/status_bar_camera"
+        sysui:defValue="false" />
 
     <!-- secure -->
 
