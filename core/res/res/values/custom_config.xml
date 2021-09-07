@@ -263,4 +263,7 @@
 
   <!-- Aspect ratio of screen -->
   <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
+
+   <!-- Wheter device supports an gaming mode profiles -->
+   <bool name="config_gamingmode_performance">false</bool>
 </resources>
