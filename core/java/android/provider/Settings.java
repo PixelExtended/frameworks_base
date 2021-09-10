@@ -5764,6 +5764,11 @@ public final class Settings {
         public static final String ASPECT_RATIO_APPS_ENABLED = "aspect_ratio_apps_enabled";
 
         /**
+          * @hide
+          */
+        public static final String GAMING_MODE_USE_OVERLAY_MENU = "gaming_mode_use_overlay_menu";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
