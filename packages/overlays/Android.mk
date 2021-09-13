@@ -32,7 +32,7 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorTangerineOverlay \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
-    DisplayCutoutEmulationHoleOverlay \
+        DisplayCutoutEmulationHoleOverlay \
 	DisplayCutoutEmulationTallOverlay \
 	DisplayCutoutEmulationWaterfallOverlay \
 	FontNotoSerifSourceOverlay \
@@ -56,6 +56,8 @@ LOCAL_REQUIRED_MODULES := \
     IconPackKaiSettingsOverlay \
     IconPackKaiSystemUIOverlay \
     IconPackKaiThemePickerOverlay \
+        IconPackOOSAndroidOverlay \
+	IconPackOOSSystemUIOverlay \
 	IconPackFilledAndroidOverlay \
 	IconPackFilledLauncherOverlay \
 	IconPackFilledSettingsOverlay \
