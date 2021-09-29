@@ -5754,16 +5754,6 @@ public final class Settings {
         public static final String LOCKSCREEN_MEDIA_BLUR = "lockscreen_media_blur";
 
         /**
-         * @hide
-         */
-        public static final String ASPECT_RATIO_APPS_LIST = "aspect_ratio_apps_list";
-
-        /**
-         * @hide
-         */
-        public static final String ASPECT_RATIO_APPS_ENABLED = "aspect_ratio_apps_enabled";
-
-        /**
           * @hide
           */
         public static final String GAMING_MODE_USE_OVERLAY_MENU = "gaming_mode_use_overlay_menu";
@@ -5970,8 +5960,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCKSCREEN_BATTERY_INFO);
             PRIVATE_SETTINGS.add(OMNI_CUSTOM_FP_ICON);
             PRIVATE_SETTINGS.add(FP_WAKE_UNLOCK);
-            PRIVATE_SETTINGS.add(ASPECT_RATIO_APPS_ENABLED);
-            PRIVATE_SETTINGS.add(ASPECT_RATIO_APPS_LIST);
         }
 
         /**
