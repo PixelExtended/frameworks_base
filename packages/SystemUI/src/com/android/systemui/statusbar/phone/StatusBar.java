@@ -2039,22 +2039,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateTheme();
     }
 
-    private boolean isNetworkTrafficOnStatusbar() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.NETWORK_TRAFFIC_LOCATION, 0) == 1;
-    }
-
-    private void setNetworkTrafficToQs() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.NETWORK_TRAFFIC_LOCATION, 2);
-    }
-
     private void updateCutoutOverlay(boolean displayCutoutHidden) {
         boolean needsRefresh = mDisplayCutoutHidden != displayCutoutHidden;
         mDisplayCutoutHidden = displayCutoutHidden;
-        if (!mDisplayCutoutHidden && CutoutUtils.hasCenteredCutout(mContext, true) && isNetworkTrafficOnStatusbar()){
-            setNetworkTrafficToQs();
-        }
         try {
             mOverlayManager.setEnabled("org.pixelexperience.overlay.hidecutout",
                         mDisplayCutoutHidden, mLockscreenUserManager.getCurrentUserId());
