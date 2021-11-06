@@ -5461,6 +5461,12 @@ public final class Settings {
          */
         public static final String VOWIFI_ICON_STYLE = "vowifi_icon_style";
 
+	/**
+         * Whether to show battery estimates in QS
+         * @hide
+         */
+        public static final String QS_SHOW_BATTERY_ESTIMATE = "qs_show_battery_estimate";
+
         /**
          * These are all public system settings
          *
