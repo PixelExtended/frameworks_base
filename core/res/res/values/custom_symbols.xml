@@ -133,4 +133,7 @@
 
   <!-- Sysfs node that exposes fast charge status on supported devices -->
   <java-symbol type="string" name="config_fastChargeSysfsNode" />
+
+  <!-- Whether devices suports in-display fingerprint when screen is off -->
+  <java-symbol type="bool" name="config_supportsScreenOffUdfps" />
 </resources>

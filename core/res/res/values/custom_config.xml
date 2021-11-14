@@ -225,4 +225,7 @@
 
   <!-- Sysfs node that exposes fast charge status on supported devices -->
   <string name="config_fastChargeSysfsNode" />
+
+  <!-- Whether devices suports in-display fingerprint when screen is off -->
+  <bool name="config_supportsScreenOffUdfps">false</bool>
 </resources>
