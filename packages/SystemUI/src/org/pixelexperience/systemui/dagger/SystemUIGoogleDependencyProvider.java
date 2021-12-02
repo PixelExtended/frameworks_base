@@ -165,6 +165,7 @@ import com.android.systemui.statusbar.policy.RemoteInputQuickSettingsDisabler;
 import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.statusbar.policy.ZenModeController;
+import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.telephony.TelephonyListenerManager;
 import com.android.systemui.theme.ThemeOverlayApplier;
 import com.android.systemui.tuner.TunerService;
@@ -1224,6 +1225,7 @@ public class SystemUIGoogleDependencyProvider {
             PluginManager pluginManager,
             Optional<LegacySplitScreen> splitScreenOptional,
             LightsOutNotifController lightsOutNotifController,
+	    FlashlightController flashlightController,
             StatusBarNotificationActivityStarter.Builder
                     statusBarNotificationActivityStarterBuilder,
             ShadeController shadeController,
@@ -1273,7 +1275,7 @@ public class SystemUIGoogleDependencyProvider {
                 notificationShadeWindowController, dozeParameters, scrimController, keyguardLiftController,
                 lockscreenWallpaperLazy, biometricUnlockControllerLazy, dozeServiceHost, powerManager,
                 screenPinningRequest, dozeScrimController, volumeComponent, commandQueue, statusBarComponentBuilder,
-                pluginManager, splitScreenOptional, lightsOutNotifController, statusBarNotificationActivityStarterBuilder,
+                pluginManager, splitScreenOptional, lightsOutNotifController, flashlightController, statusBarNotificationActivityStarterBuilder,
                 shadeController, superStatusBarViewFactory, statusBarKeyguardViewManager, viewMediatorCallback, initController,
                 timeTickHandler, pluginDependencyProvider, keyguardDismissUtil, extensionController, userInfoControllerImpl,
                 phoneStatusBarPolicy, keyguardIndicationController, dismissCallbackRegistry, demoModeController,
