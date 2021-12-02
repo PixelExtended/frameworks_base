@@ -52,6 +52,12 @@ import com.google.android.systemui.qs.tiles.BatterySaverTileGoogle;
 import com.google.android.systemui.qs.tiles.OverlayToggleTile;
 import com.google.android.systemui.qs.tiles.ReverseChargingTile;
 
+import com.android.systemui.qs.tiles.CompassTile;
+import com.android.systemui.qs.tiles.DataSwitchTile;
+import com.android.systemui.qs.tiles.SoundSearchTile;
+import com.android.systemui.qs.tiles.SyncTile;
+import com.android.systemui.qs.tiles.CaffeineTile;
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -95,7 +101,12 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
             Provider<AlarmTile> alarmTileProvider,
             Provider<QuickAccessWalletTile> quickAccessWalletTileProvider,
             Provider<OverlayToggleTile> overlayToggleTileProvider,
-            Provider<ReverseChargingTile> reverseChargingTileProvider) {
+            Provider<ReverseChargingTile> reverseChargingTileProvider,
+            Provider<CaffeineTile> caffeineTileProvider,
+            Provider<SyncTile> syncTileProvider,
+	    Provider<DataSwitchTile> dataSwitchTileProvider,
+            Provider<SoundSearchTile> soundSearchTileProvider,
+            Provider<CompassTile> compassTileProvider) {
         super(qsHostLazy,
                 customTileBuilderProvider,
                 wifiTileProvider,
@@ -124,7 +135,12 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
                 microphoneToggleTileProvider,
                 deviceControlsTileProvider,
                 alarmTileProvider,
-                quickAccessWalletTileProvider);
+                quickAccessWalletTileProvider,
+                caffeineTileProvider,
+                syncTileProvider,
+                dataSwitchTileProvider,
+                soundSearchTileProvider,
+                compassTileProvider);
         this.mReverseChargingTileProvider = reverseChargingTileProvider;
         this.mBatterySaverTileGoogleProvider = batterySaverTileGoogleProvider;
         this.mOverlayToggleTileProvider = overlayToggleTileProvider;
