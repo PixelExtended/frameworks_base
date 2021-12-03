@@ -1,5 +1,4 @@
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
+<resources>
     <!-- Max visible notification icons -->
     <integer name="config_maxVisibleNotificationIcons">4</integer>
     <integer name="config_maxVisibleNotificationIconsOnLock">5</integer>
@@ -22,9 +21,6 @@
 
     <!-- Udfps vendor code -->
     <integer name="config_udfps_vendor_code">0</integer>
-
-    <!-- Allow devices override audio panel location to the left side -->
-    <bool name="config_audioPanelOnLeftSide">false</bool>
 
     <!-- Burn in protection -->
     <bool name="config_statusBarBurnInProtection">true</bool>
