@@ -55,6 +55,7 @@ public class QSFooterView extends FrameLayout {
     protected View mSettingsContainer;
     private PageIndicator mPageIndicator;
     private TextView mBuildText;
+    private View mSnowHouseButton;
     private boolean mShouldShowBuildText;
 
     private boolean mQsDisabled;
@@ -100,6 +101,8 @@ public class QSFooterView extends FrameLayout {
 
         mSettingsButton = findViewById(R.id.settings_button);
         mSettingsContainer = findViewById(R.id.settings_button_container);
+
+        mSnowHouseButton = findViewById(R.id.snowhouse_button);
 
         mMultiUserSwitch = findViewById(R.id.multi_user_switch);
         mMultiUserAvatar = mMultiUserSwitch.findViewById(R.id.multi_user_avatar);
@@ -272,6 +275,7 @@ public class QSFooterView extends FrameLayout {
         mMultiUserSwitch.setClickable(mMultiUserSwitch.getVisibility() == View.VISIBLE);
         mEdit.setClickable(mEdit.getVisibility() == View.VISIBLE);
         mSettingsButton.setClickable(mSettingsButton.getVisibility() == View.VISIBLE);
+        mSnowHouseButton.setClickable(mSettingsButton.getVisibility() == View.VISIBLE);
         mBuildText.setLongClickable(mBuildText.getVisibility() == View.VISIBLE);
     }
 
@@ -281,7 +285,7 @@ public class QSFooterView extends FrameLayout {
         mMultiUserSwitch.setVisibility(
                 showUserSwitcher(multiUserEnabled) ? View.VISIBLE : View.GONE);
         mSettingsButton.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
-
+        mSnowHouseButton.setVisibility(!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE);
         mBuildText.setVisibility(mExpanded && mShouldShowBuildText ? View.VISIBLE : View.INVISIBLE);
     }
 
