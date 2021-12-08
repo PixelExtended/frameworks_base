@@ -70,6 +70,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
     private final SettingsButton mSettingsButton;
     private final View mSettingsButtonContainer;
     private final TextView mBuildText;
+    private final View mSnowHouseButton;
     private final View mEdit;
     private final PageIndicator mPageIndicator;
     private final View mPowerMenuLite;
@@ -109,6 +110,11 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
             } else if (v == mPowerMenuLite) {
                 mUiEventLogger.log(GlobalActionsDialogLite.GlobalActionsEvent.GA_OPEN_QS);
                 mGlobalActionsDialog.showOrHideDialog(false, true);
+	    } else if (v == mSnowHouseButton) {
+                mMetricsLogger.action(
+                        mExpanded ? MetricsProto.MetricsEvent.ACTION_QS_EXPANDED_SETTINGS_LAUNCH
+                                : MetricsProto.MetricsEvent.ACTION_QS_COLLAPSED_SETTINGS_LAUNCH);
+                startSnowHouseActivity();
             }
         }
     };
@@ -141,6 +147,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
 
         mSettingsButton = mView.findViewById(R.id.settings_button);
         mSettingsButtonContainer = mView.findViewById(R.id.settings_button_container);
+        mSnowHouseButton = mView.findViewById(R.id.snowhouse_button);
         mBuildText = mView.findViewById(R.id.build);
         mEdit = mView.findViewById(android.R.id.edit);
         mPageIndicator = mView.findViewById(R.id.footer_page_indicator);
@@ -169,6 +176,7 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
                         mView.updateAnimator(
                                 right - left, mQuickQSPanelController.getNumQuickTiles()));
         mSettingsButton.setOnClickListener(mSettingsOnClickListener);
+        mSnowHouseButton.setOnClickListener(mSettingsOnClickListener);
         mSettingsButton.setOnLongClickListener(view -> {
             startRunningServicesActivity();
             return true;
@@ -274,6 +282,15 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
         nIntent.setClassName("com.android.settings",
             "com.android.settings.Settings$DevRunningServicesActivity");
         mActivityStarter.startActivity(nIntent, true /* dismissShade */, animationController);
+    }
+
+    private void startSnowHouseActivity() {
+        ActivityLaunchAnimator.Controller animationController =
+                mSettingsButtonContainer != null ? ActivityLaunchAnimator.Controller.fromView(
+                        mSettingsButtonContainer,
+                        InteractionJankMonitor.CUJ_SHADE_APP_LAUNCH_FROM_SETTINGS_BUTTON) : null;
+                mActivityStarter.startActivity(new Intent("com.android.settings.SNOWHOUSE_SETTINGS"),
+                true /* dismissShade */, animationController);
     }
 
     private boolean isTunerEnabled() {
