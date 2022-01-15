@@ -19,5 +19,6 @@
     <color name="secondary_device_default_settings">#000000</color>
     <color name="surface_header_dark">#131313</color>
     <color name="surface_variant_dark">#131313</color>
+    <color name="background_device_default_dark">#000000</color>
 
 </resources>
