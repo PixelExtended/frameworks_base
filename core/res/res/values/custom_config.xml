@@ -240,4 +240,8 @@
   <!-- Whether key handler sends intent when changing slider position -->
   <string name="config_alertSliderIntent"></string>
 
+  <!-- List of system apps that are allowed to be locked with app lock.
+         Use with extreme caution. -->
+    <string-array name="config_appLockAllowedSystemApps" translatable="false" />
+
 </resources>
