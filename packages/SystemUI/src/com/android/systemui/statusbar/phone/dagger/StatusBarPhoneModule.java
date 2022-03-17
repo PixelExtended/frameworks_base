@@ -63,6 +63,7 @@ import com.android.systemui.statusbar.NotificationViewHierarchyManager;
 import com.android.systemui.statusbar.OperatorNameViewController;
 import com.android.systemui.statusbar.PulseExpansionHandler;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
+import com.android.systemui.statusbar.charging.WiredChargingRippleController;
 import com.android.systemui.statusbar.connectivity.NetworkController;
 import com.android.systemui.statusbar.events.SystemStatusAnimationScheduler;
 import com.android.systemui.statusbar.notification.DynamicPrivacyController;
@@ -244,6 +245,7 @@ public interface StatusBarPhoneModule {
             TunerService tunerService,
             DumpManager dumpManager,
             ActivityLaunchAnimator activityLaunchAnimator,
+            WiredChargingRippleController wiredChargingRippleController,
             BurnInProtectionController burnInProtectionController) {
         return new StatusBar(
                 context,
@@ -346,6 +348,7 @@ public interface StatusBarPhoneModule {
                 tunerService,
                 dumpManager,
                 activityLaunchAnimator,
+                wiredChargingRippleController,
                 burnInProtectionController
         );
     }
