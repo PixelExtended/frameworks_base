@@ -5634,12 +5634,6 @@ public final class Settings {
         public static final String LOCKSCREEN_MEDIA_BLUR = "lockscreen_media_blur";
 
         /**
-         * media artwork wallpaper blur level on lockscreen
-         * @hide
-         */
-        public static final String SHOW_LOCKSCREEN_MEDIA_ART = "show_lockscreen_media_art";
-
-        /**
          * Whether to show the clock in the right or left position or show it in the center
          * 0: show the clock in the right position (LTR)
          * 1: show the clock in the center
