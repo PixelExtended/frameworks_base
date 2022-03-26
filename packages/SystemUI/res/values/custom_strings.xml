@@ -51,4 +51,7 @@
     <string name="screenrecord_lowquality_summary">For smaller file size</string>
     <string name="screenrecord_longer_timeout_switch_label">Bigger file size limit\nLimit recording size to 15GiB</string>
     <string name="screenrecord_hevc_switch_label">Enable HEVC</string>
+
+    <!-- Data Saver Statusbar Icon -->
+    <string name="status_bar_data_saver">Data saver</string>
 </resources>
