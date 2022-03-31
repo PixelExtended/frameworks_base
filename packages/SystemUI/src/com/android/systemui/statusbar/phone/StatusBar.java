@@ -2050,15 +2050,6 @@ public class StatusBar extends SystemUI implements
         }
     }
 
-    public void toggleCameraFlash() {
-        if (mFlashlightController != null) {
-            mFlashlightController.initFlashLight();
-            if (mFlashlightController.hasFlashlight() && mFlashlightController.isAvailable()) {
-                mFlashlightController.setFlashlight(!mFlashlightController.isEnabled());
-            }
-        }
-    }
-
     void makeExpandedVisible(boolean force) {
         if (SPEW) Log.d(TAG, "Make expanded visible: expanded visible=" + mExpandedVisible);
         if (!force && (mExpandedVisible || !mCommandQueue.panelsEnabled())) {
