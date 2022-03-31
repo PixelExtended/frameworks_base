@@ -284,8 +284,6 @@ public class StatusBar extends SystemUI implements
 
     private static final String NAVIGATION_BAR_SHOW =
             "customsystem:" + Settings.System.NAVIGATION_BAR_SHOW;
-    private static final String PULSE_ON_NEW_TRACKS =
-            Settings.Secure.PULSE_ON_NEW_TRACKS;
 
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
@@ -972,7 +970,6 @@ public class StatusBar extends SystemUI implements
                 SysuiStatusBarStateController.RANK_STATUS_BAR);
 
         mTunerService.addTunable(this, NAVIGATION_BAR_SHOW);
-        mTunerService.addTunable(this, PULSE_ON_NEW_TRACKS);
 
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mDreamManager = IDreamManager.Stub.asInterface(
@@ -3953,6 +3950,9 @@ public class StatusBar extends SystemUI implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_MEDIA_BLUR),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.PULSE_ON_NEW_TRACKS),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -3969,6 +3969,9 @@ public class StatusBar extends SystemUI implements
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_MEDIA_BLUR))) {
                 setLockScreenMediaBlurLevel();
+            } else if (uri.equals(Settings.Secure.getUriFor(
+                    Settings.Secure.PULSE_ON_NEW_TRACKS))) {
+                setPulseOnNewTracks();
             }
         }
 
@@ -3976,6 +3979,7 @@ public class StatusBar extends SystemUI implements
             setDoubleTapToSleepGesture();
             setStatusBarWindowViewOptions();
             setLockScreenMediaBlurLevel();
+            setPulseOnNewTracks();
         }
     }
 
@@ -3994,6 +3998,14 @@ public class StatusBar extends SystemUI implements
     private void setLockScreenMediaBlurLevel() {
         if (mMediaManager != null) {
             mMediaManager.setLockScreenMediaBlurLevel();
+        }
+    }
+
+    private void setPulseOnNewTracks() {
+        if (KeyguardSliceProvider.getAttachedInstance() != null) {
+            KeyguardSliceProvider.getAttachedInstance().setPulseOnNewTracks(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.PULSE_ON_NEW_TRACKS, 0,
+                    UserHandle.USER_CURRENT) == 1);
         }
     }
 
@@ -4337,16 +4349,6 @@ public class StatusBar extends SystemUI implements
                     mNavigationBarController.onDisplayRemoved(mDisplayId);
                 }
             }
-                break;
-            case PULSE_ON_NEW_TRACKS:
-                boolean showPulseOnNewTracks =
-                        TunerService.parseIntegerSwitch(newValue, false);
-                KeyguardSliceProvider sliceProvider = KeyguardSliceProvider.getAttachedInstance();
-                if (sliceProvider != null)
-                    sliceProvider.setPulseOnNewTracks(showPulseOnNewTracks);
-                break;
-            default:
-                break;
          }
     }
     // End Extra BaseStatusBarMethods.
