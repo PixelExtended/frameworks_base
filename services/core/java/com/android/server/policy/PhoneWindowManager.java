@@ -2274,13 +2274,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         mSingleKeyGestureDetector.addRule(new BackKeyRule(KEY_LONGPRESS));
     }
 
-    private void updateKeyAssignments() {
-        int activeHardwareKeys = mDeviceHardwareKeys;
-
-        if (mHasNavigationBar) {
-            activeHardwareKeys = 0;
-        }
-
     private void enableSwipeThreeFingerGesture(boolean enable){
         if (enable) {
             if (haveEnableGesture) return;
@@ -2292,6 +2285,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mWindowManagerFuncs.unregisterPointerEventListener(mSwipeToScreenshot, DEFAULT_DISPLAY);
         }
     }
+
+    private void updateKeyAssignments() {
+        int activeHardwareKeys = mDeviceHardwareKeys;
+
+        if (mHasNavigationBar) {
+            activeHardwareKeys = 0;
+        }
 
         final boolean hasMenu = (activeHardwareKeys & KEY_MASK_MENU) != 0;
         final boolean hasAssist = (activeHardwareKeys & KEY_MASK_ASSIST) != 0;
