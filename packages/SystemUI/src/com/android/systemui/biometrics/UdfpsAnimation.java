@@ -98,7 +98,7 @@ public class UdfpsAnimation extends ImageView {
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                 | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
         mAnimParams.gravity = Gravity.TOP | Gravity.CENTER;
-        mAnimParams.y = props.sensorLocationY - props.sensorRadius
+        mAnimParams.y = props.getLocation().sensorLocationY - props.getLocation().sensorRadius
                 - (mAnimationSize / 2) + mAnimationOffset;
 
         try {
