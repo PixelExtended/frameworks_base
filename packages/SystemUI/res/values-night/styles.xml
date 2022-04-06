@@ -64,4 +64,10 @@
         <item name="android:background">?android:attr/textColorSecondaryInverse</item>
     </style>
 
+    <style name="Theme.SystemUI.QuickSettings" parent="@*android:style/Theme.DeviceDefault.SystemUI">
+        <item name="offStateColor">@color/offstateSystemUI</item>
+        <item name="underSurfaceColor">@color/bgSysMain</item>
+        <item name="android:colorBackground">@color/bgSysMain</item>
+    </style>
+
 </resources>
