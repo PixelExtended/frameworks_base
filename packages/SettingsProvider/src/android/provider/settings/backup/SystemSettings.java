@@ -87,5 +87,6 @@ public class SystemSettings {
         Settings.System.FULLSCREEN_GESTURES,
         Settings.System.USE_OLD_MOBILETYPE,
         Settings.System.ENABLE_RIPPLE_EFFECT,
+        Settings.System.FP_WAKE_UNLOCK,
     };
 }
