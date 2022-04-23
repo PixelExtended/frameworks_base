@@ -4160,7 +4160,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     // {@link interceptKeyBeforeDispatching()}.
                     result |= ACTION_PASS_TO_USER;
                 } else if ((result & ACTION_PASS_TO_USER) == 0) {
-                } else if ((result & ACTION_PASS_TO_USER) == 0 && !mWakeOnVolumeKeyPress) {
                     if (mVolumeKeyHandler.handleVolumeKey(event, interactive)) {
                         break;
                     }
