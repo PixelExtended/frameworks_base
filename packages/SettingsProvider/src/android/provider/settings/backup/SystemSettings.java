@@ -88,5 +88,6 @@ public class SystemSettings {
         Settings.System.USE_OLD_MOBILETYPE,
         Settings.System.ENABLE_RIPPLE_EFFECT,
         Settings.System.FP_WAKE_UNLOCK,
+        Settings.System.SCREEN_OFF_FOD,
     };
 }

@@ -5779,6 +5779,14 @@ public final class Settings {
         public static final String OMNI_CUSTOM_FP_ICON = "custom_fingerprint_icon";
 
         /**
+         * Enable fod detection even when screen is off
+         * Default value is 0
+         * @hide
+         */
+        @Readable
+        public static final String SCREEN_OFF_FOD = "screen_off_fod";
+
+        /**
          * These are all public system settings
          *
          * @hide
