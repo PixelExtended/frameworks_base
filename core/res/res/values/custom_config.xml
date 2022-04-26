@@ -165,7 +165,6 @@
         <item>airplane</item>
         <item>settings</item>
         <item>lockdown</item>
-        <item>torch</item>
     </string-array>
 
     <!-- Whether device supports an alt. ambient display -->
