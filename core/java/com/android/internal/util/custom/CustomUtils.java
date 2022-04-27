@@ -453,4 +453,20 @@ public class CustomUtils {
             return null;
         }
     }
+
+    public static class QSLayoutUtils {
+
+        public static boolean getQSTileLabelHide(Context context) {
+            return Settings.System.getIntForUser(context.getContentResolver(),
+                    Settings.System.QS_TILE_LABEL_HIDE,
+                    0, UserHandle.USER_CURRENT) == 1;
+        }
+
+        public static boolean getQSTileVerticalLayout(Context context) {
+            return Settings.System.getIntForUser(context.getContentResolver(),
+                    Settings.System.QS_TILE_VERTICAL_LAYOUT,
+                    0, UserHandle.USER_CURRENT) == 1;
+        }
+    }
+
 }
