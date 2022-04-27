@@ -24,11 +24,14 @@ import static com.android.systemui.qs.QSPanel.QS_SHOW_AUTO_BRIGHTNESS;
 import static com.android.systemui.qs.QSPanel.QS_SHOW_BRIGHTNESS_SLIDER;
 import static com.android.systemui.qs.dagger.QSFragmentModule.QS_USING_MEDIA_PLAYER;
 
+import android.os.Handler;
+import android.provider.Settings;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.UiEventLogger;
+import com.android.systemui.dagger.qualifiers.Main;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.media.controls.ui.MediaHierarchyManager;
@@ -44,6 +47,7 @@ import com.android.systemui.settings.brightness.BrightnessSliderController;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 import com.android.systemui.statusbar.policy.BrightnessMirrorController;
 import com.android.systemui.tuner.TunerService;
+import com.android.systemui.util.settings.SystemSettings;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -84,9 +88,11 @@ public class QSPanelController extends QSPanelControllerBase<QSPanel> {
             BrightnessSliderController.Factory brightnessSliderFactory,
             FalsingManager falsingManager,
             StatusBarKeyguardViewManager statusBarKeyguardViewManager,
-            FeatureFlags featureFlags) {
+            FeatureFlags featureFlags,
+            @Main Handler mainHandler, SystemSettings systemSettings) {
         super(view, qstileHost, qsCustomizerController, usingMediaPlayer, mediaHost,
-                metricsLogger, uiEventLogger, qsLogger, dumpManager);
+                metricsLogger, uiEventLogger, qsLogger, dumpManager,
+                mainHandler, systemSettings);
         mTunerService = tunerService;
         mQsCustomizerController = qsCustomizerController;
         mQsTileRevealControllerFactory = qsTileRevealControllerFactory;

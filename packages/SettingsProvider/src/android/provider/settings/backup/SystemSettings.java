@@ -87,8 +87,12 @@ public class SystemSettings {
         Settings.System.DISPLAY_COLOR_MODE,
         Settings.System.ALARM_ALERT,
         Settings.System.NOTIFICATION_LIGHT_PULSE,
-        // Evolution X additions
+        // PEX additions
         Settings.System.ENABLE_RIPPLE_EFFECT,
         Settings.System.FULLSCREEN_GESTURES,
+	Settings.System.QS_TILE_LABEL_HIDE,
+        Settings.System.QS_TILE_VERTICAL_LAYOUT,
+        Settings.System.QS_LAYOUT,
+        Settings.System.QQS_LAYOUT
     };
 }
