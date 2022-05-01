@@ -68,6 +68,7 @@ class PrivacyItemController @Inject constructor(
     internal companion object {
         val LOCATION_WHITELIST_PKG = arrayOf(
             "com.google.android.settings.intelligence",
+            "com.mediatek.ims",
         )
         val CAMERA_WHITELIST_PKG = arrayOf(
             "org.pixelexperience.faceunlock",
