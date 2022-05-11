@@ -100,7 +100,7 @@ public class NotificationMediaManager implements Dumpable, TunerService.Tunable 
     public static final boolean DEBUG_MEDIA = false;
 
     private static final String LOCKSCREEN_MEDIA_METADATA =
-            "customsecure:" + Settings.Secure.LOCKSCREEN_MEDIA_METADATA;
+            Settings.Secure.LOCKSCREEN_MEDIA_METADATA;
 
     private static final String NOWPLAYING_SERVICE = "com.google.android.as";
     private final StatusBarStateController mStatusBarStateController
