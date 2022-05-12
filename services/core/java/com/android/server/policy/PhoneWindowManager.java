@@ -3165,8 +3165,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         final boolean canceled = event.isCanceled();
         final int displayId = event.getDisplayId();
         final long key_consumed = -1;
-        final boolean longPress = (flags & KeyEvent.FLAG_LONG_PRESS) != 0;
-        final boolean virtualKey = event.getDeviceId() == KeyCharacterMap.VIRTUAL_KEYBOARD;
         final boolean fromNavbar = event.getSource() == InputDevice.SOURCE_NAVIGATION_BAR;
 
         if (DEBUG_INPUT) {
