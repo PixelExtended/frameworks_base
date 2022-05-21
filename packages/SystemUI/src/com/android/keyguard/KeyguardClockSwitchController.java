@@ -251,6 +251,10 @@ public class KeyguardClockSwitchController extends ViewController<KeyguardClockS
                 mView.getResources().getDimensionPixelSize(R.dimen.keyguard_clock_top_margin);
     }
 
+    public void onThemeChanged() {
+        mView.onThemeChanged();
+    }
+
     /**
      * Set which clock should be displayed on the keyguard. The other one will be automatically
      * hidden.
