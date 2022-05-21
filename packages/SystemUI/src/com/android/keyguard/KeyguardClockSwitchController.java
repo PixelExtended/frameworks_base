@@ -254,10 +254,6 @@ public class KeyguardClockSwitchController extends ViewController<KeyguardClockS
         mView.updateClockTargetRegions();
     }
 
-    public void onThemeChanged() {
-        mView.onThemeChanged();
-    }
-
     /**
      * Set which clock should be displayed on the keyguard. The other one will be automatically
      * hidden.
