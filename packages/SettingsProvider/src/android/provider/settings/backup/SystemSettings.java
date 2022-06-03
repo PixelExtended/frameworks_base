@@ -90,5 +90,9 @@ public class SystemSettings {
         Settings.System.FP_WAKE_UNLOCK,
         Settings.System.SCREEN_OFF_FOD,
         Settings.System.VOLUME_BUTTON_MUSIC_CONTROL,
+        Settings.System.QS_TILE_VERTICAL_LAYOUT,
+        Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE,
+        Settings.System.QS_LAYOUT_COLUMNS,
+        Settings.System.QS_TILE_LABEL_HIDE,
     };
 }
