@@ -31,11 +31,8 @@ import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.customize.QSCustomizerController;
 import com.android.systemui.qs.dagger.QSScope;
 import com.android.systemui.qs.logging.QSLogger;
-import com.android.systemui.settings.brightness.BrightnessController;
 import com.android.systemui.settings.brightness.BrightnessMirrorHandler;
-import com.android.systemui.settings.brightness.BrightnessSliderController;
 import com.android.systemui.statusbar.policy.BrightnessMirrorController;
-import com.android.systemui.tuner.TunerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,12 +54,9 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel> 
             };
 
     // brightness is visible only in split shade
-    private final BrightnessController mBrightnessController;
+    private final QuickQSBrightnessController mBrightnessController;
     private final BrightnessMirrorHandler mBrightnessMirrorHandler;
     private final FooterActionsController mFooterActionsController;
-    private final TunerService mTunerService;
-    private final BrightnessSliderController mBrightnessSliderController;
-    private BrightnessMirrorController mBrightnessMirrorController;
 
     @Inject
     QuickQSPanelController(QuickQSPanel view, QSTileHost qsTileHost,
@@ -71,22 +65,14 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel> 
             @Named(QUICK_QS_PANEL) MediaHost mediaHost,
             MetricsLogger metricsLogger, UiEventLogger uiEventLogger, QSLogger qsLogger,
             DumpManager dumpManager,
-            @Named(QQS_FOOTER) FooterActionsController footerActionsController,
-            TunerService tunerService,
-            BrightnessController.Factory brightnessControllerFactory,
-            BrightnessSliderController.Factory brightnessSliderFactory
+            QuickQSBrightnessController quickQSBrightnessController,
+            @Named(QQS_FOOTER) FooterActionsController footerActionsController
     ) {
         super(view, qsTileHost, qsCustomizerController, usingMediaPlayer, mediaHost, metricsLogger,
                 uiEventLogger, qsLogger, dumpManager);
-        mTunerService = tunerService;
-        mFooterActionsController = footerActionsController;
-
-        mBrightnessSliderController = brightnessSliderFactory.create(getContext(), mView);
-        mView.setBrightnessView(mBrightnessSliderController.getRootView());
-
-        mBrightnessController = brightnessControllerFactory.create(
-                mBrightnessSliderController.getIconView(), mBrightnessSliderController);
+        mBrightnessController = quickQSBrightnessController;
         mBrightnessMirrorHandler = new BrightnessMirrorHandler(mBrightnessController);
+        mFooterActionsController = footerActionsController;
     }
 
     @Override
@@ -95,24 +81,14 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel> 
         mMediaHost.setExpansion(0.0f);
         mMediaHost.setShowsOnlyActiveMedia(true);
         mMediaHost.init(MediaHierarchyManager.LOCATION_QQS);
+        mBrightnessController.init(mShouldUseSplitNotificationShade);
         mFooterActionsController.init();
         mFooterActionsController.refreshVisibility(mShouldUseSplitNotificationShade);
-        mBrightnessSliderController.init();
     }
 
     @Override
     protected void onViewAttached() {
         super.onViewAttached();
-
-        mTunerService.addTunable(mView, QSPanel.QS_BRIGHTNESS_SLIDER_POSITION);
-        mTunerService.addTunable(mView, QSPanel.QS_SHOW_AUTO_BRIGHTNESS);
-        mTunerService.addTunable(mView, QSPanel.QS_SHOW_BRIGHTNESS_SLIDER);
-
-        mView.setBrightnessRunnable(() -> {
-            mView.updateResources();
-            updateBrightnessMirror();
-        });
-
         mView.addOnConfigurationChangedListener(mOnConfigurationChangedListener);
         mBrightnessMirrorHandler.onQsPanelAttached();
     }
@@ -120,30 +96,15 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel> 
     @Override
     protected void onViewDetached() {
         super.onViewDetached();
-        mTunerService.removeTunable(mView);
-        mView.setBrightnessRunnable(null);
         mView.removeOnConfigurationChangedListener(mOnConfigurationChangedListener);
         mBrightnessMirrorHandler.onQsPanelDettached();
-    }
-
-    private void updateBrightnessMirror() {
-        if (mBrightnessMirrorController != null) {
-            mBrightnessSliderController.setMirrorControllerAndMirror(mBrightnessMirrorController);
-        }
     }
 
     @Override
     void setListening(boolean listening) {
         super.setListening(listening);
+        mBrightnessController.setListening(listening);
         mFooterActionsController.setListening(listening);
-
-        // Set the listening as soon as the QS fragment starts listening regardless of the
-        //expansion, so it will update the current brightness before the slider is visible.
-        if (listening) {
-            mBrightnessController.registerCallbacks();
-        } else {
-            mBrightnessController.unregisterCallbacks();
-        }
     }
 
     public boolean isListening() {
@@ -163,6 +124,7 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel> 
 
     @Override
     protected void onConfigurationChanged() {
+        mBrightnessController.refreshVisibility(mShouldUseSplitNotificationShade);
         mFooterActionsController.refreshVisibility(mShouldUseSplitNotificationShade);
     }
 
@@ -188,7 +150,6 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel> 
     }
 
     public void setBrightnessMirror(BrightnessMirrorController brightnessMirrorController) {
-        mBrightnessMirrorController = brightnessMirrorController;
         mBrightnessMirrorHandler.setController(brightnessMirrorController);
     }
 }
