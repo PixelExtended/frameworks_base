@@ -5748,6 +5748,18 @@ public final class Settings {
         public static final String LOCKSCREEN_MEDIA_BLUR = "lockscreen_media_blur";
 
         /**
+         * Which Vibration Pattern to use
+         * 0: dzzz-dzzz
+         * 1: dzzz-da
+         * 2: mm-mm-mm
+         * 3: da-da-dzzz
+         * 4: da-dzzz-da
+         * @hide
+         */
+        @Readable
+        public static final String RINGTONE_VIBRATION_PATTERN = "ringtone_vibration_pattern";
+
+        /**
          * media artwork wallpaper blur level on lockscreen
          * @hide
          */

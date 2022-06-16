@@ -94,5 +94,6 @@ public class SystemSettings {
         Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE,
         Settings.System.QS_LAYOUT_COLUMNS,
         Settings.System.QS_TILE_LABEL_HIDE,
+        Settings.System.RINGTONE_VIBRATION_PATTERN,
     };
 }

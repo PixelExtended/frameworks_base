@@ -240,5 +240,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.QS_LAYOUT_COLUMNS_LANDSCAPE, NON_NEGATIVE_INTEGER_VALIDATOR);
         VALIDATORS.put(System.QS_LAYOUT_COLUMNS, NON_NEGATIVE_INTEGER_VALIDATOR);
         VALIDATORS.put(System.QS_TILE_LABEL_HIDE, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.RINGTONE_VIBRATION_PATTERN, new InclusiveIntegerRangeValidator(0, 4));
     }
 }
