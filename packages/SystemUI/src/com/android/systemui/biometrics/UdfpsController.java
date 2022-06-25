@@ -48,7 +48,6 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.Trace;
-import android.os.UserHandle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.UserHandle;
@@ -85,7 +84,7 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.concurrency.Execution;
 import com.android.systemui.util.time.SystemClock;
-import com.android.systemui.util.settings.SystemSettings;
+import com.android.systemui.util.settings.SecureSettings;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -174,15 +173,13 @@ public class UdfpsController implements DozeReceiver {
     private boolean mOnFingerDown;
     private boolean mAttemptedToDismissKeyguard;
     private final int mUdfpsVendorCode;
-
     private Set<Callback> mCallbacks = new HashSet<>();
+    private final AmbientDisplayConfiguration mAmbientDisplayConfiguration;
+    private final SecureSettings mSecureSettings;
+    private boolean mScreenOffFod;
 
     private boolean mFrameworkDimming;
     private int[][] mBrightnessAlphaArray;
-
-    private final AmbientDisplayConfiguration mAmbientDisplayConfiguration;
-    private final SystemSettings mSystemSettings;
-    private boolean mScreenOffFod;
 
     private UdfpsAnimation mUdfpsAnimation;
 
@@ -616,7 +613,6 @@ public class UdfpsController implements DozeReceiver {
             @NonNull LockscreenShadeTransitionController lockscreenShadeTransitionController,
             @NonNull ScreenLifecycle screenLifecycle,
             @Nullable Vibrator vibrator,
-            @NonNull Handler mMainHandler,
             @NonNull UdfpsHapticsSimulator udfpsHapticsSimulator,
             @NonNull UdfpsHbmProvider hbmProvider,
             @NonNull KeyguardStateController keyguardStateController,
@@ -625,13 +621,11 @@ public class UdfpsController implements DozeReceiver {
             @Main Handler mainHandler,
             @NonNull ConfigurationController configurationController,
             @NonNull SystemClock systemClock,
-            @NonNull SystemSettings systemSettings,
             @NonNull UnlockedScreenOffAnimationController unlockedScreenOffAnimationController,
-            @NonNull SystemUIDialogManager dialogManager) {
+            @NonNull SystemUIDialogManager dialogManager,
+            @NonNull SecureSettings secureSettings) {
         mContext = context;
         mExecution = execution;
-        // TODO (b/185124905): inject main handler and vibrator once done prototyping
-        mMainHandler = mainHandler;
         mVibrator = vibrator;
         mInflater = inflater;
         // The fingerprint manager is queried for UDFPS before this class is constructed, so the
@@ -699,14 +693,14 @@ public class UdfpsController implements DozeReceiver {
         if (CustomUtils.isPackageInstalled(mContext, "com.custom.udfps.resources")) {
             mUdfpsAnimation = new UdfpsAnimation(mContext, mWindowManager, mSensorProps);
         }
-		 mAmbientDisplayConfiguration = new AmbientDisplayConfiguration(mContext);
-        mSystemSettings = systemSettings;
+        mAmbientDisplayConfiguration = new AmbientDisplayConfiguration(mContext);
+        mSecureSettings = secureSettings;
         updateScreenOffFodState();
-        mSystemSettings.registerContentObserver(Settings.System.SCREEN_OFF_FOD,
-            new ContentObserver(mMainHandler) {
+        mSecureSettings.registerContentObserver(Settings.Secure.SCREEN_OFF_UDFPS_ENABLED,
+            new ContentObserver(mainHandler) {
                 @Override
                 public void onChange(boolean selfChange, Uri uri) {
-                    if (uri.getLastPathSegment().equals(Settings.System.SCREEN_OFF_FOD)) {
+                    if (uri.getLastPathSegment().equals(Settings.Secure.SCREEN_OFF_UDFPS_ENABLED)) {
                         updateScreenOffFodState();
                     }
                 }
@@ -715,7 +709,9 @@ public class UdfpsController implements DozeReceiver {
     }
 
     private void updateScreenOffFodState() {
-        mScreenOffFod = mSystemSettings.getInt(Settings.System.SCREEN_OFF_FOD, 1) == 1;
+        boolean isSupported = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_supportsScreenOffUdfps);
+        mScreenOffFod = isSupported && mSecureSettings.getInt(Settings.Secure.SCREEN_OFF_UDFPS_ENABLED, 1) == 1;
     }
 
     /**

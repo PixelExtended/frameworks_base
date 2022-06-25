@@ -5964,14 +5964,6 @@ public final class Settings {
         public static final String OMNI_CUSTOM_FP_ICON = "custom_fingerprint_icon";
 
         /**
-         * Enable fod detection even when screen is off
-         * Default value is 0
-         * @hide
-         */
-        @Readable
-        public static final String SCREEN_OFF_FOD = "screen_off_fod";
-
-        /**
          * Whether to show power menu on LockScreen
          * @hide
          */
@@ -11327,6 +11319,14 @@ public final class Settings {
          * @hide
          */
         public static final String FACE_UNLOCK_METHOD = "face_unlock_method";
+
+        /**
+         * Enable udfps detection even when screen is off
+         * Default value is 0
+         * @hide
+         */
+        @Readable
+        public static final String SCREEN_OFF_UDFPS_ENABLED = "screen_off_udfps_enabled";
 
         /**
          * Whether to show privacy indicator for location

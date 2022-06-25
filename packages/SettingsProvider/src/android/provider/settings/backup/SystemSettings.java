@@ -88,7 +88,6 @@ public class SystemSettings {
         Settings.System.USE_OLD_MOBILETYPE,
         Settings.System.ENABLE_RIPPLE_EFFECT,
         Settings.System.FP_WAKE_UNLOCK,
-        Settings.System.SCREEN_OFF_FOD,
         Settings.System.VOLUME_BUTTON_MUSIC_CONTROL,
         Settings.System.QS_TILE_VERTICAL_LAYOUT,
         Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE,
