@@ -4023,6 +4023,9 @@ public class StatusBar extends SystemUI implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SHOW_LOCKSCREEN_MEDIA_ART),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LESS_BORING_HEADS_UP),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4054,6 +4057,7 @@ public class StatusBar extends SystemUI implements
             setPulseOnNewTracks();
             setLockScreenMediaBlurLevel();
             setLockScreenMediaArt();
+            setUseLessBoringHeadsUp();
         }
     }
 
@@ -4087,6 +4091,13 @@ public class StatusBar extends SystemUI implements
         if (mMediaManager != null) {
             mMediaManager.setLockScreenMediaArt();
         }
+    }
+
+    private void setUseLessBoringHeadsUp() {
+        boolean lessBoringHeadsUp = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LESS_BORING_HEADS_UP, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mNotificationInterruptStateProvider.setUseLessBoringHeadsUp(lessBoringHeadsUp);
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
