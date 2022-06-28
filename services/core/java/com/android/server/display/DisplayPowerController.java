@@ -872,7 +872,8 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
             return;
         }
 
-        mBrightnessMapper = BrightnessMappingStrategy.create(resources, mDisplayDeviceConfig);
+        mBrightnessMapper = BrightnessMappingStrategy.create(
+                resources, mDisplayDeviceConfig, getAutoBrightnessAdjustmentSetting());
 
         if (mBrightnessMapper != null) {
             final float dozeScaleFactor = resources.getFraction(
