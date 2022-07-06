@@ -709,6 +709,9 @@
     <protected-broadcast android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
     <protected-broadcast android:name="android.app.action.SHOW_NEW_USER_DISCLAIMER" />
 
+    <!-- App lock -->
+    <protected-broadcast android:name="com.android.server.app.AppLockManagerService.APP_LOCK_TIMEOUT" />
+
     <!-- Used to force the state of battery led -->
     <protected-broadcast android:name="android.intent.action.BATTERY_LED_STATE_OVERRIDE" />
 
@@ -5841,6 +5844,11 @@
            @hide -->
     <permission android:name="android.permission.READ_GLOBAL_APP_SEARCH_DATA"
                 android:protectionLevel="internal|role" />
+
+    <!-- Allows an application to manage app lock
+         @hide -->
+    <permission android:name="android.permission.MANAGE_APP_LOCK"
+                android:protectionLevel="signature|privileged" />
 
     <!-- Attribution for Geofencing service. -->
     <attribution android:tag="GeofencingService" android:label="@string/geofencing_service"/>
