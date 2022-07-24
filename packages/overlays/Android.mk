@@ -22,7 +22,7 @@ LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../../NOTICE
 LOCAL_REQUIRED_MODULES := \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
-    DisplayCutoutEmulationHoleOverlay \
+        DisplayCutoutEmulationHoleOverlay \
 	DisplayCutoutEmulationTallOverlay \
 	DisplayCutoutEmulationWaterfallOverlay \
 	NavigationBarMode3ButtonOverlay \
@@ -30,6 +30,7 @@ LOCAL_REQUIRED_MODULES := \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
+	NotchBarKillerOverlay \
 	preinstalled-packages-platform-overlays.xml
 
 include $(BUILD_PHONY_PACKAGE)
