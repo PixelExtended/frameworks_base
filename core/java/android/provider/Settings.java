@@ -5604,6 +5604,13 @@ public final class Settings {
         public static final String POWERMENU_RESTART = "powermenu_restart";
 
         /**
+         * Whether auto brightness is applied one shot when screen is turned on.
+         * Default 0
+         * @hide
+         */
+        public static final String AUTO_BRIGHTNESS_ONE_SHOT = "auto_brightness_one_shot";
+
+        /**
          * Whether to display reboot in the power menu
          *
          * @hide

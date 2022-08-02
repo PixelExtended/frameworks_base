@@ -96,5 +96,6 @@ public class SystemSettings {
         Settings.System.RINGTONE_VIBRATION_PATTERN,
         Settings.System.CUSTOM_RINGTONE_VIBRATION_PATTERN,
         Settings.System.QS_SHOW_BATTERY_ESTIMATE,
+        Settings.System.AUTO_BRIGHTNESS_ONE_SHOT,
     };
 }
