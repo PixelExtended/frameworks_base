@@ -101,4 +101,8 @@
 
   <!-- Whether devices suports in-display fingerprint when screen is off -->
   <java-symbol type="bool" name="config_supportsScreenOffUdfps" />
+
+    <!-- Light / Regular style fonts -->
+    <java-symbol type="string" name="config_lightFontFamily" />
+    <java-symbol type="string" name="config_regularFontFamily" />
 </resources>
