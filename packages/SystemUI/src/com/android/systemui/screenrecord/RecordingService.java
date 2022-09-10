@@ -74,7 +74,6 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
     private static final String EXTRA_AUDIO_SOURCE = "extra_useAudio";
     private static final String EXTRA_SHOW_TAPS = "extra_showTaps";
     private static final String EXTRA_SHOW_STOP_DOT = "extra_showStopDot";
-    private static final String EXTRA_LOW_QUALITY = "extra_lowQuality";
     private static final String EXTRA_LONGER_DURATION = "extra_longerDuration";
 
     private static final String ACTION_START = "com.android.systemui.screenrecord.START";
@@ -96,7 +95,6 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
     private final NotificationManager mNotificationManager;
     private final UserContextProvider mUserContextTracker;
 
-    private boolean mLowQuality;
     private boolean mLongerDuration;
     private boolean mShowStopDot;
     private boolean mIsDotAtRight;
@@ -130,15 +128,13 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
      */
     public static Intent getStartIntent(Context context, int resultCode,
             int audioSource, boolean showTaps,
-            boolean showStopDot, boolean lowQuality,
-            boolean longerDuration) {
+            boolean showStopDot, boolean longerDuration) {
         return new Intent(context, RecordingService.class)
                 .setAction(ACTION_START)
                 .putExtra(EXTRA_RESULT_CODE, resultCode)
                 .putExtra(EXTRA_AUDIO_SOURCE, audioSource)
                 .putExtra(EXTRA_SHOW_TAPS, showTaps)
                 .putExtra(EXTRA_SHOW_STOP_DOT, showStopDot)
-                .putExtra(EXTRA_LOW_QUALITY, lowQuality)
                 .putExtra(EXTRA_LONGER_DURATION, longerDuration);
     }
 
@@ -166,7 +162,6 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
                 setTapsVisible(mShowTaps);
 
                 mShowStopDot = intent.getBooleanExtra(EXTRA_SHOW_STOP_DOT, false);
-                mLowQuality = intent.getBooleanExtra(EXTRA_LOW_QUALITY, false);
                 mLongerDuration = intent.getBooleanExtra(EXTRA_LONGER_DURATION, false);
 
                 setStopDotVisible(mShowStopDot);
@@ -177,7 +172,6 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
                         mAudioSource,
                         this
                 );
-                setLowQuality(mLowQuality);
                 setLongerDuration(mLongerDuration);
 
                 if (startRecording()) {
@@ -480,12 +474,6 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
     private void setTapsVisible(boolean turnOn) {
         int value = turnOn ? 1 : 0;
         Settings.System.putInt(getContentResolver(), Settings.System.SHOW_TOUCHES, value);
-    }
-
-    private void setLowQuality(boolean turnOn) {
-        if (getRecorder() != null) {
-            getRecorder().setLowQuality(turnOn);
-        }
     }
 
     private void setLongerDuration(boolean longer) {
