@@ -180,7 +180,6 @@ public class InternetDialog extends SystemUIDialog implements
         mCanConfigWifi = canConfigWifi;
         mCanChangeWifiState = WifiEnterpriseRestrictionUtils.isChangeWifiStateAllowed(context);
         mKeyguard = keyguardStateController;
-
         mUiEventLogger = uiEventLogger;
         mAdapter = new InternetAdapter(mInternetDialogController);
         if (!aboveStatusBar) {
@@ -282,6 +281,7 @@ public class InternetDialog extends SystemUIDialog implements
         mHandler.removeCallbacks(mHideProgressBarRunnable);
         mHandler.removeCallbacks(mHideSearchingRunnable);
         mMobileNetworkLayout.setOnClickListener(null);
+        mMobileNetworkLayout.setOnLongClickListener(null);
         mMobileDataToggle.setOnCheckedChangeListener(null);
         mConnectedWifListLayout.setOnClickListener(null);
         mSeeAllLayout.setOnClickListener(null);
@@ -344,6 +344,10 @@ public class InternetDialog extends SystemUIDialog implements
                     mInternetDialogController.connectCarrierNetwork();
                 }
             }
+        });
+        mMobileNetworkLayout.setOnLongClickListener(v -> {
+                mInternetDialogController.launchMobileNetworkSetting(v);
+                return true;
         });
         mMobileDataToggle.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> {
