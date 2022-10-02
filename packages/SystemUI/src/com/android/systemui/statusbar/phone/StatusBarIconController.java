@@ -51,6 +51,7 @@ import com.android.systemui.statusbar.phone.PhoneStatusBarPolicy.BluetoothIconSt
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.CallIndicatorIconState;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.MobileIconState;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.WifiIconState;
+import com.android.systemui.tuner.TunerService;
 import com.android.systemui.statusbar.pipeline.StatusBarPipelineFlags;
 import com.android.systemui.statusbar.pipeline.wifi.ui.view.ModernStatusBarWifiView;
 import com.android.systemui.statusbar.pipeline.wifi.ui.viewmodel.WifiViewModel;
@@ -181,6 +182,7 @@ public interface StatusBarIconController {
                 mDarkIconDispatcher.removeDarkReceiver((DarkReceiver) mGroup.getChildAt(i));
             }
             mGroup.removeAllViews();
+            Dependency.get(TunerService.class).removeTunable(this);
         }
 
         @Override
@@ -316,7 +318,7 @@ public interface StatusBarIconController {
     /**
      * Turns info from StatusBarIconController into ImageViews in a ViewGroup.
      */
-    class IconManager implements DemoModeCommandReceiver {
+    class IconManager implements DemoModeCommandReceiver, TunerService.Tunable  {
         protected final ViewGroup mGroup;
         private final StatusBarLocation mLocation;
         private final StatusBarPipelineFlags mStatusBarPipelineFlags;
@@ -333,6 +335,11 @@ public interface StatusBarIconController {
         private boolean mIsInDemoMode;
         protected DemoStatusIcons mDemoStatusIcons;
 
+        private boolean mOldStyleType;
+
+        private static final String USE_OLD_MOBILETYPE =
+            "system:" + Settings.System.USE_OLD_MOBILETYPE;
+            
         protected ArrayList<String> mBlockList = new ArrayList<>();
 
         public IconManager(
@@ -453,6 +460,7 @@ public interface StatusBarIconController {
             StatusBarMobileView view = onCreateStatusBarMobileView(state.subId, slot);
             view.applyMobileState(state);
             mGroup.addView(view, index, onCreateLayoutParams());
+            Dependency.get(TunerService.class).addTunable(this, USE_OLD_MOBILETYPE);
 
             if (mIsInDemoMode) {
                 Context mobileContext = mMobileContextProvider
@@ -507,6 +515,7 @@ public interface StatusBarIconController {
 
         protected void destroy() {
             mGroup.removeAllViews();
+            Dependency.get(TunerService.class).removeTunable(this);
         }
 
         protected void onIconExternal(int viewIndex, int height) {
@@ -639,6 +648,28 @@ public interface StatusBarIconController {
 
         protected DemoStatusIcons createDemoStatusIcons() {
             return new DemoStatusIcons((LinearLayout) mGroup, mIconSize);
+        }
+
+        @Override
+        public void onTuningChanged(String key, String newValue) {
+            switch (key) {
+                case USE_OLD_MOBILETYPE:
+                    mOldStyleType =
+                        TunerService.parseIntegerSwitch(newValue, true);
+                    updateOldStyleMobileDataIcons();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void updateOldStyleMobileDataIcons() {
+            for (int i = 0; i < mGroup.getChildCount(); i++) {
+                View child = mGroup.getChildAt(i);
+                if (child instanceof StatusBarMobileView) {
+                    ((StatusBarMobileView) child).updateDisplayType(mOldStyleType);
+                }
+            }
         }
     }
 }
