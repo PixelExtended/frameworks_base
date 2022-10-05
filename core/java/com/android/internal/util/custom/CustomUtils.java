@@ -71,6 +71,9 @@ import com.android.internal.statusbar.IStatusBarService;
 import java.util.List;
 import java.util.Locale;
 
+import java.io.IOException;
+import java.lang.InterruptedException;
+
 public class CustomUtils {
     private static final String TAG = "CustomUtils";
 
@@ -353,6 +356,22 @@ public class CustomUtils {
             }
         }
         return NO_CUTOUT;
+    }
+
+    // Google now has a change screen reolution option but it fails to update dpi properly
+    // This function takes screen diagonal and updates dpi
+    public static void changeScreenDPI(int resolutionWidth, int resolutionHeight, float diagonalLength) {
+	int dpi = (int) (Math.sqrt((resolutionHeight*resolutionHeight) + (resolutionWidth*resolutionWidth)) / diagonalLength);
+	String command = String.format("wm density %s", Integer.toString(dpi));
+	try {
+	    Runtime.getRuntime().exec(command).waitFor();
+	} catch (IOException e) {
+            System.err.println("CustomUtils: Error changing dpi");
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            System.err.println("CustomUtils: Error changing dpi");
+            e.printStackTrace();
+        }
     }
 
     // Method to detect whether an overlay is enabled or not
