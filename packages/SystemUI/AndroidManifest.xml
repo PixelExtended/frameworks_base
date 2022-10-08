@@ -333,6 +333,10 @@
     <!-- Network traffic monitor -->
     <uses-permission android:name="android.permission.MAINLINE_NETWORK_STACK" />
 
+    <!-- QS Tiles -->
+    <!-- DataSwitch tile -->
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
+
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
