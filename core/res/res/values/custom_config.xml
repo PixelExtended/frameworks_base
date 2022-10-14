@@ -226,4 +226,6 @@
   <!-- Whether key handler sends intent when changing slider position -->
   <string name="config_alertSliderIntent"></string>
 
+  <!-- Sysfs node that exposes fast charge status on supported devices -->
+  <string name="config_fastChargeSysfsNode" />
 </resources>
