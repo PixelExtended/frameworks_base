@@ -134,4 +134,6 @@
   <!-- Whether key handler sends intent when changing slider position -->
   <java-symbol type="string" name="config_alertSliderIntent" />
 
+  <!-- Sysfs node that exposes fast charge status on supported devices -->
+  <java-symbol type="string" name="config_fastChargeSysfsNode" />
 </resources>
