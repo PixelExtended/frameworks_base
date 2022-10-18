@@ -11769,14 +11769,6 @@ public final class Settings {
                 "launcher_taskbar_education_showing";
 
         /**
-         * Enable udfps detection even when screen is off
-         * Default value is 0
-         * @hide
-         */
-        @Readable
-        public static final String SCREEN_OFF_UDFPS_ENABLED = "screen_off_udfps_enabled";
-
-        /**
          * Whether key swap is enabled on supported hardware
          * @hide
          */
