@@ -32,6 +32,8 @@ import com.android.settingslib.Utils
 import com.android.systemui.animation.Interpolators
 import com.android.systemui.surfaceeffects.ripple.RippleShader
 
+import com.android.systemui.R
+
 private const val RIPPLE_SPARKLE_STRENGTH: Float = 0.3f
 
 /**
@@ -87,13 +89,13 @@ class AuthRippleView(context: Context?, attrs: AttributeSet?) : View(context, at
     init {
         rippleShader.rawProgress = 0f
         rippleShader.pixelDensity = resources.displayMetrics.density
-        rippleShader.color = Utils.getColorAttr(context, android.R.attr.colorAccent).defaultColor
+        rippleShader.color = Utils.getColorAttrDefaultColor(context, R.attr.wallpaperTextColorAccent)
         rippleShader.sparkleStrength = RIPPLE_SPARKLE_STRENGTH
         updateRippleFadeParams()
         ripplePaint.shader = rippleShader
         setLockScreenColor(0xffffffff.toInt()) // default color
 
-        dwellShader.color = 0xffffffff.toInt() // default color
+        dwellShader.color = Utils.getColorAttrDefaultColor(context, R.attr.wallpaperTextColorAccent)
         dwellShader.progress = 0f
         dwellShader.distortionStrength = .4f
         dwellPaint.shader = dwellShader
