@@ -89,5 +89,6 @@ public class SystemSettings {
         Settings.System.NOTIFICATION_LIGHT_PULSE,
         // Evolution X additions
         Settings.System.ENABLE_RIPPLE_EFFECT,
+        Settings.System.FULLSCREEN_GESTURES,
     };
 }
