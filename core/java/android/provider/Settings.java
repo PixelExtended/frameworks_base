@@ -5759,6 +5759,13 @@ public final class Settings {
 
 
         /**
+         * Whether to hide navbar pill and keyboard space.
+         * Default 0.
+         * @hide
+         */
+        public static final String FULLSCREEN_GESTURES = "fullscreen_gestures";
+
+        /**
          * Whether to wake the screen with the volume key, the value is boolean.
          * 0 = 0ff, 1 = on
          * @hide
