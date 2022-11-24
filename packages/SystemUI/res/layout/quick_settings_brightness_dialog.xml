@@ -15,12 +15,14 @@
 -->
     <com.android.systemui.settings.brightness.BrightnessSliderView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
         android:id="@+id/brightness_slider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/brightness_mirror_height"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/accessibility_brightness"
-        android:importantForAccessibility="no" >
+        android:importantForAccessibility="no"
+        android:orientation="horizontal">
 
         <com.android.systemui.settings.brightness.ToggleSeekBar
             android:id="@+id/slider"
@@ -47,5 +49,18 @@
             android:src="@drawable/ic_qs_brightness_auto_off"
             android:contentDescription="@null"
             android:visibility="gone"
+        />
+
+        <ImageView
+            android:id="@+id/auto_brightness_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/auto_brightness_icon_bg"
+            android:backgroundTint="?android:attr/colorAccent"
+            android:src="@drawable/ic_brightness_full"
+            android:tint="?androidprv:attr/colorSurface"
+            android:scaleType="centerInside"
         />
     </com.android.systemui.settings.brightness.BrightnessSliderView>

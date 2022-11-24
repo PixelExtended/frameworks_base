@@ -28,6 +28,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.settings.brightness.BrightnessSliderController;
@@ -63,6 +65,10 @@ public class BrightnessMirrorController
     private boolean mShouldShowAutoBrightness;
     private boolean mIsAutomaticBrightnessAvailable;
     private ImageView mIcon;
+    @Nullable
+    private ImageView mAutoBrightnessIcon = null;
+    private int mAutoBrightnessIconResId = -1;
+    private boolean mAutoBrightnessIconVisible = false;
 
     public BrightnessMirrorController(NotificationShadeWindowView statusBarWindow,
             NotificationPanelViewController notificationPanelViewController,
@@ -159,16 +165,34 @@ public class BrightnessMirrorController
         reinflate();
     }
 
+    public void updateAutoBrightnessIcon(int resId) {
+        if (mAutoBrightnessIconResId == resId) return;
+        mAutoBrightnessIconResId = resId;
+        if (mAutoBrightnessIcon == null) return;
+        mAutoBrightnessIcon.setImageResource(mAutoBrightnessIconResId);
+    }
+
+    public void setAutoBrightnessIconVisibile(boolean visible) {
+        if (mAutoBrightnessIconVisible == visible) return;
+        mAutoBrightnessIconVisible = visible;
+        if (mAutoBrightnessIcon == null) return;
+        mAutoBrightnessIcon.setVisibility(mAutoBrightnessIconVisible ? View.VISIBLE : View.GONE);
+    }
+
     private BrightnessSliderController setMirrorLayout() {
         Context context = mBrightnessMirror.getContext();
         BrightnessSliderController controller = mToggleSliderFactory.create(context,
                 mBrightnessMirror);
         controller.init();
-
         mBrightnessMirror.addView(controller.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         mIcon = mBrightnessMirror.findViewById(R.id.brightness_icon);
 
+        mAutoBrightnessIcon = controller.getRootView().findViewById(R.id.auto_brightness_icon);
+        mAutoBrightnessIcon.setVisibility(mAutoBrightnessIconVisible ? View.VISIBLE : View.GONE);
+        if (mAutoBrightnessIconResId != -1) {
+            mAutoBrightnessIcon.setImageResource(mAutoBrightnessIconResId);
+        }
         return controller;
     }
 
