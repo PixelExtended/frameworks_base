@@ -131,15 +131,15 @@
     <!-- Whether to force enable multi resolution configuration for camera -->
     <java-symbol type="bool" name="config_forceMultiResolution" />
 
-  <!-- Alert slider. -->
-  <java-symbol type="string" name="alert_slider_state_path" />
-  <java-symbol type="string" name="alert_slider_uevent_match_path" />
-  <java-symbol type="bool" name="config_hasAlertSlider" />
+    <!-- Alert slider. -->
+    <java-symbol type="string" name="alert_slider_state_path" />
+    <java-symbol type="string" name="alert_slider_uevent_match_path" />
+    <java-symbol type="bool" name="config_hasAlertSlider" />
 
-  <java-symbol type="integer" name="config_alertSliderLocation" />
+    <java-symbol type="integer" name="config_alertSliderLocation" />
 
-  <!-- Whether key handler sends intent when changing slider position -->
-  <java-symbol type="string" name="config_alertSliderIntent" />
+    <!-- Whether key handler sends intent when changing slider position -->
+    <java-symbol type="string" name="config_alertSliderIntent" />
 
     <!-- Whether device has dash charging support -->
     <java-symbol type="bool" name="config_hasDashCharger" />
@@ -152,4 +152,16 @@
 
     <!-- Whether device has turbo power charging support -->
     <java-symbol type="bool" name="config_hasTurboPowerCharger" />
+
+    <!-- Pocket Lock -->
+    <java-symbol type="layout" name="pocket_lock_view" />
+
+    <!-- Pocket bridge -->
+    <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" />
+    <java-symbol type="bool" name="config_pocketModeSupported" />
+    <java-symbol type="bool" name="config_pocketUseLightSensor" />
+
+    <!-- Pocket Service -->
+    <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
+    <java-symbol type="string" name="config_pocketJudgeVendorProximitySensorName" />
 </resources>
