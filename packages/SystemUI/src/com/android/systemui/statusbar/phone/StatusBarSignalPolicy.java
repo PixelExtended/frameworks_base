@@ -160,6 +160,7 @@ public class StatusBarSignalPolicy implements SignalCallback,
         boolean hideMobile = hideList.contains(mSlotMobile);
         boolean hideWifi = hideList.contains(mSlotWifi);
         boolean hideEthernet = hideList.contains(mSlotEthernet);
+        boolean hideIms = hideList.contains(mSlotIms);
 
         if (hideAirplane != mHideAirplane || hideMobile != mHideMobile
                 || hideEthernet != mHideEthernet || hideWifi != mHideWifi
@@ -417,10 +418,7 @@ public class StatusBarSignalPolicy implements SignalCallback,
 
     @Override
     public void setImsIcon(ImsIconState icon) {
-        boolean showIms = icon.visible && !mHideIms;
-        String description = icon.contentDescription;
-
-        if (showIms) {
+        if (icon.visible && !mHideIms) {
             mIconController.setImsIcon(mSlotIms, icon);
             mIconController.setIconVisibility(mSlotIms, true);
         } else {
