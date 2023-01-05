@@ -1281,9 +1281,6 @@ public class VolumeDialogImpl implements VolumeDialog,
                 updateRowsH(mDefaultRow, true);
                 mExpandRows.setExpanded(mExpanded);
             });
-        }
-    }
-
             mSettingsIcon.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {

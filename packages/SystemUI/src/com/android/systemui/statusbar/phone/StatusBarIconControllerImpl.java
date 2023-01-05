@@ -88,7 +88,7 @@ public class StatusBarIconControllerImpl implements Tunable,
             TunerService tunerService,
             DumpManager dumpManager,
             @Main Handler handler,
-            SystemSettings systemSettings) {
+            SystemSettings systemSettings,
             StatusBarIconList statusBarIconList) {
         mStatusBarIconList = statusBarIconList;
         mContext = context;
