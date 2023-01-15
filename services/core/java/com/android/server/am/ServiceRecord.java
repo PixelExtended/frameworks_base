@@ -63,6 +63,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A running application service.
@@ -75,6 +76,10 @@ final class ServiceRecord extends Binder implements ComponentName.WithComponentN
 
     // Maximum number of times it can fail during execution before giving up.
     static final int MAX_DONE_EXECUTING_COUNT = 6;
+
+    static final Set<String> FOREGROUND_NOTIFICATION_BLACKLIST = Set.of(
+        "com.oplus.camera"
+    );
 
     final ActivityManagerService ams;
     final ComponentName name; // service component.
@@ -109,6 +114,8 @@ final class ServiceRecord extends Binder implements ComponentName.WithComponentN
                             // IBinder -> ConnectionRecord of all bound clients
 
     private final boolean mShouldIgnoreForegroundNotification;
+
+    final boolean ignoreForegroundNoti;
 
     ProcessRecord app;      // where this service is running or null.
     ProcessRecord isolationHostProc; // process which we've started for this service (used for
@@ -606,6 +613,7 @@ final class ServiceRecord extends Binder implements ComponentName.WithComponentN
         packageName = sInfo.applicationInfo.packageName;
         mShouldIgnoreForegroundNotification = Arrays.asList(ams.mContext.getResources().getStringArray(
                 com.android.internal.R.array.config_postNotificationIgnoredApps)).contains(packageName);
+        ignoreForegroundNoti = FOREGROUND_NOTIFICATION_BLACKLIST.contains(packageName);
         this.isSdkSandbox = sdkSandboxProcessName != null;
         this.sdkSandboxClientAppUid = sdkSandboxClientAppUid;
         this.sdkSandboxClientAppPackage = sdkSandboxClientAppPackage;
@@ -1010,7 +1018,7 @@ final class ServiceRecord extends Binder implements ComponentName.WithComponentN
     }
 
     public void postNotification() {
-        if (isForeground && foregroundNoti != null && app != null && !mShouldIgnoreForegroundNotification) {
+        if (isForeground && foregroundNoti != null && app != null && !mShouldIgnoreForegroundNotification && !ignoreForegroundNoti) {
             final int appUid = appInfo.uid;
             final int appPid = app.getPid();
             // Do asynchronous communication with notification manager to
