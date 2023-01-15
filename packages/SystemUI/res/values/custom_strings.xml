@@ -40,4 +40,7 @@
     <string name="status_bar_notification_info_overflow" translatable="false">\u221E</string>
     <!-- VoLTE/VoWiFi -->
     <string name="status_bar_ims">VoLTE/VoWiFi</string>
+
+    <!-- Label for current user in power menu options dialog -->
+    <string name="global_action_restart_systemui">SystemUI</string>
 </resources>
