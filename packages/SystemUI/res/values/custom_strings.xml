@@ -88,4 +88,8 @@
     <string name="screenrecord_lowquality_summary">For smaller file size</string>
     <string name="screenrecord_longer_timeout_switch_label">Bigger file size limit\nLimit recording size to 15GiB</string>
     <string name="screenrecord_hevc_switch_label">Enable HEVC</string>
+
+    <!-- Label for current user in power menu options dialog -->
+    <string name="global_action_restart_systemui">SystemUI</string>
+
 </resources>
