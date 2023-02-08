@@ -6253,6 +6253,16 @@ public final class Settings {
         public static final String QS_TILE_VERTICAL_LAYOUT = "qs_tile_vertical_layout";
 
         /**
+         * @hide
+         */
+        public static final String QS_LAYOUT = "qs_layout";
+
+        /**
+         * @hide
+         */
+        public static final String QQS_LAYOUT = "qqs_layout";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
