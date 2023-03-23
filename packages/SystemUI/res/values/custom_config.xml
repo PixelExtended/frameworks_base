@@ -15,9 +15,6 @@
     <!-- Allow devices override audio panel location to the left side -->
     <bool name="config_audioPanelOnLeftSide">false</bool>
 
-    <!-- Unlock ripple animation -->
-    <bool name="config_enableUnlockRippleAnimation">true</bool>
-
     <!-- Body font family -->
     <string name="config_bodyFontFamily">@*android:string/config_bodyFontFamily</string>
 
