@@ -1295,4 +1295,9 @@
         <item name="biometricsEnrollProgressHelp">@color/udfps_enroll_progress_help</item>
         <item name="biometricsEnrollProgressHelpWithTalkback">@color/udfps_enroll_progress_help_with_talkback</item>
     </style>
+
+    <!-- Pure Tuner Theme-->
+    <style name="ExTunerSettings" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="preferenceTheme">@style/TunerPreferenceTheme</item>
+    </style>    
 </resources>
