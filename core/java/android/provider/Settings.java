@@ -6081,6 +6081,9 @@ public final class Settings {
          */
         public static final String OMNI_CUSTOM_FP_ICON = "custom_fingerprint_icon";
 
+        /** @hide */
+        public static final String BACK_GESTURE_HAPTIC = "back_gesture_haptic";
+
         /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
@@ -6263,6 +6266,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ADAPTIVE_PLAYBACK_ENABLED);
             PRIVATE_SETTINGS.add(ADAPTIVE_PLAYBACK_TIMEOUT);
             PRIVATE_SETTINGS.add(POCKET_JUDGE);
+	    PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
         }
         /**
          * These entries are considered common between the personal and the managed profile,
