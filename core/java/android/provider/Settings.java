@@ -12126,17 +12126,6 @@ public final class Settings {
         public static final String POWER_MENU_ACTIONS = "power_menu_actions";
 
         /**
-         * Whether to show the brightness slider in quick settings panel.
-         * @hide
-         */
-        public static final String QS_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
-
-        /**
-         * Whether to show the auto brightness icon in quick settings panel.
-         * @hide
-         */
-        public static final String QS_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
-
         /**
          * Whether tethering is allowed to use VPN upstreams
          * 0 = false, 1 = true
