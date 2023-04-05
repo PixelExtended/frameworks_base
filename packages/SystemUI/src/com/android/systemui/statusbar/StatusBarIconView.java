@@ -389,7 +389,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         }
 
         if (!numberEquals || force) {
-            if (icon.number > 0 && mShowNotificationCount) {
+            if (icon.number > 1 && mShowNotificationCount) {
                 if (mNumberBackground == null) {
                     mNumberBackground = getContext().getResources().getDrawable(
                             R.drawable.ic_notification_overlay);
