@@ -5554,6 +5554,12 @@ public final class Settings {
                 "button_backlight_only_when_pressed";
 
         /**
+         * Whether to show IME space
+         * @hide
+         */
+        public static final String HIDE_IME_SPACE_ENABLE = "hide_ime_space_enable";
+
+        /**
          * Force show navigation bar setting.
          * @hide
          */
